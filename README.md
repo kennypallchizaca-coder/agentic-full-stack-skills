@@ -117,5 +117,43 @@ Estas skills respetan orgánicamente el sistema genérico de formateado en `SKIL
 
 ---
 
+## 🧠 Core Philosophy & Agentic SDLC / Filosofía Central
+
+This ecosystem operates on the principle of **Agentic Determinism**. LLMs are non-deterministic by nature, which often leads to inconsistent code across large projects. By providing localized, strict, and bilingual instructions for every structural decision (from Routing to Databases), we force the AI to follow **Standard Operating Procedures (SOPs)**.
+1. **Context Isolation**: The AI reads only the exact folder it needs.
+2. **Preventing Loops**: Guardrails exist within the markdown to stop hallucination.
+3. **Bilingual Parity**: Double reinforcement (`EN` & `ES`) ensures stronger neural attention to critical constraints.
+
+---
+
+## 🌳 Ecosystem Architecture / Arquitectura Global
+
+A visual abstraction of how the repository is distributed:
+```text
+📦 universal-full-stack-skills
+ ┣ 📂 frontend-skills/       # Contains 12 client-side patterns
+ ┃ ┣ 📂 01-project-setup
+ ┃ ┣ 📂 02-component-architecture
+ ┃ ┗ ... (10 more folders with dedicated SKILL.md rules)
+ ┣ 📂 skills-backend/        # Contains 12 server-side architecture rules
+ ┃ ┣ 📂 01-project-bootstrap
+ ┃ ┣ 📂 02-modular-project-structure
+ ┃ ┗ ... (10 more folders mapped to REST/Auth/DB)
+ ┣ 📜 README.md              # You are here (Master Index)
+ ┗ 📜 LICENSE                # Standard MIT
+```
+
+---
+
+## 🤖 Real-World Usage Example / Ejemplo de Uso Real
+
+**Developer Prompt:**
+> *"I need an Authentication Endpoint for my users table. Read the **@04-service-layer**, **@06-dto-and-validation** and **@10-jwt-authentication** skills to build the code. Follow their strict bilingual guidelines."*
+
+**AI Agent Response:**
+> *"Understood. I will now generate your User DTOs enforcing validations as requested in Skill 06, decouple the hashing logic inside a UserService as dictated in Skill 04, and finally deploy the JWT signer using the structure defined in Skill 10."*
+
+---
+
 ## 📝 License
 MIT License — free to use, modify, and distribute in any project. Made for the Future of Coding. 🚀
