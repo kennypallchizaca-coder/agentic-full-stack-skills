@@ -59,20 +59,20 @@
 
 📍 **Location:** `./frontend-skills/`
 
-| # | Skill Name | English Summary | Español (Resumen) |
-|:---:|---|---|---|
-| **01** | [**project-setup**](./frontend-skills/01-project-setup/SKILL.md) | Global scaffold & Configs | Estructura root y Configs |
-| **02** | [**component-architecture**](./frontend-skills/02-component-architecture/SKILL.md) | Smart/Dumb pattern splits | División Lógicos/Tontos |
-| **03** | [**routing-strategy**](./frontend-skills/03-routing-strategy/SKILL.md) | Layouts and Lazy Loading | Paginación y Carga Lenta URL |
-| **04** | [**form-orchestration**](./frontend-skills/04-form-orchestration/SKILL.md) | Immutable generic state refs | Referencias inmutables estado |
-| **05** | [**ui-feedback-system**](./frontend-skills/05-ui-feedback-system/SKILL.md) | Toasts, Skeletons & Spinners | Mapeo carga, Esqueletos y Toast |
-| **06** | [**authentication-flow**](./frontend-skills/06-authentication-flow/SKILL.md) | JWT Hydration on LocalStorage | Hidratación JWT en LocalStorage |
-| **07** | [**styling-system**](./frontend-skills/07-styling-system/SKILL.md) | Architecture CSS/Tailwind rules | Reglas Maestras CSS/Módulos |
-| **08** | [**state-management**](./frontend-skills/08-state-management/SKILL.md) | Zustand/Pinia/Redux patterns | Gestores Globales Reactivos |
-| **09** | [**data-fetching**](./frontend-skills/09-data-fetching/SKILL.md) | Axios interceptors & Cache | Interceptores Red Axios/Cache |
-| **10** | [**advanced-navigation**](./frontend-skills/10-advanced-navigation/SKILL.md) | Breadcrumbs & URL pagination | Migas y Paginación UI (URL) |
-| **11** | [**baas-integration**](./frontend-skills/11-baas-integration/SKILL.md) | Firebase/Supabase Connectors | Inyección SDK Firebase nativa |
-| **12** | [**route-guards**](./frontend-skills/12-route-guards/SKILL.md) | Protected routes Middlewares | Rutas Privadas e Interceptores |
+| # | Skill Name | English Summary | Español (Resumen) | Risk |
+|:---:|---|---|---|:---:|
+| **01** | [**project-setup**](./frontend-skills/01-project-setup/SKILL.md) | Global scaffold & Configs | Estructura root y Configs | 🟢 Low |
+| **02** | [**component-architecture**](./frontend-skills/02-component-architecture/SKILL.md) | Smart/Dumb pattern splits | División Lógicos/Tontos | 🟡 Med |
+| **03** | [**routing-strategy**](./frontend-skills/03-routing-strategy/SKILL.md) | Layouts and Lazy Loading | Paginación y Carga Lenta URL | 🟡 Med |
+| **04** | [**form-orchestration**](./frontend-skills/04-form-orchestration/SKILL.md) | Immutable generic state refs | Referencias inmutables estado | 🟢 Low |
+| **05** | [**ui-feedback-system**](./frontend-skills/05-ui-feedback-system/SKILL.md) | Toasts, Skeletons & Spinners | Mapeo carga, Esqueletos y Toast | 🟢 Low |
+| **06** | [**authentication-flow**](./frontend-skills/06-authentication-flow/SKILL.md) | JWT Hydration on LocalStorage | Hidratación JWT en LocalStorage | 🔴 High |
+| **07** | [**styling-system**](./frontend-skills/07-styling-system/SKILL.md) | Architecture CSS/Tailwind rules | Reglas Maestras CSS/Módulos | 🟢 Low |
+| **08** | [**state-management**](./frontend-skills/08-state-management/SKILL.md) | Zustand/Pinia/Redux patterns | Gestores Globales Reactivos | 🔴 High |
+| **09** | [**data-fetching**](./frontend-skills/09-data-fetching/SKILL.md) | Axios interceptors & Cache | Interceptores Red Axios/Cache | 🟡 Med |
+| **10** | [**advanced-navigation**](./frontend-skills/10-advanced-navigation/SKILL.md) | Breadcrumbs & URL pagination | Migas y Paginación UI (URL) | 🟢 Low |
+| **11** | [**baas-integration**](./frontend-skills/11-baas-integration/SKILL.md) | Firebase/Supabase Connectors | Inyección SDK Firebase nativa | 🔴 High |
+| **12** | [**route-guards**](./frontend-skills/12-route-guards/SKILL.md) | Protected routes Middlewares | Rutas Privadas e Interceptores | 🔴 High |
 
 ---
 
@@ -82,18 +82,18 @@
 
 | # | Skill Name | English Summary | Español (Resumen) | Risk |
 |:---:|---|---|---|:---:|
-| **01** | [**project-bootstrap**](./skills-backend/01-project-bootstrap/SKILL.md) | Express/Spring HTTP Setup | Setup de Motor HTTP Limpio | 🟢 |
-| **02** | [**modular-project-structure**](./skills-backend/02-modular-project-structure/SKILL.md) | Feature-based directory tree | Árbol de carpetas por Features | 🟢 |
-| **03** | [**rest-api-design**](./skills-backend/03-rest-api-design/SKILL.md) | REST generic endpoints | Puntos de Red Genéricos REST | 🟢 |
-| **04** | [**service-layer**](./skills-backend/04-service-layer/SKILL.md) | Decoupled Business logic | Lógica de Negocio Desacoplada | 🟢 |
-| **05** | [**data-persistence**](./skills-backend/05-data-persistence/SKILL.md) | Repository & ORM bindings | Conexión limpia con ORM base | 🟡 |
-| **06** | [**dto-and-validation**](./skills-backend/06-dto-and-validation/SKILL.md) | Body validations strict constraints | Validaciones de Body strictas | 🟢 |
-| **07** | [**error-handling**](./skills-backend/07-error-handling/SKILL.md) | Global generic Catch system | Sistema Global recolector fallos | 🟡 |
-| **08** | [**entity-relationships**](./skills-backend/08-entity-relationships/SKILL.md) | OneToMany / Foreign Keys | Marcadores Llaves Foráneas DB | 🟡 |
-| **09** | [**advanced-querying**](./skills-backend/09-advanced-querying/SKILL.md) | DB limits and Search offsets | Offsets de Consulta URL limpios | 🟢 |
-| **10** | [**jwt-authentication**](./skills-backend/10-jwt-authentication/SKILL.md) | Stateless JWT creation | Creador Stateless en JWT Token | 🔴 |
-| **11** | [**authorization**](./skills-backend/11-authorization/SKILL.md) | Role constraints mapping | Enrutado Restringido por Rol | 🔴 |
-| **12** | [**production-deployment**](./skills-backend/12-production-deployment/SKILL.md) | Dockerfiles and clean Builds | Dockerfiles y Limpieza Builds | 🔴 |
+| **01** | [**project-bootstrap**](./skills-backend/01-project-bootstrap/SKILL.md) | Express/Spring HTTP Setup | Setup de Motor HTTP Limpio | 🟢 Low |
+| **02** | [**modular-project-structure**](./skills-backend/02-modular-project-structure/SKILL.md) | Feature-based directory tree | Árbol de carpetas por Features | 🟢 Low |
+| **03** | [**rest-api-design**](./skills-backend/03-rest-api-design/SKILL.md) | REST generic endpoints | Puntos de Red Genéricos REST | 🟢 Low |
+| **04** | [**service-layer**](./skills-backend/04-service-layer/SKILL.md) | Decoupled Business logic | Lógica de Negocio Desacoplada | 🟢 Low |
+| **05** | [**data-persistence**](./skills-backend/05-data-persistence/SKILL.md) | Repository & ORM bindings | Conexión limpia con ORM base | 🟡 Med |
+| **06** | [**dto-and-validation**](./skills-backend/06-dto-and-validation/SKILL.md) | Body validations strict constraints | Validaciones de Body strictas | 🟢 Low |
+| **07** | [**error-handling**](./skills-backend/07-error-handling/SKILL.md) | Global generic Catch system | Sistema Global recolector fallos | 🟡 Med |
+| **08** | [**entity-relationships**](./skills-backend/08-entity-relationships/SKILL.md) | OneToMany / Foreign Keys | Marcadores Llaves Foráneas DB | 🟡 Med |
+| **09** | [**advanced-querying**](./skills-backend/09-advanced-querying/SKILL.md) | DB limits and Search offsets | Offsets de Consulta URL limpios | 🟢 Low |
+| **10** | [**jwt-authentication**](./skills-backend/10-jwt-authentication/SKILL.md) | Stateless JWT creation | Creador Stateless en JWT Token | 🔴 High |
+| **11** | [**authorization**](./skills-backend/11-authorization/SKILL.md) | Role constraints mapping | Enrutado Restringido por Rol | 🔴 High |
+| **12** | [**production-deployment**](./skills-backend/12-production-deployment/SKILL.md) | Dockerfiles and clean Builds | Dockerfiles y Limpieza Builds | 🔴 High |
 
 ---
 
