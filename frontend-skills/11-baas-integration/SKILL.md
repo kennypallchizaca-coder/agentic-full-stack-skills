@@ -20,12 +20,12 @@ Las plataformas BaaS reducen trabajo backend, pero también difuminan fronteras 
 # 2. Skill Objective
 
 **Objective (EN):**
-Integrate Firebase or Supabase safely without turning components into direct infrastructure code.
+Integrate Firebase, Supabase, or an equivalent BaaS safely without turning components into direct infrastructure code.
 - Use this skill when: The app depends on Firebase, Supabase, or another official BaaS SDK for auth, database, storage, or realtime features.
 - Do not use this skill when: The frontend talks only to a custom backend and does not need a direct cloud SDK.
 
 **Objetivo (ES):**
-Integrar Firebase o Supabase de forma segura sin convertir componentes en código de infraestructura.
+Integrar Firebase, Supabase o un BaaS equivalente de forma segura sin convertir componentes en código de infraestructura.
 - Úsese cuando: La app dependa de Firebase, Supabase u otro SDK BaaS oficial para auth, base de datos, storage o realtime.
 - No se use cuando: El frontend solo hable con un backend propio y no necesite SDK cloud directo.
 
@@ -67,6 +67,7 @@ Integrar Firebase o Supabase de forma segura sin convertir componentes en códig
 3. **Wrap SDK usage:** Components should call app services or repositories, not raw SDK primitives scattered everywhere.
 4. **Enforce backend-side protection:** Use Firestore rules, Supabase RLS, App Check, or server/edge functions for privileged operations.
 5. **Connect auth reactively:** Surface auth-session changes into the app store or route guards without duplicating provider logic in each page.
+6. **Adapt the pattern, not the literal example:** Rename files, provider wrappers, session hooks, and server boundaries to match the chosen BaaS, framework, and project language.
 
 **Instrucciones (ES):**
 1. **Inicializar el SDK una sola vez:** Exporta una única instancia inicializada del app o client desde un módulo compartido.
@@ -74,6 +75,7 @@ Integrar Firebase o Supabase de forma segura sin convertir componentes en códig
 3. **Envolver el uso del SDK:** Los componentes deben llamar servicios o repositorios de la app, no primitivas crudas del SDK por todas partes.
 4. **Hacer cumplir la protección en backend:** Usa Firestore rules, Supabase RLS, App Check o server/edge functions para operaciones privilegiadas.
 5. **Conectar auth de forma reactiva:** Expón cambios de sesión al store o a los route guards sin duplicar la lógica del provider en cada página.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, wrappers del provider, hooks de sesión y límites server-side para ajustarlos al BaaS elegido, el framework y el lenguaje del proyecto.
 
 ---
 
@@ -116,8 +118,10 @@ src/
 - [ ] The SDK is initialized exactly once.
 - [ ] No service keys or admin credentials are exposed to the client bundle.
 - [ ] Security rules or server-side functions enforce privileged operations beyond UI checks.
+- [ ] Names, files, provider wrappers, session hooks, and server boundaries were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] El SDK se inicializa exactamente una vez.
 - [ ] Ninguna service key ni credencial admin se expone al bundle del cliente.
 - [ ] Las rules de seguridad o funciones server-side hacen cumplir operaciones privilegiadas más allá de la UI.
+- [ ] Los nombres, archivos, wrappers del provider, hooks de sesión y límites server-side se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

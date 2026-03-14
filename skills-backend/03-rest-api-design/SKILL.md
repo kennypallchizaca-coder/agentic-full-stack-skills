@@ -20,12 +20,12 @@ Las APIs REST se mantienen sanas cuando sus rutas son predecibles. Esta skill es
 # 2. Skill Objective
 
 **Objective (EN):**
-Design resource-oriented HTTP interfaces that are easy to document, test, and consume.
+Design resource-oriented HTTP interfaces that are easy to document, test, consume, and adapt to the target project's naming conventions.
 - Use this skill when: Defining CRUD endpoints, nested resources, or public/internal REST contracts.
 - Do not use this skill when: Building GraphQL schemas, RPC endpoints, or event-only interfaces.
 
 **Objetivo (ES):**
-Diseñar interfaces HTTP orientadas a recursos, fáciles de documentar, probar y consumir.
+Diseñar interfaces HTTP orientadas a recursos, fáciles de documentar, probar, consumir y adaptar a las convenciones de nombres del proyecto objetivo.
 - Úsese cuando: Se definan endpoints CRUD, recursos anidados o contratos REST públicos o internos.
 - No se use cuando: Se construyan esquemas GraphQL, endpoints RPC o interfaces solo por eventos.
 
@@ -67,6 +67,7 @@ Diseñar interfaces HTTP orientadas a recursos, fáciles de documentar, probar y
 3. **Separate collections from items:** `/users` addresses many resources; `/users/{id}` addresses one.
 4. **Return proper status codes:** `200` for reads/updates, `201` for creates, `204` for empty successful deletes, `400/404/409` as appropriate for errors.
 5. **Keep filters in query params:** Use `/users?page=1&limit=20&role=admin` instead of inventing action paths.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Usar sustantivos, no acciones:** Prefiere `/users` en lugar de `/getUsers` y `/users/{id}` en lugar de `/deleteUserById`.
@@ -74,6 +75,7 @@ Diseñar interfaces HTTP orientadas a recursos, fáciles de documentar, probar y
 3. **Separar colecciones de ítems:** `/users` representa muchos recursos; `/users/{id}` representa uno.
 4. **Retornar códigos correctos:** `200` para lectura/actualización, `201` para creación, `204` para borrado exitoso sin cuerpo y `400/404/409` según el error.
 5. **Poner filtros en query params:** Usa `/users?page=1&limit=20&role=admin` en lugar de inventar rutas de acción.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -113,8 +115,10 @@ src/
 - [ ] Endpoints use plural resource nouns consistently.
 - [ ] Query parameters handle pagination, sorting, and filtering.
 - [ ] Status codes match the operation outcome without ad-hoc behavior.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los endpoints usan sustantivos en plural de forma consistente.
 - [ ] Los query parameters manejan paginación, orden y filtros.
 - [ ] Los códigos de estado reflejan correctamente el resultado de la operación.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

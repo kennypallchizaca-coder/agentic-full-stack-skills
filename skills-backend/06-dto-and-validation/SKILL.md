@@ -20,12 +20,12 @@ La validación de entrada es una frontera de seguridad, no un adorno opcional. E
 # 2. Skill Objective
 
 **Objective (EN):**
-Create validated request contracts for create, update, and query operations.
+Create validated request contracts for create, update, and query operations that fit the target transport layer and validation stack.
 - Use this skill when: Accepting external input through `POST`, `PUT`, `PATCH`, form-data, or query filters.
 - Do not use this skill when: A route is purely static and has no user-controlled input.
 
 **Objetivo (ES):**
-Crear contratos de request validados para operaciones de creación, actualización y consulta.
+Crear contratos de request validados para operaciones de creación, actualización y consulta que encajen con la capa de transporte y el stack de validación objetivo.
 - Úsese cuando: Se acepte input externo por `POST`, `PUT`, `PATCH`, formularios o filtros por query.
 - No se use cuando: Una ruta sea puramente estática y no tenga input controlado por usuarios.
 
@@ -67,6 +67,7 @@ Crear contratos de request validados para operaciones de creación, actualizaci�
 3. **Separate create vs update contracts:** `PATCH` should not reuse the exact same rules as `POST` unless that is truly correct.
 4. **Normalize validation errors:** Return clear field-level feedback without leaking stack traces or framework internals.
 5. **Keep validation close to the boundary:** Reject bad input before business logic runs.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Definir DTOs con allowlist:** Declara explícitamente los campos aceptados en lugar de pasar `request.body` crudo a servicios o repositorios.
@@ -74,6 +75,7 @@ Crear contratos de request validados para operaciones de creación, actualizaci�
 3. **Separar contratos de create y update:** `PATCH` no debe reutilizar exactamente las mismas reglas de `POST` salvo que sea correcto.
 4. **Normalizar errores de validación:** Devuelve feedback claro por campo sin filtrar stack traces ni detalles internos.
 5. **Validar en el borde:** Rechaza el input inválido antes de ejecutar lógica de negocio.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -115,8 +117,10 @@ src/
 - [ ] Services never receive unchecked raw request bodies.
 - [ ] Create and update payloads use distinct validation rules when needed.
 - [ ] Validation errors are deterministic and safe to expose to clients.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los servicios nunca reciben cuerpos de request crudos sin validar.
 - [ ] Los payloads de create y update usan reglas distintas cuando hace falta.
 - [ ] Los errores de validación son deterministas y seguros para exponer al cliente.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

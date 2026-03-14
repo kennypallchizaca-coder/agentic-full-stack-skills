@@ -1,48 +1,70 @@
 # Module Structure Template
 
-Use this template to scaffold any domain module in your project.
+Use this template to scaffold a domain module that is easy to understand at a glance.
 
-## Universal folder structure (per domain)
+## Design rule
+
+When someone opens the module folder, they should understand:
+
+- where requests enter
+- where business rules live
+- where data access happens
+- which files belong only to this domain
+- which file is the public entrypoint for the rest of the app
+
+Start simple and keep the full request-to-persistence flow inside the same domain folder.
+
+## Recommended folder structure (per domain)
 
 ```
-src/{domain}/
-├── controllers/
-│   └── {domain}.controller.{ext}      ← Routes HTTP requests to the service
-├── services/
-│   ├── {domain}.service.{ext}         ← Interface (optional, strongly typed languages)
-│   └── {domain}.service.impl.{ext}    ← Business logic implementation
-├── repositories/
-│   └── {domain}.repository.{ext}      ← All database access
+src/modules/{domain}/
+├── dto/
+│   ├── create-{domain}.dto.{ext}      ← Input for POST
+│   ├── update-{domain}.dto.{ext}      ← Input for PUT/PATCH
+│   └── {domain}-response.dto.{ext}    ← Output shape (no internals)
 ├── entities/
-│   └── {domain}.entity.{ext}          ← ORM-mapped data model
-└── dtos/
-    ├── create-{domain}.dto.{ext}       ← Input for POST
-    ├── update-{domain}.dto.{ext}       ← Input for PUT/PATCH (all optional)
-    └── {domain}-response.dto.{ext}    ← Output shape (no internals)
+│   └── {domain}.entity.{ext}          ← Persistence model / ORM mapping
+├── {domain}.controller.{ext}          ← HTTP controller / router / handler
+├── {domain}.service.{ext}             ← Business rules and orchestration
+├── {domain}.repository.{ext}          ← Database access only
+├── {domain}.module.{ext} or index.{ext} ← Public entrypoint used by the app root
+└── {domain}.spec.{ext}                ← Module tests
 ```
 
-## Shared folder structure
+## When the module grows
+
+- Add local subfolders such as `use-cases/`, `mappers/`, or `tests/` inside the same domain module.
+- Do not create global top-level folders like `src/controllers/` or `src/services/` for the whole app.
+- Keep external imports pointed at the module public entrypoint, not at deep internal files.
+
+## Shared and core folders
 
 ```
-src/shared/
-├── middleware/
-│   ├── auth.middleware.{ext}           ← JWT filter (skill 10)
-│   └── error.middleware.{ext}          ← Global error handler (skill 07)
-├── utils/
-│   └── pagination.util.{ext}           ← Paginated response builder
-└── base-entity.{ext}                   ← id, createdAt, updatedAt
+src/
+├── core/
+│   ├── config/
+│   │   ├── database.config.{ext}       ← DB connection setup
+│   │   ├── jwt.config.{ext}            ← JWT secret + expiration
+│   │   └── app.config.{ext}            ← General app settings
+│   ├── auth/
+│   └── logging/
+└── shared/
+    ├── middleware/
+    │   ├── auth.middleware.{ext}       ← JWT filter (skill 10)
+    │   └── error.middleware.{ext}      ← Global error handler (skill 07)
+    ├── utils/
+    │   └── pagination.util.{ext}       ← Paginated response builder
+    └── types/
 ```
 
-## Config folder structure
+## Module clarity checklist
 
-```
-src/config/
-├── database.config.{ext}               ← DB connection setup
-├── jwt.config.{ext}                    ← JWT secret + expiration
-└── app.config.{ext}                    ← General app settings
-```
+- [ ] Can I understand the module without opening another feature folder?
+- [ ] Does every file that belongs to one domain stay inside this module?
+- [ ] Are config, auth, logging, and shared helpers outside the domain modules?
+- [ ] Do other modules import only the public entrypoint?
 
-## Domain naming checklist
+## Naming checklist
 
 - [ ] Folder name: `lowercase-kebab-case` (e.g., `work-orders`, `customer-accounts`)
 - [ ] Class names: `PascalCase` with layer suffix (e.g., `WorkOrderController`, `WorkOrderService`)

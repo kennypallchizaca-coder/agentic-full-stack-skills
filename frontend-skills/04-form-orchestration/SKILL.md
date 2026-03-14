@@ -20,12 +20,12 @@ Los formularios son una de las principales puertas de entrada de datos del usuar
 # 2. Skill Objective
 
 **Objective (EN):**
-Build reliable forms that keep validation, submission state, and rendering in sync.
+Build reliable forms that keep validation, submission state, and rendering in sync across the target framework and validation approach.
 - Use this skill when: Implementing login forms, CRUD forms, settings forms, or any multi-field submit flow.
 - Do not use this skill when: A simple one-field search input can stay as lightweight local state.
 
 **Objetivo (ES):**
-Construir formularios confiables que mantengan sincronizados validación, estado de envío y render.
+Construir formularios confiables que mantengan sincronizados validación, estado de envío y render dentro del framework y enfoque de validación objetivo.
 - Úsese cuando: Se implementen formularios de login, CRUD, settings o cualquier flujo de envío con varios campos.
 - No se use cuando: Un input simple de búsqueda pueda quedarse como estado local liviano.
 
@@ -67,6 +67,7 @@ Construir formularios confiables que mantengan sincronizados validación, estado
 3. **Track field and submit state:** Support concepts such as touched, dirty, invalid, and submitting when the stack provides them.
 4. **Show validation close to the field:** Keep input errors near their source and reserve global alerts for submit-level failures.
 5. **Prevent duplicate submits:** Disable or guard the submit action while the request is in flight.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, schemas, and field contracts to match the target project's framework, UX rules, and business language.
 
 **Instrucciones (ES):**
 1. **Modelar el esquema del formulario:** Define campos permitidos, valores por defecto y reglas de validación antes de conectar inputs.
@@ -74,6 +75,7 @@ Construir formularios confiables que mantengan sincronizados validación, estado
 3. **Rastrear estado de campos y submit:** Soporta conceptos como touched, dirty, invalid y submitting cuando el stack los ofrezca.
 4. **Mostrar validación cerca del campo:** Mantén los errores de input junto a su origen y deja las alertas globales para fallos de submit.
 5. **Prevenir submits duplicados:** Deshabilita o protege la acción de envío mientras la request siga en curso.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, esquemas y contratos de campos para ajustarlos al framework, las reglas UX y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -113,8 +115,10 @@ src/
 - [ ] Form values are not read through ad-hoc DOM queries.
 - [ ] Validation rules are centralized and reusable.
 - [ ] The submit action is guarded against duplicate requests.
+- [ ] Names, files, layers, schemas, and field contracts were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los valores del formulario no se leen mediante consultas DOM improvisadas.
 - [ ] Las reglas de validación están centralizadas y son reutilizables.
 - [ ] La acción de submit está protegida contra requests duplicadas.
+- [ ] Los nombres, archivos, capas, esquemas y contratos de campos se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

@@ -20,12 +20,12 @@ Un frontend sólido empieza con una estructura predecible. Esta skill define la 
 # 2. Skill Objective
 
 **Objective (EN):**
-Prepare a new or existing frontend project for maintainable development.
+Prepare a new or existing frontend project for maintainable development and straightforward adaptation to the chosen stack.
 - Use this skill when: Bootstrapping a frontend app, cleaning inconsistent config, or standardizing imports and env files.
 - Do not use this skill when: You are only changing isolated component behavior with no impact on project configuration.
 
 **Objetivo (ES):**
-Preparar un proyecto frontend nuevo o existente para un desarrollo mantenible.
+Preparar un proyecto frontend nuevo o existente para un desarrollo mantenible y fácil de adaptar al stack elegido.
 - Úsese cuando: Se inicialice una app frontend, se limpie configuración inconsistente o se estandaricen imports y archivos de entorno.
 - No se use cuando: Solo se cambie el comportamiento de un componente aislado sin impacto en la configuración del proyecto.
 
@@ -67,6 +67,7 @@ Preparar un proyecto frontend nuevo o existente para un desarrollo mantenible.
 3. **Separate public and private env values:** Only expose variables that are explicitly intended for the client bundle.
 4. **Document the config contract:** Leave `.env.example`, alias docs, and base scripts clear enough for any contributor or agent to bootstrap the project safely.
 5. **Keep the structure simple:** Prefer a clean root with source, config, and environment files over ad-hoc scattered setup.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, configs, and conventions to match the target project's framework, tooling, and business language.
 
 **Instrucciones (ES):**
 1. **Activar defaults estrictos de desarrollo:** Habilita tipado estricto o checks equivalentes del compilador siempre que el stack lo soporte.
@@ -74,6 +75,7 @@ Preparar un proyecto frontend nuevo o existente para un desarrollo mantenible.
 3. **Separar variables públicas y privadas:** Expón al bundle cliente solo las variables que realmente estén pensadas para el navegador.
 4. **Documentar el contrato de configuración:** Deja `.env.example`, documentación de aliases y scripts base lo suficientemente claros para que cualquier colaborador o agente inicialice el proyecto con seguridad.
 5. **Mantener la estructura simple:** Prefiere una raíz limpia con código fuente, config y archivos de entorno en vez de una configuración dispersa e improvisada.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, configuraciones y convenciones para ajustarlos al framework, tooling y lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -113,8 +115,10 @@ Usa la skill @01-project-setup para estandarizar la base de este proyecto fronte
 - [ ] Top-level imports resolve through a documented alias instead of deep relative paths.
 - [ ] Public environment variables use the correct exposure mechanism for the chosen stack.
 - [ ] Contributors can clone the project and understand the base configuration quickly.
+- [ ] Names, files, layers, configs, and conventions were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los imports de alto nivel se resuelven mediante un alias documentado en lugar de rutas relativas profundas.
 - [ ] Las variables públicas usan el prefijo o mecanismo correcto de exposición del framework.
 - [ ] Cualquier colaborador puede clonar el proyecto y entender rápidamente su configuración base.
+- [ ] Los nombres, archivos, capas, configuraciones y convenciones se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

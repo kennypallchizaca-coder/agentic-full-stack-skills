@@ -20,12 +20,12 @@ Los componentes frontend se vuelven difíciles de mantener cuando la carga de da
 # 2. Skill Objective
 
 **Objective (EN):**
-Build components with clear separation between visual rendering and feature logic.
+Build components with clear separation between visual rendering and feature logic across the target project's component model.
 - Use this skill when: A view coordinates API calls, store reads, derived state, or non-trivial user interactions.
 - Do not use this skill when: A tiny purely visual component already has no business logic to extract.
 
 **Objetivo (ES):**
-Construir componentes con una separación clara entre render visual y lógica del feature.
+Construir componentes con una separación clara entre render visual y lógica del feature dentro del modelo de componentes del proyecto objetivo.
 - Úsese cuando: Una vista coordine llamadas API, lecturas de store, estado derivado o interacciones no triviales.
 - No se use cuando: Un componente pequeño y puramente visual ya no tenga lógica de negocio para extraer.
 
@@ -67,6 +67,7 @@ Construir componentes con una separación clara entre render visual y lógica de
 3. **Pass explicit contracts downward:** Use typed props, inputs, slots, or callbacks instead of hidden shared state.
 4. **Return interactions upward:** Emit events or callbacks such as `onEdit`, `onDelete`, or `submit`.
 5. **Test UI in isolation:** Presentational components should render correctly with mock data and no server dependency.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and interactions to match the target project's framework, feature boundaries, and business language.
 
 **Instrucciones (ES):**
 1. **Subir la orquestación hacia arriba:** Deja que la vista principal del feature lea repositorios, estado de ruta o stores.
@@ -74,6 +75,7 @@ Construir componentes con una separación clara entre render visual y lógica de
 3. **Pasar contratos explícitos hacia abajo:** Usa props, inputs, slots o callbacks tipados en lugar de estado compartido oculto.
 4. **Subir interacciones hacia arriba:** Emite eventos o callbacks como `onEdit`, `onDelete` o `submit`.
 5. **Probar la UI en aislamiento:** Los componentes presentacionales deben renderizar correctamente con mocks y sin dependencia del servidor.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e interacciones para ajustarlos al framework, los límites de feature y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -114,8 +116,10 @@ src/
 - [ ] Presentational components do not fetch data or depend on transport libraries.
 - [ ] Container components own repository calls, route parsing, and feature orchestration.
 - [ ] Visual components can be rendered with mocks in isolation.
+- [ ] Names, files, layers, contracts, and interactions were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los componentes presentacionales no consumen datos ni dependen de librerías de transporte.
 - [ ] Los componentes contenedores controlan las llamadas a repositorios, el parseo de rutas y la orquestación del feature.
 - [ ] Los componentes visuales pueden renderizarse con mocks en aislamiento.
+- [ ] Los nombres, archivos, capas, contratos e interacciones se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

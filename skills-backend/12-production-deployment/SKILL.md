@@ -20,12 +20,12 @@ Estar listo para producción no es solo “corre en mi máquina”. Esta skill d
 # 2. Skill Objective
 
 **Objective (EN):**
-Prepare the backend for secure, repeatable deployment across staging and production environments.
+Prepare the backend for secure, repeatable deployment across staging and production environments, regardless of runtime or hosting model.
 - Use this skill when: Building Docker images, defining runtime environment variables, or preparing CI/CD release flows.
 - Do not use this skill when: You only need a local dev script with no intention of deployment.
 
 **Objetivo (ES):**
-Preparar el backend para un despliegue seguro y repetible en staging y producción.
+Preparar el backend para un despliegue seguro y repetible en staging y producción, sin depender de un runtime o modelo de hosting específico.
 - Úsese cuando: Se construyan imágenes Docker, variables de entorno de runtime o flujos CI/CD de release.
 - No se use cuando: Solo se necesite un script de desarrollo local sin intención de despliegue.
 
@@ -67,6 +67,7 @@ Preparar el backend para un despliegue seguro y repetible en staging y producci�
 3. **Externalize secrets and config:** Load database URLs, JWT secrets, API keys, and environment flags from env vars or secret managers, never from committed files.
 4. **Expose health and startup behavior:** Provide a health endpoint and clear startup logs so orchestration platforms can detect readiness and failure.
 5. **Ship only what production needs:** Exclude tests, caches, local `.env` files, and unused build artifacts with `.dockerignore` and release hygiene.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Usar builds multi-stage:** Mantén compiladores y dependencias de desarrollo fuera de la imagen final.
@@ -74,6 +75,7 @@ Preparar el backend para un despliegue seguro y repetible en staging y producci�
 3. **Externalizar secretos y configuración:** Carga URLs de base, secretos JWT, API keys y flags desde env vars o secret managers, nunca desde archivos subidos al repo.
 4. **Exponer health y arranque:** Provee un endpoint de salud y logs de arranque claros para que la plataforma detecte readiness y fallos.
 5. **Empaquetar solo lo necesario:** Excluye pruebas, cachés, `.env` locales y artefactos sobrantes con `.dockerignore` y buena higiene de release.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -114,8 +116,10 @@ Usa la skill @12-production-deployment para endurecer este backend para producci
 - [ ] The runtime image excludes dev-only tooling and secrets.
 - [ ] The container runs without root privileges whenever possible.
 - [ ] Production configuration comes from environment or secret stores, not committed local files.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] La imagen final excluye tooling de desarrollo y secretos.
 - [ ] El contenedor corre sin privilegios root siempre que sea posible.
 - [ ] La configuración de producción viene de entorno o secret stores, no de archivos locales subidos al repo.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

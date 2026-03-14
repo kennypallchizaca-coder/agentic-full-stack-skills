@@ -20,12 +20,12 @@ Las relaciones son el origen de muchos bugs de persistencia: ownership duplicado
 # 2. Skill Objective
 
 **Objective (EN):**
-Implement entity relationships that preserve data integrity and keep API serialization under control.
+Implement entity relationships that preserve data integrity and keep API serialization under control across different schemas and ORM styles.
 - Use this skill when: Modeling one-to-one, one-to-many, many-to-one, or many-to-many associations.
 - Do not use this skill when: The data model is flat and does not reference other entities.
 
 **Objetivo (ES):**
-Implementar relaciones entre entidades que preserven integridad de datos y mantengan controlada la serialización de la API.
+Implementar relaciones entre entidades que preserven integridad de datos y mantengan controlada la serialización de la API en distintos estilos de esquema u ORM.
 - Úsese cuando: Se modelen asociaciones one-to-one, one-to-many, many-to-one o many-to-many.
 - No se use cuando: El modelo de datos sea plano y no referencie otras entidades.
 
@@ -67,6 +67,7 @@ Implementar relaciones entre entidades que preserven integridad de datos y mante
 3. **Be conservative with cascades:** Enable delete/update cascades only when they are truly safe and intentional.
 4. **Control loading behavior:** Avoid eager-loading large graphs by default; fetch related data intentionally for each use case.
 5. **Serialize through DTOs:** Do not expose raw ORM graphs directly if they can recurse or leak internal details.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Elegir la cardinalidad correcta:** Modela cada relación según reglas reales del negocio, no por comodidad.
@@ -74,6 +75,7 @@ Implementar relaciones entre entidades que preserven integridad de datos y mante
 3. **Ser conservador con cascadas:** Activa cascadas de borrado o actualización solo cuando sean realmente seguras e intencionales.
 4. **Controlar la carga de datos:** Evita cargar grafos grandes de forma eager por defecto; trae relaciones según cada caso de uso.
 5. **Serializar mediante DTOs:** No expongas directamente grafos ORM si pueden recursar o filtrar detalles internos.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -116,8 +118,10 @@ src/
 - [ ] Relationship ownership is unambiguous in code and schema.
 - [ ] Cascades are explicit and justified, not enabled by habit.
 - [ ] API responses avoid recursive or unexpectedly heavy entity graphs.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] El ownership de la relación es inequívoco en código y esquema.
 - [ ] Las cascadas son explícitas y justificadas, no activadas por costumbre.
 - [ ] Las respuestas de la API evitan grafos recursivos o demasiado pesados.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

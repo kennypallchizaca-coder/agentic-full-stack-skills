@@ -20,13 +20,13 @@ La autenticación es mucho más que un formulario de login. El frontend debe res
 # 2. Skill Objective
 
 **Objective (EN):**
-Implement a reliable session flow for SPA or hybrid frontend applications.
+Implement a reliable session flow for SPA or hybrid frontend applications that fits the chosen auth architecture.
 - Use this skill when: Building login/logout flows, protected dashboards, or startup hydration for authenticated apps.
 - Do not use this skill when: Authentication is fully delegated to a BaaS SDK that already exposes reactive session state (see Skill 11).
 - Security preference: Prefer `httpOnly`, `secure`, `sameSite` cookies. Use `localStorage` or `sessionStorage` only if the architecture explicitly requires it and the tradeoff is documented.
 
 **Objetivo (ES):**
-Implementar un flujo de sesión confiable para aplicaciones frontend SPA o híbridas.
+Implementar un flujo de sesión confiable para aplicaciones frontend SPA o híbridas que encaje con la arquitectura de auth elegida.
 - Úsese cuando: Se construyan flujos de login/logout, dashboards protegidos o hidratación inicial de apps autenticadas.
 - No se use cuando: La autenticación esté delegada por completo a un SDK BaaS que ya expone estado reactivo de sesión (ver Skill 11).
 - Preferencia de seguridad: Prioriza cookies `httpOnly`, `secure`, `sameSite`. Usa `localStorage` o `sessionStorage` solo si la arquitectura lo exige de forma explícita y el riesgo queda documentado.
@@ -69,6 +69,7 @@ Implementar un flujo de sesión confiable para aplicaciones frontend SPA o híbr
 3. **Hydrate on startup:** On app boot, call `/me` or a refresh endpoint before rendering protected routes; do not guess auth state from UI-only assumptions.
 4. **Centralize logout:** A single `logout()` action must clear session state, trigger backend logout if needed, and redirect safely.
 5. **Handle `401` once:** Route HTTP `401` responses through the same logout/session reset path to avoid duplicated logic and stale UI state.
+6. **Adapt the pattern, not the literal example:** Rename files, flows, auth states, and integration points to match the target project's framework, session model, and business language.
 
 **Instrucciones (ES):**
 1. **Crear el repositorio de auth:** Aísla las llamadas `login`, `logout`, `me` y `refresh` fuera de los componentes UI.
@@ -76,6 +77,7 @@ Implementar un flujo de sesión confiable para aplicaciones frontend SPA o híbr
 3. **Hidratar al arrancar:** Al iniciar la app, llama a `/me` o a un endpoint de refresh antes de renderizar rutas protegidas; no adivines auth solo desde suposiciones de UI.
 4. **Centralizar logout:** Una única acción `logout()` debe limpiar el estado de sesión, ejecutar logout backend si aplica y redirigir de forma segura.
 5. **Manejar `401` una sola vez:** Enruta las respuestas HTTP `401` por el mismo camino de logout o reset de sesión para evitar lógica duplicada y UI obsoleta.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, flujos, estados de auth y puntos de integración para ajustarlos al framework, el modelo de sesión y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -119,8 +121,10 @@ src/
 - [ ] A page refresh preserves the real session state after hydration.
 - [ ] Protected routes wait for session bootstrap before redirecting.
 - [ ] Token persistence is not stored in `localStorage` unless the project documents that exception and accepts the risk.
+- [ ] Names, files, flows, auth states, and integration points were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Un refresh de página preserva el estado real de la sesión después de la hidratación.
 - [ ] Las rutas protegidas esperan el bootstrap de sesión antes de redirigir.
 - [ ] La persistencia de tokens no se guarda en `localStorage` salvo que el proyecto documente esa excepción y acepte el riesgo.
+- [ ] Los nombres, archivos, flujos, estados de auth y puntos de integración se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

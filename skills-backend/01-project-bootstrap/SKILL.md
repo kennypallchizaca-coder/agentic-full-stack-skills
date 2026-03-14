@@ -20,12 +20,12 @@ Todo backend necesita un punto de partida estable antes de agregar lógica de ne
 # 2. Skill Objective
 
 **Objective (EN):**
-Create a minimal but professional backend bootstrap ready for future modules.
+Create a minimal but professional backend bootstrap ready for future modules and adaptable to the target runtime, framework, and deployment style.
 - Use this skill when: Starting a backend project, a microservice, or a new service runtime from scratch.
 - Do not use this skill when: The project already has a working entry point and you are only extending existing features.
 
 **Objetivo (ES):**
-Crear un bootstrap backend mínimo pero profesional, listo para módulos futuros.
+Crear un bootstrap backend mínimo pero profesional, listo para módulos futuros y adaptable al runtime, framework y estilo de despliegue del proyecto objetivo.
 - Úsese cuando: Se inicie un backend, un microservicio o un nuevo runtime de servicio desde cero.
 - No se use cuando: El proyecto ya tenga un punto de entrada funcionando y solo se estén extendiendo features existentes.
 
@@ -67,6 +67,7 @@ Crear un bootstrap backend mínimo pero profesional, listo para módulos futuros
 3. **Create a clear entry point:** Read configuration from environment, start the HTTP server, and register a simple health route.
 4. **Define safe defaults:** Fall back to a standard port like `8080` and expose the expected environment variables in `.env.example`.
 5. **Protect local secrets:** Keep real `.env` files out of version control and commit only templates or examples.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Inicializar el runtime del proyecto:** Crea el paquete, módulo o workspace base usando el tooling estándar del ecosistema.
@@ -74,6 +75,7 @@ Crear un bootstrap backend mínimo pero profesional, listo para módulos futuros
 3. **Crear un punto de entrada claro:** Lee configuración desde el entorno, inicia el servidor HTTP y registra una ruta simple de salud.
 4. **Definir defaults seguros:** Usa un puerto estándar como `8080` cuando no haya configuración explícita y expón las variables esperadas en `.env.example`.
 5. **Proteger secretos locales:** Mantén los `.env` reales fuera del control de versiones y sube solo plantillas o ejemplos.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -113,8 +115,10 @@ Usa la skill @01-project-bootstrap para inicializar un nuevo servicio backend en
 - [ ] The service starts from a single clear entry point.
 - [ ] `GET /health` returns a successful response when the service is healthy.
 - [ ] Real local secrets are excluded from version control.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] El servicio arranca desde un punto de entrada único y claro.
 - [ ] `GET /health` devuelve una respuesta exitosa cuando el servicio está sano.
 - [ ] Los secretos locales reales están excluidos del control de versiones.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

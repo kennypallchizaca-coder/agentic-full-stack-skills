@@ -20,12 +20,12 @@ La autenticación responde quién es el usuario; la autorización responde qué 
 # 2. Skill Objective
 
 **Objective (EN):**
-Implement authorization checks that clearly separate `401 Unauthorized` from `403 Forbidden`.
+Implement authorization checks that clearly separate `401 Unauthorized` from `403 Forbidden` and fit the project's permission model.
 - Use this skill when: Protecting admin routes, scoped resources, or actions that require a specific permission set.
 - Do not use this skill when: The endpoint is intentionally public and has no protected behavior.
 
 **Objetivo (ES):**
-Implementar controles de autorización que separen claramente `401 Unauthorized` de `403 Forbidden`.
+Implementar controles de autorización que separen claramente `401 Unauthorized` de `403 Forbidden` y encajen con el modelo de permisos del proyecto.
 - Úsese cuando: Se protejan rutas admin, recursos acotados o acciones que requieran permisos específicos.
 - No se use cuando: El endpoint sea intencionalmente público y no tenga comportamiento protegido.
 
@@ -69,6 +69,7 @@ Implementar controles de autorización que separen claramente `401 Unauthorized`
 5. **Implement privileged bypass explicitly:** Allow `ADMIN` or the equivalent privileged role to bypass ownership checks in a clear early-return branch.
 6. **Return correct status codes:** `401` when there is no valid authenticated principal; `403` when the principal exists but lacks permission.
 7. **Log denials safely:** Record denied attempts for audit value without exposing sensitive policy details to clients.
+8. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Exigir autenticación primero:** La autorización solo debe ejecutarse después de resolver la identidad.
@@ -78,6 +79,7 @@ Implementar controles de autorización que separen claramente `401 Unauthorized`
 5. **Implementar bypass privilegiado de forma explícita:** Permite que `ADMIN` o el rol privilegiado equivalente salte la validación de ownership mediante una rama temprana y clara.
 6. **Devolver códigos correctos:** `401` cuando no existe principal autenticado válido; `403` cuando sí existe pero no tiene permiso.
 7. **Registrar denegaciones con seguridad:** Guarda intentos denegados con valor de auditoría sin exponer detalles sensibles de la política al cliente.
+8. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -124,6 +126,7 @@ src/
 - [ ] Ownership-sensitive actions are checked in the service layer, not only in the UI.
 - [ ] Privileged roles bypass ownership explicitly and safely.
 - [ ] Missing resources return `404` before any ownership denial.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Las requests no autenticadas fallan con `401`, no con `403`.
@@ -131,3 +134,4 @@ src/
 - [ ] Las acciones sensibles por ownership se validan en la capa de servicio, no solo en la UI.
 - [ ] Los roles privilegiados hacen bypass del ownership de forma explícita y segura.
 - [ ] Los recursos inexistentes devuelven `404` antes de cualquier denegación por ownership.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

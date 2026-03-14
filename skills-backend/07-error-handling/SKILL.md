@@ -20,12 +20,12 @@ Los `try/catch` dispersos crean APIs inconsistentes y esconden problemas operati
 # 2. Skill Objective
 
 **Objective (EN):**
-Standardize how the backend throws, logs, and returns errors.
+Standardize how the backend throws, logs, and returns errors across the project's transport and execution boundaries.
 - Use this skill when: The project exposes HTTP endpoints, background jobs, or external integrations that can fail.
 - Do not use this skill when: You are only writing throwaway scripts with no client-facing contract.
 
 **Objetivo (ES):**
-Estandarizar cómo el backend lanza, registra y devuelve errores.
+Estandarizar cómo el backend lanza, registra y devuelve errores a través de las distintas fronteras de transporte y ejecución del proyecto.
 - Úsese cuando: El proyecto exponga endpoints HTTP, jobs en segundo plano o integraciones externas que puedan fallar.
 - No se use cuando: Solo se escriban scripts descartables sin contrato hacia clientes.
 
@@ -67,6 +67,7 @@ Estandarizar cómo el backend lanza, registra y devuelve errores.
 3. **Log with context:** Include request ID, route, actor, and dependency details when available, but avoid leaking secrets or PII.
 4. **Separate expected from unexpected:** Business errors should be cleanly exposed; unknown errors should return generic `500` responses.
 5. **Keep controllers/services focused:** Throw meaningful errors and let the global layer decide how to serialize them.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Definir categorías conocidas:** Modela explícitamente validación, no encontrado, conflicto, auth y fallos de dependencias.
@@ -74,6 +75,7 @@ Estandarizar cómo el backend lanza, registra y devuelve errores.
 3. **Loggear con contexto:** Incluye request ID, ruta, actor y detalles de dependencias cuando existan, pero sin filtrar secretos ni PII.
 4. **Separar lo esperado de lo inesperado:** Los errores de negocio pueden exponerse limpiamente; los desconocidos deben devolver `500` genérico.
 5. **Mantener foco en controladores y servicios:** Lanza errores significativos y deja que la capa global decida cómo serializarlos.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -117,8 +119,10 @@ src/
 - [ ] Unknown failures return a safe `500` response without stack traces in production.
 - [ ] Validation and domain errors map to deterministic status codes.
 - [ ] Logs contain enough context to debug incidents without exposing secrets.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los fallos desconocidos devuelven un `500` seguro sin stack traces en producción.
 - [ ] Los errores de validación y dominio mapean a códigos deterministas.
 - [ ] Los logs contienen contexto suficiente para depurar sin exponer secretos.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

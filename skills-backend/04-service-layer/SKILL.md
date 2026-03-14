@@ -20,12 +20,12 @@ Los controladores deben manejar transporte, no decisiones de negocio. Esta skill
 # 2. Skill Objective
 
 **Objective (EN):**
-Create services that encapsulate business logic and remain reusable across controllers, jobs, and tests.
+Create services that encapsulate business logic and remain reusable across controllers, jobs, tests, and framework styles.
 - Use this skill when: Logic is growing beyond simple request parsing, or multiple endpoints share the same workflow.
 - Do not use this skill when: The change is limited to static routing metadata with no business behavior.
 
 **Objetivo (ES):**
-Crear servicios que encapsulen lógica de negocio y puedan reutilizarse entre controladores, jobs y pruebas.
+Crear servicios que encapsulen lógica de negocio y puedan reutilizarse entre controladores, jobs, pruebas y distintos estilos de framework.
 - Úsese cuando: La lógica crece más allá del parseo de requests o varios endpoints comparten el mismo flujo.
 - No se use cuando: El cambio se limita a metadatos de rutas sin comportamiento de negocio.
 
@@ -67,6 +67,7 @@ Crear servicios que encapsulen lógica de negocio y puedan reutilizarse entre co
 3. **Centralize business rules:** Place validations, calculations, conditional flows, and orchestration in the service.
 4. **Raise domain-level errors:** Throw meaningful exceptions that can later be translated by the global error layer.
 5. **Design for reuse:** A service method should be callable from an HTTP controller, a queue consumer, or a scheduled job without needing web objects.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Mantener controladores delgados:** Parsear `path/query/body`, llamar al servicio y mapear el resultado a HTTP.
@@ -74,6 +75,7 @@ Crear servicios que encapsulen lógica de negocio y puedan reutilizarse entre co
 3. **Centralizar reglas de negocio:** Coloca validaciones, cálculos, flujos condicionales y orquestación en el servicio.
 4. **Lanzar errores de dominio:** Usa excepciones significativas que luego puedan traducirse en la capa global de errores.
 5. **Diseñar para reutilizar:** Un método de servicio debe poder llamarse desde HTTP, colas o tareas programadas sin depender de objetos web.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -114,8 +116,10 @@ src/
 - [ ] Controllers do not contain business calculations or persistence logic.
 - [ ] Services accept plain arguments or DTOs, not raw web framework objects.
 - [ ] The main use case can be unit-tested without booting an HTTP server.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los controladores no contienen cálculos de negocio ni lógica de persistencia.
 - [ ] Los servicios reciben argumentos planos o DTOs, no objetos crudos del framework web.
 - [ ] El caso de uso principal puede probarse sin levantar un servidor HTTP.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

@@ -20,12 +20,12 @@ Los endpoints de listado se vuelven peligrosos cuando traen todo por defecto. Es
 # 2. Skill Objective
 
 **Objective (EN):**
-Add scalable query capabilities to collection endpoints without exposing the database to abusive requests.
+Add scalable query capabilities to collection endpoints without exposing the database to abusive requests, while fitting the target API and persistence stack.
 - Use this skill when: A `GET /resource` endpoint needs pagination, sorting, searching, or filters.
 - Do not use this skill when: The dataset is fixed and guaranteed to stay tiny forever.
 
 **Objetivo (ES):**
-Agregar capacidades de consulta escalables a endpoints de colección sin exponer la base a requests abusivos.
+Agregar capacidades de consulta escalables a endpoints de colección sin exponer la base a requests abusivos y encajando con el stack de API y persistencia objetivo.
 - Úsese cuando: Un `GET /resource` necesite paginación, orden, búsqueda o filtros.
 - No se use cuando: El dataset sea fijo y esté garantizado que siempre será pequeño.
 
@@ -67,6 +67,7 @@ Agregar capacidades de consulta escalables a endpoints de colección sin exponer
 3. **Allowlist sort/filter fields:** Never concatenate arbitrary client input directly into raw database queries.
 4. **Push constraints to the repository:** Translate pagination and filters to SQL, ORM, or driver-level operations instead of slicing in memory.
 5. **Return metadata consistently:** Include totals and paging info so clients can render navigation correctly.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Validar y normalizar query params:** Define valores por defecto para `page`, `limit` y orden; rechaza números inválidos o campos no soportados.
@@ -74,6 +75,7 @@ Agregar capacidades de consulta escalables a endpoints de colección sin exponer
 3. **Permitir solo campos de orden o filtro conocidos:** Nunca concatenes input arbitrario del cliente dentro de consultas crudas.
 4. **Llevar restricciones al repositorio:** Traduce paginación y filtros a SQL, ORM o driver en vez de recortar en memoria.
 5. **Devolver metadata consistente:** Incluye totales e información de paginación para que el cliente navegue correctamente.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -117,8 +119,10 @@ src/
 - [ ] Requests cannot force extreme limits such as `limit=1000000`.
 - [ ] Sort and filter fields are validated against an allowlist.
 - [ ] Collection responses include stable paging metadata.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Las requests no pueden forzar límites extremos como `limit=1000000`.
 - [ ] Los campos de orden y filtro se validan contra una allowlist.
 - [ ] Las respuestas de colección incluyen metadata de paginación estable.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

@@ -20,12 +20,12 @@ El routing es la columna estructural de una aplicación frontend. Esta skill org
 # 2. Skill Objective
 
 **Objective (EN):**
-Design a route system that separates public and private areas while keeping performance and maintainability under control.
+Design a route system that separates public and private areas while keeping performance and maintainability under control across different router architectures.
 - Use this skill when: The application has multiple pages, nested layouts, or route-level code splitting.
 - Do not use this skill when: A small widget or modal has no standalone navigation model.
 
 **Objetivo (ES):**
-Diseñar un sistema de rutas que separe áreas públicas y privadas mientras mantiene rendimiento y mantenibilidad bajo control.
+Diseñar un sistema de rutas que separe áreas públicas y privadas mientras mantiene rendimiento y mantenibilidad bajo control en distintas arquitecturas de router.
 - Úsese cuando: La aplicación tenga múltiples páginas, layouts anidados o code splitting por ruta.
 - No se use cuando: Un widget pequeño o modal no tenga un modelo de navegación propio.
 
@@ -67,6 +67,7 @@ Diseñar un sistema de rutas que separe áreas públicas y privadas mientras man
 3. **Lazy-load route boundaries:** Split large pages or modules at route boundaries to reduce initial bundle cost.
 4. **Support dynamic segments intentionally:** Keep route params explicit and aligned with feature needs.
 5. **Add a final fallback route:** Unknown paths should land on a consistent not-found view instead of a blank screen.
+6. **Adapt the pattern, not the literal example:** Rename files, route groups, layouts, and conventions to match the target router, framework, and navigation model.
 
 **Instrucciones (ES):**
 1. **Mapear primero el árbol de rutas:** Identifica rutas públicas, protegidas, de detalle y fallback antes de escribir código.
@@ -74,6 +75,7 @@ Diseñar un sistema de rutas que separe áreas públicas y privadas mientras man
 3. **Aplicar lazy loading en límites de ruta:** Divide páginas o módulos grandes en fronteras de ruta para reducir el costo del bundle inicial.
 4. **Soportar segmentos dinámicos con intención:** Mantén los params explícitos y alineados con las necesidades del feature.
 5. **Agregar una ruta fallback final:** Las rutas desconocidas deben aterrizar en una vista consistente de no encontrado y no en una pantalla en blanco.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, grupos de rutas, layouts y convenciones para ajustarlos al router, framework y modelo de navegación del proyecto objetivo.
 
 ---
 
@@ -117,8 +119,10 @@ src/
 - [ ] Public and protected areas are grouped under clear layouts.
 - [ ] Route-level lazy loading is used where it meaningfully reduces initial load cost.
 - [ ] Unknown paths resolve to a predictable not-found experience.
+- [ ] Names, files, route groups, layouts, and conventions were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Las áreas públicas y protegidas están agrupadas bajo layouts claros.
 - [ ] El lazy loading por ruta se usa donde realmente reduce el costo de carga inicial.
 - [ ] Las rutas desconocidas resuelven una experiencia consistente de no encontrado.
+- [ ] Los nombres, archivos, grupos de rutas, layouts y convenciones se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

@@ -20,12 +20,12 @@ Los route guards deben hacer cumplir reglas de navegación sin flicker, loops ni
 # 2. Skill Objective
 
 **Objective (EN):**
-Implement auth and guest route protection that cooperates with session hydration.
+Implement auth and guest route protection that cooperates with session hydration and fits the project's routing model.
 - Use this skill when: Protecting private pages, preventing logged-in users from visiting login routes, or applying role-based route access.
 - Do not use this skill when: The app is fully public and has no session-dependent navigation.
 
 **Objetivo (ES):**
-Implementar protección de rutas auth y guest que coopere con la hidratación de sesión.
+Implementar protección de rutas auth y guest que coopere con la hidratación de sesión y encaje con el modelo de routing del proyecto.
 - Úsese cuando: Se protejan páginas privadas, se impida que usuarios logueados visiten rutas de login o se aplique acceso por rol.
 - No se use cuando: La app sea completamente pública y no tenga navegación dependiente de sesión.
 
@@ -67,6 +67,7 @@ Implementar protección de rutas auth y guest que coopere con la hidratación de
 3. **Implement distinct guard types:** Auth guards protect private routes, guest guards protect login/register routes, and role guards protect privileged areas.
 4. **Preserve intent when useful:** Redirect unauthenticated users to login with a return URL or equivalent router state.
 5. **Keep guard logic deterministic:** Avoid side effects beyond navigation decisions and shared session resets.
+6. **Adapt the pattern, not the literal example:** Rename files, guards, route metadata, and redirect rules to match the target project's router, auth flow, and business language.
 
 **Instrucciones (ES):**
 1. **Esperar el bootstrap de sesión:** Los guards deben distinguir entre “sesión aún cargando” y “guest” para evitar redirecciones falsas.
@@ -74,6 +75,7 @@ Implementar protección de rutas auth y guest que coopere con la hidratación de
 3. **Implementar tipos de guard distintos:** Auth guards para rutas privadas, guest guards para login/register y role guards para áreas privilegiadas.
 4. **Preservar intención cuando sirva:** Redirige usuarios no autenticados al login con return URL o estado equivalente del router.
 5. **Mantener lógica determinista:** Evita side effects más allá de decisiones de navegación y resets compartidos de sesión.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, guards, metadata de rutas y reglas de redirección para ajustarlos al router, el flujo de auth y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -118,8 +120,10 @@ src/
 - [ ] Guards do not redirect until session bootstrap has completed.
 - [ ] Route protection depends on shared session state, not direct token reads from browser storage.
 - [ ] Auth redirects preserve the intended destination when appropriate.
+- [ ] Names, files, guards, route metadata, and redirect rules were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los guards no redirigen hasta que el bootstrap de sesión termine.
 - [ ] La protección de rutas depende del estado compartido de sesión, no de lecturas directas del storage del navegador.
 - [ ] Las redirecciones auth preservan el destino deseado cuando aplica.
+- [ ] Los nombres, archivos, guards, metadata de rutas y reglas de redirección se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

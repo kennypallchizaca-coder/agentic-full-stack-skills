@@ -20,12 +20,12 @@ El styling se vuelve costoso cuando colores, espaciados y reglas de componentes 
 # 2. Skill Objective
 
 **Objective (EN):**
-Establish a styling architecture that is reusable, themeable, and easy to maintain.
+Establish a styling architecture that is reusable, themeable, easy to maintain, and adaptable to the chosen styling stack.
 - Use this skill when: Starting a frontend design system, cleaning a messy stylesheet layer, or adding light/dark themes.
 - Do not use this skill when: You only need a one-off page tweak inside an already consistent design system.
 
 **Objetivo (ES):**
-Establecer una arquitectura de estilos reutilizable, tematizable y fácil de mantener.
+Establecer una arquitectura de estilos reutilizable, tematizable, fácil de mantener y adaptable al stack de estilos elegido.
 - Úsese cuando: Se inicie un design system frontend, se limpie una capa CSS caótica o se agreguen temas light/dark.
 - No se use cuando: Solo se necesite un ajuste puntual dentro de un sistema visual ya consistente.
 
@@ -67,6 +67,7 @@ Establecer una arquitectura de estilos reutilizable, tematizable y fácil de man
 3. **Design theme switching explicitly:** Use CSS variables, data attributes, or framework theme providers instead of hardcoding duplicate color values.
 4. **Favor semantic naming:** Use tokens such as `--color-surface` or `--spacing-md` instead of arbitrary literals spread across files.
 5. **Audit accessibility:** Verify contrast, focus states, and reduced-motion behavior when the theme system changes.
+6. **Adapt the pattern, not the literal example:** Rename files, token groups, themes, and style boundaries to match the target project's framework, styling strategy, and design language.
 
 **Instrucciones (ES):**
 1. **Definir tokens primero:** Centraliza colores, spacing, tipografía, radius y sombras antes de estilizar pantallas individuales.
@@ -74,6 +75,7 @@ Establecer una arquitectura de estilos reutilizable, tematizable y fácil de man
 3. **Diseñar el cambio de tema de forma explícita:** Usa variables CSS, `data-theme` o providers del framework en lugar de duplicar valores de color.
 4. **Favorecer nombres semánticos:** Usa tokens como `--color-surface` o `--spacing-md` en vez de literales sueltos repartidos por archivos.
 5. **Auditar accesibilidad:** Verifica contraste, estados de foco y reduced motion cuando cambie el sistema de tema.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, grupos de tokens, temas y límites de estilos para ajustarlos al framework, la estrategia de estilos y el lenguaje visual del proyecto objetivo.
 
 ---
 
@@ -115,8 +117,10 @@ src/
 - [ ] Tokens are defined once and reused across the app.
 - [ ] Component styles do not leak unintentionally into unrelated screens.
 - [ ] Theme changes preserve contrast and interaction accessibility.
+- [ ] Names, files, token groups, themes, and style boundaries were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los tokens se definen una sola vez y se reutilizan en toda la app.
 - [ ] Los estilos de componentes no se filtran accidentalmente a pantallas no relacionadas.
 - [ ] Los cambios de tema conservan contraste y accesibilidad de interacción.
+- [ ] Los nombres, archivos, grupos de tokens, temas y límites de estilos se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

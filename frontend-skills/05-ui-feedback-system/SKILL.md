@@ -20,12 +20,12 @@ Los usuarios necesitan feedback claro cuando algo está cargando, sale bien, fal
 # 2. Skill Objective
 
 **Objective (EN):**
-Build a shared feedback layer for transient notifications, blocking confirmations, and loading communication.
+Build a shared feedback layer for transient notifications, blocking confirmations, and loading communication that fits the target UI architecture.
 - Use this skill when: The app performs async operations that need visible success, error, warning, or confirmation feedback.
 - Do not use this skill when: The issue is a field-level validation error that belongs inside the form itself.
 
 **Objetivo (ES):**
-Construir una capa compartida de feedback para notificaciones transitorias, confirmaciones bloqueantes y comunicación de carga.
+Construir una capa compartida de feedback para notificaciones transitorias, confirmaciones bloqueantes y comunicación de carga que encaje con la arquitectura UI objetivo.
 - Úsese cuando: La app ejecute operaciones asíncronas que necesiten feedback visible de éxito, error, advertencia o confirmación.
 - No se use cuando: El problema sea un error de validación por campo que deba vivir dentro del formulario.
 
@@ -67,6 +67,7 @@ Construir una capa compartida de feedback para notificaciones transitorias, conf
 3. **Differentiate transient and blocking feedback:** Toasts should be lightweight; destructive actions should use explicit confirmation dialogs.
 4. **Handle loading visibly:** Use spinners, skeletons, or progress indicators where the wait matters to the user.
 5. **Clean up automatically:** Toast timeouts and dialog lifecycle should not leak listeners or stale state.
+6. **Adapt the pattern, not the literal example:** Rename files, channels, helpers, and UI primitives to match the target project's framework, design system, and business language.
 
 **Instrucciones (ES):**
 1. **Crear un punto compartido de feedback:** Monta contenedores de toast y diálogo cerca del layout principal de la app.
@@ -74,6 +75,7 @@ Construir una capa compartida de feedback para notificaciones transitorias, conf
 3. **Diferenciar feedback transitorio y bloqueante:** Los toasts deben ser livianos; las acciones destructivas deben usar diálogos de confirmación explícitos.
 4. **Hacer visible la carga:** Usa spinners, skeletons o indicadores de progreso donde la espera sea relevante para el usuario.
 5. **Limpiar automáticamente:** Los timeouts de toast y el ciclo de vida de diálogos no deben dejar listeners o estado obsoleto.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, canales, helpers y primitivas UI para ajustarlos al framework, design system y lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -115,8 +117,10 @@ src/
 - [ ] Async success and error states surface through a shared feedback system.
 - [ ] Destructive actions require explicit confirmation.
 - [ ] Toast and dialog lifecycle handling does not leak stale state or timers.
+- [ ] Names, files, channels, helpers, and UI primitives were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los estados asíncronos de éxito y error se muestran mediante un sistema compartido de feedback.
 - [ ] Las acciones destructivas requieren confirmación explícita.
 - [ ] El ciclo de vida de toasts y diálogos no deja timers ni estado obsoleto.
+- [ ] Los nombres, archivos, canales, helpers y primitivas UI se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

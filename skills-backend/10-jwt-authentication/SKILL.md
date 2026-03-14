@@ -20,12 +20,12 @@ La autenticación debe proteger credenciales, emitir tokens confiables y mantene
 # 2. Skill Objective
 
 **Objective (EN):**
-Build a secure login flow that issues and validates JWTs without leaking secrets or overloading the token payload.
+Build a secure login flow that issues and validates JWTs without leaking secrets or overloading the token payload, adapting to the chosen auth architecture.
 - Use this skill when: Implementing email/password login, token validation middleware, or refresh/access token flows.
 - Do not use this skill when: Authentication is fully delegated to an external identity provider with no local token issuance.
 
 **Objetivo (ES):**
-Construir un flujo de login seguro que emita y valide JWTs sin filtrar secretos ni sobrecargar el payload.
+Construir un flujo de login seguro que emita y valide JWTs sin filtrar secretos ni sobrecargar el payload, adaptándolo a la arquitectura de autenticación elegida.
 - Úsese cuando: Se implemente login por email/password, middleware de validación de tokens o flujos refresh/access token.
 - No se use cuando: La autenticación esté delegada por completo a un proveedor externo sin emisión local de tokens.
 
@@ -67,6 +67,7 @@ Construir un flujo de login seguro que emita y valide JWTs sin filtrar secretos 
 3. **Load secrets from secure config:** Read signing secrets or keys from environment variables or a secret manager. Never hardcode them.
 4. **Validate every token use:** Check signature, expiration, issuer/audience as needed, and reject malformed or expired tokens deterministically.
 5. **Prefer short-lived access tokens:** If the product needs long sessions, add refresh-token rotation or secure cookie-based session renewal.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Hashear contraseñas de forma segura:** Usa `bcrypt`, `argon2` o un algoritmo adaptativo equivalente. Nunca guardes passwords en texto plano.
@@ -74,6 +75,7 @@ Construir un flujo de login seguro que emita y valide JWTs sin filtrar secretos 
 3. **Cargar secretos desde configuración segura:** Lee secretos o llaves desde variables de entorno o un secret manager. Nunca los hardcodees.
 4. **Validar cada uso del token:** Revisa firma, expiración, issuer/audience cuando aplique y rechaza tokens malformados o vencidos de forma determinista.
 5. **Preferir access tokens cortos:** Si el producto necesita sesiones largas, agrega rotación de refresh tokens o renovación mediante cookies seguras.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -116,8 +118,10 @@ src/
 - [ ] Passwords are stored only as secure hashes.
 - [ ] JWT secrets or private keys are not committed to the repository.
 - [ ] Protected routes reject expired, malformed, or tampered tokens consistently.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Las contraseñas se almacenan solo como hashes seguros.
 - [ ] Los secretos JWT o llaves privadas no se suben al repositorio.
 - [ ] Las rutas protegidas rechazan tokens expirados, malformados o alterados de forma consistente.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

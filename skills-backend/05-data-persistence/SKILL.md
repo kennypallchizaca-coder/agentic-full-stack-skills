@@ -20,12 +20,12 @@ La persistencia debe dejar claro cómo se guardan, consultan y migran los datos.
 # 2. Skill Objective
 
 **Objective (EN):**
-Build a persistence layer with clear entities, repository methods, and migration discipline.
+Build a persistence layer with clear entities, repository methods, and migration discipline that fits the chosen data engine and project architecture.
 - Use this skill when: Connecting the project to a relational or document database, or replacing in-memory arrays.
 - Do not use this skill when: The feature only needs temporary mock data for a throwaway prototype.
 
 **Objetivo (ES):**
-Construir una capa de persistencia con entidades claras, métodos de repositorio y disciplina de migraciones.
+Construir una capa de persistencia con entidades claras, métodos de repositorio y disciplina de migraciones que encaje con el motor de datos y la arquitectura del proyecto.
 - Úsese cuando: Se conecte el proyecto a una base relacional o documental, o se reemplacen arreglos en memoria.
 - No se use cuando: El feature solo necesita datos mock temporales para un prototipo descartable.
 
@@ -67,6 +67,7 @@ Construir una capa de persistencia con entidades claras, métodos de repositorio
 3. **Keep persistence behind the service layer:** Controllers must never call ORM or raw SQL directly.
 4. **Handle transactions deliberately:** Group multi-write workflows under service-managed transactions where the framework supports them.
 5. **Version schema changes:** Use migrations or equivalent change history instead of editing the live database manually.
+6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
 1. **Modelar la forma persistente:** Define entidades o esquemas con nombres, llaves, índices y restricciones explícitas.
@@ -74,6 +75,7 @@ Construir una capa de persistencia con entidades claras, métodos de repositorio
 3. **Mantener la persistencia detrás del servicio:** Los controladores nunca deben llamar al ORM ni al SQL crudo directamente.
 4. **Manejar transacciones con intención:** Agrupa flujos con múltiples escrituras bajo transacciones administradas por el servicio cuando el framework lo permita.
 5. **Versionar cambios de esquema:** Usa migraciones o historial equivalente en lugar de editar la base viva manualmente.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -117,8 +119,10 @@ migrations/
 - [ ] Repository methods describe business retrieval intent instead of raw SQL fragments.
 - [ ] Controllers never import ORM models directly.
 - [ ] Database changes are tracked through migrations or an equivalent audited mechanism.
+- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los métodos del repositorio describen intención de negocio y no fragmentos sueltos de SQL.
 - [ ] Los controladores nunca importan modelos ORM directamente.
 - [ ] Los cambios de base se registran mediante migraciones o un mecanismo equivalente auditable.
+- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

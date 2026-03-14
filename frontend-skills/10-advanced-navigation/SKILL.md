@@ -20,12 +20,12 @@ La navegación también es estado de la aplicación y parte de la experiencia vi
 # 2. Skill Objective
 
 **Objective (EN):**
-Build navigation patterns that survive reloads, preserve history, and remain visually clear for users.
+Build navigation patterns that survive reloads, preserve history, remain visually clear, and adapt to the project's router and layout model.
 - Use this skill when: Implementing breadcrumbs, URL pagination, search params, list-detail flows, or visual navigation improvements around the app shell.
 - Do not use this skill when: A page has no navigational state beyond a static route.
 
 **Objetivo (ES):**
-Construir patrones de navegación que sobrevivan recargas, preserven historial y sigan siendo visualmente claros para usuarios.
+Construir patrones de navegación que sobrevivan recargas, preserven historial, sigan siendo visualmente claros y se adapten al router y layout del proyecto.
 - Úsese cuando: Se implementen breadcrumbs, paginación por URL, search params, flujos lista-detalle o mejoras visuales alrededor del shell de navegación.
 - No se use cuando: Una página no tenga estado de navegación más allá de una ruta estática.
 
@@ -73,6 +73,7 @@ Construir patrones de navegación que sobrevivan recargas, preserven historial y
 5. **Keep summaries synced to route state:** Hero headers, counts, or pills should reflect the active route and query params, not stale local assumptions.
 6. **Stabilize the visual shell:** Keep navbar, drawer, footer, and route outlet layout coherent so loading states or empty pages do not collapse the overall page structure.
 7. **Add helper navigation components when justified:** Use back-to-top buttons, contextual hero blocks, or persistent navigation helpers only when they improve long-page usability.
+8. **Adapt the pattern, not the literal example:** Rename files, router helpers, visual shells, and navigation components to match the target project's framework, IA, and business language.
 
 **Instrucciones (ES):**
 1. **Derivar breadcrumbs desde el router:** Usa metadata de rutas o segmentos resueltos en lugar de hardcodear etiquetas en cada página.
@@ -82,6 +83,7 @@ Construir patrones de navegación que sobrevivan recargas, preserven historial y
 5. **Sincronizar resúmenes con la ruta:** Hero headers, contadores o pills deben reflejar la ruta activa y los query params, no supuestos locales obsoletos.
 6. **Estabilizar el shell visual:** Mantén navbar, drawer, footer y layout del router coherentes para que los estados de carga o vacíos no colapsen la estructura general.
 7. **Agregar ayudas de navegación cuando estén justificadas:** Usa back-to-top, bloques hero contextuales o ayudas persistentes solo cuando mejoren la usabilidad de páginas largas.
+8. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, helpers de router, shells visuales y componentes de navegación para ajustarlos al framework, la arquitectura de información y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -131,6 +133,7 @@ src/
 - [ ] Back and forward navigation behave predictably after changing query params.
 - [ ] Hero summaries and helper navigation components stay synchronized with the current route.
 - [ ] The layout shell remains visually stable during loading and empty states.
+- [ ] Names, files, router helpers, visual shells, and navigation components were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Recargar la página preserva el estado de paginación y filtros desde la URL.
@@ -138,3 +141,4 @@ src/
 - [ ] La navegación back y forward se comporta de forma predecible tras cambiar query params.
 - [ ] Los resúmenes hero y ayudas de navegación permanecen sincronizados con la ruta actual.
 - [ ] El shell visual se mantiene estable durante estados de carga o vacíos.
+- [ ] Los nombres, archivos, helpers de router, shells visuales y componentes de navegación se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

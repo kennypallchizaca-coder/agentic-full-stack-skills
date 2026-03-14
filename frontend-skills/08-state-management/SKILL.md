@@ -20,13 +20,13 @@ El estado global se vuelve peligroso cuando se convierte en un basurero. Esta sk
 # 2. Skill Objective
 
 **Objective (EN):**
-Build small, intentional stores instead of one oversized global state container.
+Build small, intentional stores instead of one oversized global state container, adapting the pattern to the chosen state mechanism.
 - Use this skill when: Multiple pages share UI/session state, or local prop drilling is becoming noisy.
 - Do not use this skill when: The data belongs to a single component subtree and can stay local.
 - Security note: Do not persist sensitive tokens in browser storage by default. Keep session truth in secure cookies or controlled memory when possible.
 
 **Objetivo (ES):**
-Construir stores pequeños e intencionales en lugar de un contenedor global gigantesco.
+Construir stores pequeños e intencionales en lugar de un contenedor global gigantesco, adaptando el patrón al mecanismo de estado elegido.
 - Úsese cuando: Varias páginas compartan estado de UI o sesión, o el prop drilling local ya genere ruido.
 - No se use cuando: Los datos pertenezcan a un solo subárbol de componentes y puedan seguir locales.
 - Nota de seguridad: No persistas tokens sensibles en almacenamiento del navegador por defecto. Mantén la verdad de la sesión en cookies seguras o memoria controlada cuando sea posible.
@@ -69,6 +69,7 @@ Construir stores pequeños e intencionales en lugar de un contenedor global giga
 3. **Keep server data out of the store unless necessary:** Prefer query/resource libraries for remote cache and use stores for client-owned state.
 4. **Hydrate intentionally:** Rebuild store state from safe sources such as cookies, `/me`, URL params, or documented persisted preferences.
 5. **Document persistence rules:** Only persist what the app truly needs across reloads, and never persist secrets casually.
+6. **Adapt the pattern, not the literal example:** Rename files, stores, actions, and persistence rules to match the target project's framework, state library, and business language.
 
 **Instrucciones (ES):**
 1. **Separar el estado por responsabilidad:** Mantén auth, tema y estado UI de features en stores distintos salvo que realmente pertenezcan juntos.
@@ -76,6 +77,7 @@ Construir stores pequeños e intencionales en lugar de un contenedor global giga
 3. **Dejar fuera los datos del servidor salvo que haga falta:** Prefiere librerías de query o resources para caché remota y usa stores para estado propiedad del cliente.
 4. **Hidratar con intención:** Reconstruye el state desde fuentes seguras como cookies, `/me`, URL params o preferencias persistidas documentadas.
 5. **Documentar reglas de persistencia:** Persiste solo lo que la app necesita entre recargas y nunca secretos de forma casual.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, stores, acciones y reglas de persistencia para ajustarlos al framework, la librería de estado y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -118,8 +120,10 @@ src/
 - [ ] Each store has a narrow responsibility and explicit actions.
 - [ ] Remote API cache is not mixed blindly into client UI state.
 - [ ] Sensitive session data is not persisted in browser storage by default.
+- [ ] Names, files, stores, actions, and persistence rules were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Cada store tiene una responsabilidad estrecha y acciones explícitas.
 - [ ] La caché remota de API no se mezcla a ciegas con el estado UI del cliente.
 - [ ] Los datos sensibles de sesión no se persisten por defecto en almacenamiento del navegador.
+- [ ] Los nombres, archivos, stores, acciones y reglas de persistencia se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

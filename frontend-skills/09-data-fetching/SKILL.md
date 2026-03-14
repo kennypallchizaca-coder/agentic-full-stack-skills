@@ -20,13 +20,13 @@ Consumir APIs directamente desde componentes crea rápido duplicación, bugs de 
 # 2. Skill Objective
 
 **Objective (EN):**
-Create a maintainable HTTP layer that components can consume without knowing transport details.
+Create a maintainable HTTP layer that components can consume without knowing transport details, adapting to the target API and auth stack.
 - Use this skill when: The app talks to REST, GraphQL, or internal API endpoints and needs reusable request behavior.
 - Do not use this skill when: A tiny proof of concept only makes one disposable request.
 - Security preference: Prefer cookie-based sessions with `withCredentials` over reading tokens from `localStorage`.
 
 **Objetivo (ES):**
-Crear una capa HTTP mantenible que los componentes puedan consumir sin conocer detalles del transporte.
+Crear una capa HTTP mantenible que los componentes puedan consumir sin conocer detalles del transporte, adaptándola al stack de API y auth objetivo.
 - Úsese cuando: La app hable con endpoints REST, GraphQL o APIs internas y necesite comportamiento reutilizable de requests.
 - No se use cuando: Un proof of concept mínimo solo haga una request descartable.
 - Preferencia de seguridad: Prioriza sesiones por cookie con `withCredentials` por encima de leer tokens desde `localStorage`.
@@ -69,6 +69,7 @@ Crear una capa HTTP mantenible que los componentes puedan consumir sin conocer d
 3. **Wrap endpoints in repositories/services:** Components should call `UsersRepository.list()` rather than constructing raw URLs.
 4. **Normalize failures:** Map backend error payloads to one predictable shape and route `401` handling through the shared auth reset flow.
 5. **Keep components transport-agnostic:** UI code should focus on loading, empty, success, and error states, not on HTTP plumbing.
+6. **Adapt the pattern, not the literal example:** Rename files, clients, repositories, and auth hooks to match the target project's framework, API contract, and business language.
 
 **Instrucciones (ES):**
 1. **Crear un cliente por contexto backend:** Centraliza base URL, timeout, defaults JSON y comportamiento de credenciales.
@@ -76,6 +77,7 @@ Crear una capa HTTP mantenible que los componentes puedan consumir sin conocer d
 3. **Envolver endpoints en repositorios o servicios:** Los componentes deberían llamar `UsersRepository.list()` en lugar de construir URLs crudas.
 4. **Normalizar fallos:** Mapea los payloads de error backend a una forma predecible y envía el manejo de `401` por el flujo compartido de reset de auth.
 5. **Mantener componentes agnósticos al transporte:** La UI debe enfocarse en loading, empty, success y error, no en plumbing HTTP.
+6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, clientes, repositorios y hooks de auth para ajustarlos al framework, el contrato API y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -118,8 +120,10 @@ src/
 - [ ] Components never embed raw API URLs or auth header logic.
 - [ ] `401` responses trigger the shared session reset path.
 - [ ] Browser token storage is not the default auth transport recommendation.
+- [ ] Names, files, clients, repositories, and auth hooks were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
 - [ ] Los componentes nunca embeben URLs API crudas ni lógica de auth headers.
 - [ ] Las respuestas `401` disparan el camino compartido de reset de sesión.
 - [ ] El almacenamiento de tokens en el navegador no es la recomendación por defecto.
+- [ ] Los nombres, archivos, clientes, repositorios y hooks de auth se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.
