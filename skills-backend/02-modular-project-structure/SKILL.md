@@ -59,7 +59,7 @@ Crear una estructura backend modular que escale de forma limpia entre frameworks
 
 ---
 
-# 5. Core Principle / Principio Central
+## Core Principle / Principio Central
 
 **Principle (EN):**
 A domain module should be understandable in isolation. Opening its folder should reveal the request entry point, the business logic, the persistence layer, the data contracts, and the public file that other modules are allowed to import.
@@ -69,7 +69,7 @@ Un módulo de dominio debe poder entenderse de forma aislada. Al abrir su carpet
 
 ---
 
-# 6. Execution Steps
+# 5. Execution Steps
 
 **Instructions (EN):**
 1. **Make the domain the first organizing rule:** Create one folder per business area under `src/modules/` (`users`, `products`, `billing`) instead of grouping the whole project under global `controllers/` or `services/` folders.
@@ -91,7 +91,7 @@ Un módulo de dominio debe poder entenderse de forma aislada. Al abrir su carpet
 
 ---
 
-# 7. Example Usage (Prompt)
+# 6. Example Usage (Prompt)
 
 **Prompt (EN):**
 ```text
@@ -109,7 +109,7 @@ Usa la skill @02-modular-project-structure para reorganizar este backend por dom
 
 ---
 
-# 8. Recommended File Structure / Estructura Recomendada
+# 7. Recommended File Structure / Estructura Recomendada
 
 ```text
 src/
