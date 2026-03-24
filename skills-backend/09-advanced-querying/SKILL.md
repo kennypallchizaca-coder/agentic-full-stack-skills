@@ -50,12 +50,12 @@ Agregar capacidades de consulta escalables a endpoints de colección sin exponer
 **Outputs (EN):**
 1. Validated query DTOs or parser utilities.
 2. Repository queries with bounded pagination and controlled sorting.
-3. Responses containing both `data` and `meta`.
+3. Responses containing both `data` and `meta` (recommended meta fields: `total`, `page`, `limit`, and `totalPages` or `hasNext`).
 
 **Salidas (ES):**
 1. DTOs de query o utilidades de parseo validadas.
 2. Consultas de repositorio con paginación acotada y orden controlado.
-3. Respuestas que contengan tanto `data` como `meta`.
+3. Respuestas que contengan tanto `data` como `meta` (campos meta recomendados: `total`, `page`, `limit` y `totalPages` o `hasNext`).
 
 ---
 
@@ -109,6 +109,9 @@ src/
     └── {feature}/
         ├── dto/
         │   └── query-{feature}.dto.{ext}
+        ├── services/
+        │   ├── {feature}.service.{ext}
+        │   └── {feature}.service.impl.{ext}
         ├── {feature}.controller.{ext}
         └── {feature}.repository.{ext}
 ```

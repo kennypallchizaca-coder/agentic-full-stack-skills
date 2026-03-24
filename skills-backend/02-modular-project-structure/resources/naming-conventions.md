@@ -16,8 +16,8 @@
 | Layer | Naming | Example |
 |-------|--------|---------|
 | Controller class | `{Domain}Controller` | `WorkOrderController` |
-| Service interface | `{Domain}Service` | `WorkOrderService` |
-| Service impl | `{Domain}ServiceImpl` | `WorkOrderServiceImpl` |
+| Service contract (optional) | `{Domain}Service` | `WorkOrderService` |
+| Service class | `{Domain}Service`, `{Domain}UseCaseService`, or project standard | `WorkOrderService` |
 | Repository | `{Domain}Repository` | `WorkOrderRepository` |
 | Entity | `{Domain}Entity` | `WorkOrderEntity` |
 | Create DTO | `Create{Domain}Dto` | `CreateWorkOrderDto` |

@@ -1,62 +1,99 @@
-# 🌌 Universal Backend Skills (Bilingual Edition)
-### The Ultimate Collection of 12 Agentic Skills for Claude Code, Gemini CLI, Cursor, Copilot & More
-**Battle-tested · Framework-agnostic · Language-agnostic · Java · Node.js · Python · Go**
+# Universal Backend Skills
+### 12 bilingual agentic skills for portable REST-first backend architecture
+**Framework-agnostic patterns for service APIs, security, and production delivery**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
 [![Skills](https://img.shields.io/badge/Skills-12-blueviolet)]()
 
 ---
 
-## 🌎 About this Library / Sobre esta Librería
+## About this library
 
-**(EN):** Welcome to the Universal Backend Skills Library. This is a complete operating system for your AI agent to implement any backend pattern correctly, every time. Every skill here is entirely bilingual, providing AI models with precise contextual mappings without degrading logic.
+This backend library gives an AI assistant a reusable playbook for clean API architecture, request validation, data access, security, and production delivery without tying the guidance to one runtime or framework.
 
-**(ES):** Bienvenido a la librería Universal Backend Skills. Este es un sistema operativo completo para que tu agente de Inteligencia Artificial implemente cualquier patrón backend correctamente cada vez. Cada skill aquí es completamente bilingüe, proveyendo a los modelos de IA mapas contextuales precisos sin degradar la lógica.
+Scope notes:
+- The backend set is REST-first. OpenAPI guidance lives inside [03-rest-api-design](./03-rest-api-design/SKILL.md), not as a separate skill.
+- GraphQL, gRPC, WebSockets, and SSE appear as transport-boundary decisions, but they are not first-class skill tracks in this repository.
+- The strongest coverage is for service-style web backends that expose HTTP APIs and need operational discipline.
 
 ---
 
-## ⚡️ Quick Start / Inicio Rápido
+## Quick start
 
-**(EN):**
-1. Copy the `skills-backend/` folder into your AI assistant workspace.
-2. Ask your agent explicitly:
-> "Use the **@04-service-layer** skill to implement the `OrderService` for my backend project."
+1. Copy the `skills-backend/` folder into the AI assistant workspace.
+2. Ask the agent explicitly:
 
-**(ES):**
-1. Copia la carpeta `skills-backend/` dentro de tu espacio de asistente IA.
-2. Pide a tu agente explícitamente:
-> "Usa la skill **@04-service-layer** para implementar el `OrderService` para mi proyecto backend."
+> "Use the **@04-service-layer** skill to move the `Order` workflow out of controllers and into a reusable service boundary."
+
+> "Apply **@12-production-deployment** to prepare this API for staging and production rollout."
 
 ---
 
 ## Validation
 
-Run `npm run validate` before publishing updates to verify every skill file, relative markdown link, and JSON schema in this repository.
+Run `npm run validate` before publishing updates. The validator checks every `SKILL.md`, relative markdown link, and JSON resource in the repository.
 
 ---
 
-## 📚 Backend Skills Index / Índice de Skills Backend
+## Backend skills index
 
-| # | Skill | English Description | Descripción (Español) | Risk |
-|---|-------|---------------------|-----------------------|:----:|
-| **01** | [**project-bootstrap**](./01-project-bootstrap/SKILL.md) | Initializes backend from scratch | Inicializa servidor HTTP desde cero | 🟢 Low |
-| **02** | [**modular-project-structure**](./02-modular-project-structure/SKILL.md) | Domain-driven folder routing | Ruteo de carpetas guiado por dominio | 🟢 Low |
-| **03** | [**rest-api-design**](./03-rest-api-design/SKILL.md) | Standard HTTP REST mapping | Mapeo HTTP REST estándar | 🟢 Low |
-| **04** | [**service-layer**](./04-service-layer/SKILL.md) | Business Logic encapsulated | Lógica de Negocio encapsulada | 🟢 Low |
-| **05** | [**data-persistence**](./05-data-persistence/SKILL.md) | ORM Repository abstraction | Abstracción de Repositorio ORM | 🟡 Medium |
-| **06** | [**dto-and-validation**](./06-dto-and-validation/SKILL.md) | Request Payload strict validation | Validación estricta de Payloads | 🟢 Low |
-| **07** | [**error-handling**](./07-error-handling/SKILL.md) | Global centralized try/catch | Excepciones Globales centralizadas | 🟡 Medium |
-| **08** | [**entity-relationships**](./08-entity-relationships/SKILL.md) | Foreign Keys and Joins isolation | Aislamiento de Llaves Foráneas y Joins | 🟡 Medium |
-| **09** | [**advanced-querying**](./09-advanced-querying/SKILL.md) | Native limits and URL queries | Límites nativos y Paginated URLs | 🟢 Low |
-| **10** | [**jwt-authentication**](./10-jwt-authentication/SKILL.md) | Passwords & Web Token Issuance | Contraseñas y Emisión JWT | 🔴 High|
-| **11** | [**authorization**](./11-authorization/SKILL.md) | Role Guard Route Blockers | Guardias bloqueadores de Rol | 🔴 High|
-| **12** | [**production-deployment**](./12-production-deployment/SKILL.md) | Secure Dockerfile instancing | Instanciación segura de Dockerfile | 🔴 High|
+| # | Skill | English Description | Descripcion (Espanol) | Risk |
+|---|---|---|---|:---:|
+| **01** | [**project-bootstrap**](./01-project-bootstrap/SKILL.md) | Initializes backend entry point and base health contract | Inicializa el backend y su contrato base de salud | 🟢 Low |
+| **02** | [**modular-project-structure**](./02-modular-project-structure/SKILL.md) | Organizes code by feature and layer boundaries | Organiza el codigo por feature y limites de capa | 🟢 Low |
+| **03** | [**rest-api-design**](./03-rest-api-design/SKILL.md) | Defines REST contracts, envelopes, versioning, and OpenAPI discipline | Define contratos REST, envelopes, versionado y disciplina OpenAPI | 🟢 Low |
+| **04** | [**service-layer**](./04-service-layer/SKILL.md) | Keeps business logic reusable, testable, and transport-independent | Mantiene la logica de negocio reutilizable y aislada del transporte | 🟢 Low |
+| **05** | [**data-persistence**](./05-data-persistence/SKILL.md) | Encapsulates repositories, entities, and migration-aware persistence | Encapsula repositorios, entidades y persistencia lista para migraciones | 🟡 Medium |
+| **06** | [**dto-and-validation**](./06-dto-and-validation/SKILL.md) | Enforces DTO or schema boundaries before business logic runs | Impone limites de DTO o schema antes de ejecutar negocio | 🟢 Low |
+| **07** | [**error-handling**](./07-error-handling/SKILL.md) | Centralizes exception mapping and safe client-facing errors | Centraliza excepciones y errores seguros hacia el cliente | 🟡 Medium |
+| **08** | [**entity-relationships**](./08-entity-relationships/SKILL.md) | Models ownership, relations, and safe serialization boundaries | Modela ownership, relaciones y limites seguros de serializacion | 🟡 Medium |
+| **09** | [**advanced-querying**](./09-advanced-querying/SKILL.md) | Adds safe filtering, sorting, and paginated metadata | Agrega filtros, orden y metadata paginada de forma segura | 🟢 Low |
+| **10** | [**jwt-authentication**](./10-jwt-authentication/SKILL.md) | Implements secure login, token issuance, and token validation | Implementa login seguro, emision y validacion de tokens | 🔴 High |
+| **11** | [**authorization**](./11-authorization/SKILL.md) | Applies RBAC, ownership, and layered access checks | Aplica RBAC, ownership y controles de acceso por capas | 🔴 High |
+| **12** | [**production-deployment**](./12-production-deployment/SKILL.md) | Hardens release, observability, CI/CD, and rollback readiness | Endurece release, observabilidad, CI/CD y rollback | 🔴 High |
 
 ---
 
-## 🔗 Architecture Tree / Árbol de Arquitectura
+## Backend resources index
 
-**Apply skills in order / Aplica estas skills en estricto orden:**
+These resources help adapt the skills to different languages, frameworks, and hosting models without changing the architectural intent.
+
+| Skill | Resource | Purpose |
+|---|---|---|
+| 01 | [health-check.template.md](./01-project-bootstrap/resources/health-check.template.md) | Base liveness contract with optional readiness extension |
+| 01 | [`01-project-bootstrap/resources/.env.example`](./01-project-bootstrap/resources/.env.example) | Example environment layout for backend bootstrap |
+| 02 | [module-structure.template.md](./02-modular-project-structure/resources/module-structure.template.md) | Portable feature-and-layer directory baseline |
+| 02 | [naming-conventions.md](./02-modular-project-structure/resources/naming-conventions.md) | Naming patterns by language and layer |
+| 03 | [api-contract.template.md](./03-rest-api-design/resources/api-contract.template.md) | Base contract template for resource-oriented APIs |
+| 03 | [contract-test-checklist.md](./03-rest-api-design/resources/contract-test-checklist.md) | Verify real route behavior against the published contract |
+| 03 | [http-status-reference.md](./03-rest-api-design/resources/http-status-reference.md) | Quick reference for intentional HTTP status choices |
+| 03 | [openapi-quality-checklist.md](./03-rest-api-design/resources/openapi-quality-checklist.md) | Review OpenAPI accuracy, schema quality, and release readiness |
+| 03 | [openapi-starter.template.md](./03-rest-api-design/resources/openapi-starter.template.md) | Start a portable OpenAPI document with stable envelopes |
+| 03 | [transport-decision-guide.md](./03-rest-api-design/resources/transport-decision-guide.md) | Decide whether REST is the right fit before forcing it |
+| 04 | [service-interface.template.md](./04-service-layer/resources/service-interface.template.md) | Service boundary template with optional explicit contract |
+| 04 | [service-test-strategy.md](./04-service-layer/resources/service-test-strategy.md) | Minimum testing plan for service-level use cases |
+| 05 | [base-entity.template.md](./05-data-persistence/resources/base-entity.template.md) | Common baseline for persistence entities |
+| 05 | [migration-strategy.md](./05-data-persistence/resources/migration-strategy.md) | Safe schema-change and migration guidance |
+| 06 | [validation-rules-reference.md](./06-dto-and-validation/resources/validation-rules-reference.md) | Reusable validation-rule catalog |
+| 07 | [`07-error-handling/resources/error-response.schema.json`](./07-error-handling/resources/error-response.schema.json) | JSON schema for consistent API error envelopes |
+| 08 | [relationship-decision.md](./08-entity-relationships/resources/relationship-decision.md) | Choose cardinality, ownership, and serialization boundaries |
+| 09 | [`09-advanced-querying/resources/paginated-response.schema.json`](./09-advanced-querying/resources/paginated-response.schema.json) | JSON schema for paginated collection responses |
+| 10 | [`10-jwt-authentication/resources/jwt-claims.schema.json`](./10-jwt-authentication/resources/jwt-claims.schema.json) | JSON schema for minimal JWT claim payloads |
+| 11 | [security-layers.md](./11-authorization/resources/security-layers.md) | Map authentication, authorization, and ownership responsibilities |
+| 12 | [`12-production-deployment/resources/.dockerignore.template`](./12-production-deployment/resources/.dockerignore.template) | Ignore rules for container builds |
+| 12 | [`12-production-deployment/resources/.env.production.example`](./12-production-deployment/resources/.env.production.example) | Example production environment layout |
+| 12 | [`12-production-deployment/resources/Dockerfile.template`](./12-production-deployment/resources/Dockerfile.template) | Multi-stage container build baseline |
+| 12 | [edge-runtime.matrix.md](./12-production-deployment/resources/edge-runtime.matrix.md) | Choose the right runtime model for deployment |
+| 12 | [observability-release-checklist.md](./12-production-deployment/resources/observability-release-checklist.md) | Release checklist for observability and rollback readiness |
+| 12 | [process-supervision.template.md](./12-production-deployment/resources/process-supervision.template.md) | Supervision rules for native long-running processes |
+| 12 | [reverse-proxy.template.md](./12-production-deployment/resources/reverse-proxy.template.md) | Minimum proxy responsibilities for public backend traffic |
+| 12 | [release-pipeline.template.md](./12-production-deployment/resources/release-pipeline.template.md) | Portable CI/CD pipeline stages and release gates |
+
+---
+
+## Architecture order
+
+Apply these skills in a natural backend build-out order:
 
 ```text
 01  project-bootstrap
@@ -66,7 +103,7 @@ Run `npm run validate` before publishing updates to verify every skill file, rel
     │   │   ├── 05  data-persistence
     │   │   │   └── 08  entity-relationships
     │   │   ├── 06  dto-and-validation
-    │   │   └── 07  error-handling  ◄── Safety Net / Red de salvavidas
+    │   │   └── 07  error-handling
     │   └── 09  advanced-querying
     ├── 10  jwt-authentication
     │   └── 11  authorization
@@ -75,4 +112,9 @@ Run `npm run validate` before publishing updates to verify every skill file, rel
 
 ---
 
-> ⭐ **Bilingual Architecture:** *All native files hold identical logic in both English and Spanish contexts ensuring AI models execute variables accurately.*
+## Design principles
+
+- Keep transport thin and business rules reusable.
+- Treat API contracts as code, not as after-the-fact documentation.
+- Keep auth, authorization, validation, and error handling as explicit boundaries.
+- Adapt naming and file structure to the target stack instead of copying examples literally.

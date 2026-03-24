@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "description": "Universal frontend and backend skills for AI coding agents.",
+  "license": "MIT",
   "scripts": {
     "validate": "node scripts/validate-skills.mjs"
   },

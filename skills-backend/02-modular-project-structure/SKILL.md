@@ -113,7 +113,8 @@ Usa la skill @02-modular-project-structure para reorganizar este backend por dom
 
 ```text
 src/
-├── app.{ext} or main.{ext}
+├── main.{ext}
+├── application.yml
 ├── core/
 │   ├── config/
 │   ├── auth/
@@ -126,10 +127,11 @@ src/
     ├── users/
     │   ├── dto/
     │   ├── entities/
+    │   ├── repositories/
+    │   ├── services/
+    │   │   ├── users.service.{ext} (Interface)
+    │   │   └── users.service.impl.{ext} (Implementation)
     │   ├── users.controller.{ext}
-    │   ├── users.service.{ext}
-    │   ├── users.repository.{ext}
-    │   ├── users.module.{ext} or index.{ext}
     │   └── users.spec.{ext}
     └── orders/
         └── ...

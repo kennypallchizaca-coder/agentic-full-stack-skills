@@ -103,12 +103,14 @@ Usa la skill @05-data-persistence para agregar persistencia a `{FeatureName}`.
 src/
 └── modules/
     └── {feature}/
-        ├── entities/ or schemas/
+        ├── entities/
         │   └── {feature}.entity.{ext}
         ├── repositories/
         │   └── {feature}.repository.{ext}
         ├── dto/
-        └── {feature}.service.{ext}
+        └── services/
+            ├── {feature}.service.{ext}
+            └── {feature}.service.impl.{ext}
 migrations/
 └── {timestamp}-{change-name}.{ext}
 ```

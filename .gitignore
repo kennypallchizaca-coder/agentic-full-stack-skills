@@ -2,6 +2,8 @@ node_modules/
 coverage/
 dist/
 build/
+.cache/
+.tmp/
 .idea/
 .vscode/
 *.log
@@ -9,6 +11,13 @@ npm-debug.log*
 yarn-error.log*
 .DS_Store
 Thumbs.db
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.rej
+*~
 .env
 .env.*
 !.env.example

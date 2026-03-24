@@ -62,7 +62,7 @@ Estandarizar cómo el backend lanza, registra y devuelve errores a través de la
 # 5. Execution Steps
 
 **Instructions (EN):**
-1. **Define known error categories:** Model validation, not-found, conflict, auth, and dependency failures explicitly.
+1. **Define known error categories:** Distinguish **validation errors** (DTO format, missing fields), **business errors** (not-found, conflict, auth, domain-rule violations), and **technical errors** (database failures, external dependencies, unexpected exceptions). Each category maps to specific HTTP status ranges.
 2. **Translate errors centrally:** Use a single middleware/filter/handler to map exceptions to HTTP status codes and the shared error schema.
 3. **Log with context:** Include request ID, route, actor, and dependency details when available, but avoid leaking secrets or PII.
 4. **Separate expected from unexpected:** Business errors should be cleanly exposed; unknown errors should return generic `500` responses.
@@ -70,7 +70,7 @@ Estandarizar cómo el backend lanza, registra y devuelve errores a través de la
 6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
-1. **Definir categorías conocidas:** Modela explícitamente validación, no encontrado, conflicto, auth y fallos de dependencias.
+1. **Definir categorías conocidas:** Distingue **errores de validación** (formato del DTO, campos faltantes), **errores de negocio** (no encontrado, conflicto, auth, violaciones de reglas del dominio) y **errores técnicos** (fallos de base de datos, dependencias externas, excepciones inesperadas). Cada categoría mapea a rangos HTTP específicos.
 2. **Traducir errores en un punto central:** Usa un middleware, filtro o handler único para convertir excepciones en códigos HTTP y en el esquema compartido de error.
 3. **Loggear con contexto:** Incluye request ID, ruta, actor y detalles de dependencias cuando existan, pero sin filtrar secretos ni PII.
 4. **Separar lo esperado de lo inesperado:** Los errores de negocio pueden exponerse limpiamente; los desconocidos deben devolver `500` genérico.
@@ -102,12 +102,9 @@ Usa la skill @07-error-handling para estandarizar los fallos del backend.
 ```text
 src/
 ├── core/
-│   ├── errors/
-│   │   ├── app-error.{ext}
-│   │   └── error-codes.{ext}
-│   ├── logging/
-│   └── http/
-│       └── error-handler.{ext}
+│   ├── exceptions/
+│   │   ├── GlobalExceptionHandler.{ext}
+│   │   └── AppError.{ext}
 └── modules/
     └── {feature}/
         └── {feature}.service.{ext}

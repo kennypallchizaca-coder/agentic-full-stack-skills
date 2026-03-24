@@ -1,80 +1,91 @@
-# 🎨 Universal Frontend Skills
-### The Ultimate Collection of 12 Agentic Skills for Modern Frontend Workspaces
-**Framework-agnostic · Bilingual · Client architecture · Stable patterns**
+# Universal Frontend Skills
+### 12 bilingual agentic skills for portable frontend architecture
+**Framework-agnostic patterns informed by Angular and Astro source material**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
 [![Skills](https://img.shields.io/badge/Skills-12-blueviolet)]()
-[![Cursor](https://img.shields.io/badge/Cursor-✓-black)]()
-[![Claude Code](https://img.shields.io/badge/Claude_Code-✓-orange)]()
 
 ---
 
-## 🚀 Welcome to Frontend Skills
+## About this library
 
-Just like the Backend universal skills library, this repository provides **12 Universal Agentic Skills** for frontend applications. They teach your AI Assistant how to implement robust architectures, global states, protected routing, and professional API consumption without making spaghetti code.
+This frontend library gives an AI assistant a reusable playbook for setup, component boundaries, routing, forms, feedback, auth, data fetching, styling, and navigation without assuming a single framework.
 
-Regardless of the framework, router, or state library in use, the architectural flow is intentionally the same.
-
-### How to use
-
-Copy this `frontend-skills/` directory into your project root (or inside `.cursor/skills` / `.claude/skills`).
-
-Then tell your AI:
-> "Use the **@09-data-fetching** skill to configure the shared API client and its auth-aware interceptor."
-
-> "Follow **@02-component-architecture** to separate my `InvoiceView` from my `InvoiceForm` component."
+Scope notes:
+- The strongest source coverage comes from Angular and Astro concepts.
+- React, Vue, and similar stacks are supported through portable patterns, not framework-specific cookbooks in this repository.
+- The library is designed for real application work: SPAs, hybrid-rendered apps, and frontend delivery strategy with release readiness.
 
 ---
 
-## 📚 Browse the 12 Frontend Skills
+## Quick start
 
-| # | Skill | Descripción | Risk |
-|---|-------|-------------|:----:|
-| 01 | [**01-project-setup**](./01-project-setup/SKILL.md) | Setup inicial: aliases `@/`, linter, TS strict y archivos `.env` | 🟢 Low |
-| 02 | [**02-component-architecture**](./02-component-architecture/SKILL.md) | Separación obligatoria de Smart Component vs Dumb Component | 🟢 Low |
-| 03 | [**03-routing-strategy**](./03-routing-strategy/SKILL.md) | Enrutador global con Layouts y soporte de Lazy Loading | 🟡 Med |
-| 04 | [**04-form-orchestration**](./04-form-orchestration/SKILL.md) | Formularios controlados sin petición, validación visual y DTOs | 🟡 Med |
-| 05 | [**05-ui-feedback-system**](./05-ui-feedback-system/SKILL.md) | Estandarización de modales de alerta y Toast notifications globales | 🟢 Low |
-| 06 | [**06-authentication-flow**](./06-authentication-flow/SKILL.md) | Sesión segura, hidratación inicial y cierre controlado | 🔴 High |
-| 07 | [**07-styling-system**](./07-styling-system/SKILL.md) | Design Tokens globales (variables) y abstracción de CSS global | 🟢 Low |
-| 08 | [**08-state-management**](./08-state-management/SKILL.md) | Estado compartido enfocado y separado del cache remoto | 🔴 High |
-| 09 | [**09-data-fetching**](./09-data-fetching/SKILL.md) | Cliente API compartido, repositorios y manejo global de 401 | 🔴 High |
-| 10 | [**10-advanced-navigation**](./10-advanced-navigation/SKILL.md) | Paginación por URL, Hero components y Breadcrumbs de navegación | 🟢 Low |
-| 11 | [**11-baas-integration**](./11-baas-integration/SKILL.md) | Integración BaaS portable, auth externa y datos gestionados | 🔴 High |
-| 12 | [**12-route-guards**](./12-route-guards/SKILL.md) | Guards auth/guest basados en sesión hidratada | 🔴 High |
+1. Copy the `frontend-skills/` folder into the AI assistant workspace.
+2. Ask the agent explicitly:
 
----
+> "Use the **@03-routing-strategy** skill to define layouts, lazy routes, and the right rendering mode for this app."
 
-## 📁 Frontend Resources Index
-
-These templates help the agent adapt each pattern to the target stack without changing the architectural intent.
-
-| Skill | Resource | Purpose |
-|-------|----------|---------|
-| 01 | [`env.template.md`](./01-project-setup/resources/env.template.md) | Variables de entorno seguras con ejemplos de exposicion publica por stack |
-| 01 | [`aliases.template.md`](./01-project-setup/resources/aliases.template.md) | Setup de aliases entre compilador, bundler y tooling |
-| 03 | [`lazy-routing.template.md`](./03-routing-strategy/resources/lazy-routing.template.md) | Configuración de nested routes y Lazy Componentes |
-| 12 | [`guards.template.md`](./12-route-guards/resources/guards.template.md) | Guards auth/guest esperando bootstrap de sesión |
-| 08 | [`global-store.template.md`](./08-state-management/resources/global-store.template.md) | Patrones de estado compartido sin persistir secretos por defecto |
-| 09 | [`interceptors.template.md`](./09-data-fetching/resources/interceptors.template.md) | Clientes HTTP con credenciales seguras y manejo global de 401 |
+> "Apply **@05-ui-feedback-system** so the form has clear loading, empty, success, and error states with accessible behavior."
 
 ---
 
 ## Validation
 
-Run `npm run validate` before publishing changes to verify skill structure, JSON resources, internal links, and accidental editorial artifacts.
-
-## 🔁 Placeholder Convention
-
-Use these universal placeholders to ask the agent to act on a domain.
-
-| Placeholder | Meaning |
-|-------------|---------|
-| `{Framework}` | Frontend stack or runtime elegido (`React`, `Angular`, `Vue`, `Astro`, etc.) |
-| `{FeatureName}` | Business Domain (e.g., `Invoice`, `UserProfile`) |
-| `{ToasterLibrary}`| e.g. `sonner`, `vue-toastification`, `primeng` |
-| `{API_URL}` | Real base url target `http://localhost:3000/api` |
+Run `npm run validate` before publishing updates. The validator checks skill structure, markdown links, and JSON resources across the repository.
 
 ---
 
-> ⭐ Keep your UX consistent, your components dumb, and your tokens intercepted.
+## Frontend skills index
+
+| # | Skill | English Description | Descripcion (Espanol) | Risk |
+|---|---|---|---|:---:|
+| **01** | [**project-setup**](./01-project-setup/SKILL.md) | Establishes portable frontend setup, env hygiene, aliases, and delivery baseline | Define setup portable, orden de configuracion y baseline de entrega | 🟢 Low |
+| **02** | [**component-architecture**](./02-component-architecture/SKILL.md) | Defines component boundaries, composition rules, and reusable UI primitives | Define limites de componentes, composicion y primitivas reutilizables | 🟢 Low |
+| **03** | [**routing-strategy**](./03-routing-strategy/SKILL.md) | Organizes routing, layouts, lazy loading, and render strategy choices | Organiza rutas, layouts, lazy loading y decisiones de renderizado | 🟡 Medium |
+| **04** | [**form-orchestration**](./04-form-orchestration/SKILL.md) | Structures reusable forms with validation, async checks, and server-error mapping | Estructura formularios reutilizables con validacion y mapeo de errores | 🟡 Medium |
+| **05** | [**ui-feedback-system**](./05-ui-feedback-system/SKILL.md) | Standardizes UI feedback, heuristic checks, and accessibility-aware states | Estandariza feedback UI, heuristicas y estados accesibles | 🟢 Low |
+| **06** | [**authentication-flow**](./06-authentication-flow/SKILL.md) | Owns session lifecycle, hydration, and auth state transitions | Controla el ciclo de sesion, la hidratacion y las transiciones auth | 🔴 High |
+| **07** | [**styling-system**](./07-styling-system/SKILL.md) | Applies tokens, theming, responsive rules, and stack-aware styling choices | Aplica tokens, theming y decisiones de estilos segun el stack | 🟢 Low |
+| **08** | [**state-management**](./08-state-management/SKILL.md) | Separates shared client state from remote cache and request state | Separa estado compartido del cache remoto y del estado de request | 🔴 High |
+| **09** | [**data-fetching**](./09-data-fetching/SKILL.md) | Builds shared HTTP clients, repositories, and transport-aware tests | Construye clientes HTTP compartidos, repositorios y pruebas de transporte | 🔴 High |
+| **10** | [**advanced-navigation**](./10-advanced-navigation/SKILL.md) | Adds breadcrumbs, URL pagination, and navigation-supporting UI patterns | Agrega breadcrumbs, paginacion por URL y ayudas visuales de navegacion | 🟢 Low |
+| **11** | [**baas-integration**](./11-baas-integration/SKILL.md) | Integrates BaaS capabilities through provider adapters and clear boundaries | Integra capacidades BaaS mediante adaptadores y limites claros | 🔴 High |
+| **12** | [**route-guards**](./12-route-guards/SKILL.md) | Protects navigation with auth-aware and guest-aware route rules | Protege la navegacion con reglas de ruta auth y guest | 🔴 High |
+
+---
+
+## Frontend resources index
+
+These templates and references help adapt the skills to different frameworks while preserving the architectural intent.
+
+| Skill | Resource | Purpose |
+|---|---|---|
+| 01 | [aliases.template.md](./01-project-setup/resources/aliases.template.md) | Align path aliases across compiler, bundler, test runner, and IDE |
+| 01 | [env.template.md](./01-project-setup/resources/env.template.md) | Define safe public/private environment-variable handling by stack |
+| 01 | [frontend-delivery-checklist.md](./01-project-setup/resources/frontend-delivery-checklist.md) | Baseline checklist for lint, typecheck, build, and release readiness |
+| 01 | [frontend-deployment-strategy.md](./01-project-setup/resources/frontend-deployment-strategy.md) | Decide between static, SPA, and hybrid delivery targets |
+| 02 | [component-primitives.matrix.md](./02-component-architecture/resources/component-primitives.matrix.md) | Map component primitives across Angular, React, Vue, and Astro |
+| 02 | [smart-dumb-pattern.template.md](./02-component-architecture/resources/smart-dumb-pattern.template.md) | Explain container/presentational split as one optional composition pattern |
+| 03 | [lazy-routing.template.md](./03-routing-strategy/resources/lazy-routing.template.md) | Organize nested routes, lazy boundaries, and layout-aware navigation |
+| 03 | [rendering-strategy.matrix.md](./03-routing-strategy/resources/rendering-strategy.matrix.md) | Compare CSR, SSR, SSG, ISR, and islands by use case |
+| 04 | [dynamic-form-patterns.md](./04-form-orchestration/resources/dynamic-form-patterns.md) | Handle repeatable groups, conditional fields, and nested forms |
+| 04 | [validation-engine.matrix.md](./04-form-orchestration/resources/validation-engine.matrix.md) | Choose a validation/form engine that matches the target stack |
+| 05 | [usability-accessibility-checklist.md](./05-ui-feedback-system/resources/usability-accessibility-checklist.md) | Review focus, keyboard, copy, and error-prevention behavior |
+| 05 | [ux-heuristics-reference.md](./05-ui-feedback-system/resources/ux-heuristics-reference.md) | Map Nielsen-style heuristics to practical UI review questions |
+| 07 | [styling-strategy.matrix.md](./07-styling-system/resources/styling-strategy.matrix.md) | Compare utility CSS, scoped CSS, CSS-in-JS, and token-first setups |
+| 08 | [global-store.template.md](./08-state-management/resources/global-store.template.md) | Structure portable shared-state patterns without coupling to one library |
+| 09 | [http-testing.matrix.md](./09-data-fetching/resources/http-testing.matrix.md) | Cover repository, interceptor, form, and guard-adjacent transport tests |
+| 09 | [interceptors.template.md](./09-data-fetching/resources/interceptors.template.md) | Wire auth-aware request/response behavior into a shared HTTP client |
+| 10 | [pagination.template.md](./10-advanced-navigation/resources/pagination.template.md) | Normalize URL-driven pagination and navigation metadata |
+| 11 | [baas-adapter-pattern.md](./11-baas-integration/resources/baas-adapter-pattern.md) | Separate provider bootstrap from capability adapters |
+| 11 | [firebase-setup.template.md](./11-baas-integration/resources/firebase-setup.template.md) | Example setup for Firebase-style provider wiring |
+| 12 | [guards.template.md](./12-route-guards/resources/guards.template.md) | Build auth/guest route guards against a hydrated session source |
+
+---
+
+## Design principles
+
+- Treat framework APIs as implementation details, not as the architecture itself.
+- Keep session lifecycle, provider integration, and route protection as separate responsibilities.
+- Prefer reusable composition patterns over rigid one-framework recipes.
+- Include feedback, accessibility, and delivery concerns as first-class frontend work.

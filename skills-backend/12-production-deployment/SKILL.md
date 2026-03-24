@@ -1,6 +1,6 @@
 ---
 name: 12-production-deployment
-description: "Hardens backend deployment for production with multi-stage builds, non-root containers, secret management and operational safeguards."
+description: "Hardens backend delivery for production with reproducible builds, secret-safe runtime config, observability, release gates, and rollback discipline."
 risk: high
 universal: true
 source: community
@@ -10,72 +10,91 @@ date_added: "2026-03-10"
 # 1. Skill Description
 
 **Description (EN):**
-Production readiness is not just “it runs on my machine.” This skill defines how to package, configure, and operate a backend securely with container hardening, safe environment handling, health checks, and reproducible build steps.
+Production readiness is not just "it runs on my machine." This skill defines how to package, configure, release, and operate a backend with secure runtime settings, health checks, structured logs, monitoring hooks, CI/CD guardrails, and rollback awareness.
 
-**Descripción (ES):**
-Estar listo para producción no es solo “corre en mi máquina”. Esta skill define cómo empaquetar, configurar y operar un backend con endurecimiento de contenedores, manejo seguro de entornos, health checks y pasos de build reproducibles.
+**Descripcion (ES):**
+Estar listo para produccion no es solo "corre en mi maquina". Esta skill define como empaquetar, configurar, liberar y operar un backend con runtime seguro, health checks, logs estructurados, ganchos de monitoreo, guardrails de CI/CD y criterio de rollback.
+
+Related resources:
+- [edge-runtime.matrix.md](./resources/edge-runtime.matrix.md)
+- [observability-release-checklist.md](./resources/observability-release-checklist.md)
+- [process-supervision.template.md](./resources/process-supervision.template.md)
+- [reverse-proxy.template.md](./resources/reverse-proxy.template.md)
+- [release-pipeline.template.md](./resources/release-pipeline.template.md)
 
 ---
 
 # 2. Skill Objective
 
 **Objective (EN):**
-Prepare the backend for secure, repeatable deployment across staging and production environments, regardless of runtime or hosting model.
-- Use this skill when: Building Docker images, defining runtime environment variables, or preparing CI/CD release flows.
-- Do not use this skill when: You only need a local dev script with no intention of deployment.
+Prepare the backend for secure, repeatable deployment across staging and production environments, regardless of runtime, hosting model, or process manager.
+- Use this skill when: Building Docker images, creating deployment manifests, configuring reverse proxies, or defining release pipelines.
+- Do not use this skill when: You only need a local dev script with no operational or release requirements.
 
 **Objetivo (ES):**
-Preparar el backend para un despliegue seguro y repetible en staging y producción, sin depender de un runtime o modelo de hosting específico.
-- Úsese cuando: Se construyan imágenes Docker, variables de entorno de runtime o flujos CI/CD de release.
-- No se use cuando: Solo se necesite un script de desarrollo local sin intención de despliegue.
+Preparar el backend para un despliegue seguro y repetible en staging y produccion, sin depender del runtime, modelo de hosting o process manager.
+- Use esta skill cuando: Construyas imagenes Docker, manifiestos de despliegue, configuraciones de reverse proxy o pipelines de release.
+- No use esta skill cuando: Solo necesites un script de desarrollo local sin requerimientos operativos ni de release.
 
 ---
 
 # 3. Inputs / Entradas
 
 **Inputs (EN):**
-1. `Runtime Target`: Container platform, VM, PaaS, or orchestrator.
-2. `Build Artifacts`: JAR, compiled Node app, Python package, Go binary, etc.
-3. `Operational Requirements`: Health endpoint, secrets, migrations, logging, resource limits.
+1. `Runtime Target`: Container platform, VM, PaaS, serverless runtime, or orchestrator.
+2. `Build Artifacts`: JAR, compiled Node app, Python package, Go binary, or equivalent release output.
+3. `Operational Requirements`: Secrets, health/readiness checks, logs, metrics, migrations, backups, and rollback expectations.
 
 **Entradas (ES):**
-1. `Runtime Target`: Plataforma de contenedores, VM, PaaS u orquestador.
-2. `Build Artifacts`: JAR, app Node compilada, paquete Python, binario Go, etc.
-3. `Operational Requirements`: Health endpoint, secretos, migraciones, logging y límites de recursos.
+1. `Runtime Target`: Plataforma de contenedores, VM, PaaS, runtime serverless u orquestador.
+2. `Build Artifacts`: JAR, app Node compilada, paquete Python, binario Go o salida equivalente de release.
+3. `Operational Requirements`: Secretos, health/readiness, logs, metricas, migraciones, backups y expectativas de rollback.
 
 ---
 
 # 4. Outputs / Salidas
 
 **Outputs (EN):**
-1. Production-focused Dockerfile or deployment manifest.
+1. A production-focused Dockerfile, service manifest, or native process configuration.
 2. Safe runtime configuration driven by environment variables or secret stores.
-3. Operational checks for startup, health, logging, and migration discipline.
+3. Operational hooks for liveness/readiness, structured logs, metrics, and smoke checks.
+4. Release guardrails covering migrations, deployment validation, and rollback criteria.
 
 **Salidas (ES):**
-1. Dockerfile o manifiesto de despliegue orientado a producción.
-2. Configuración segura de runtime impulsada por variables de entorno o secret stores.
-3. Chequeos operativos para arranque, health, logging y disciplina de migraciones.
+1. Un Dockerfile, manifiesto de servicio o configuracion de proceso nativo orientado a produccion.
+2. Configuracion segura de runtime impulsada por variables de entorno o secret stores.
+3. Ganchos operativos para liveness/readiness, logs estructurados, metricas y smoke checks.
+4. Guardrails de release que cubran migraciones, validacion del despliegue y criterios de rollback.
 
 ---
 
 # 5. Execution Steps
 
 **Instructions (EN):**
-1. **Use multi-stage builds:** Keep compilers and dev dependencies out of the final runtime image.
-2. **Run as a non-root user:** Drop privileges inside the container whenever the base image allows it.
-3. **Externalize secrets and config:** Load database URLs, JWT secrets, API keys, and environment flags from env vars or secret managers, never from committed files.
-4. **Expose health and startup behavior:** Provide a health endpoint and clear startup logs so orchestration platforms can detect readiness and failure.
-5. **Ship only what production needs:** Exclude tests, caches, local `.env` files, and unused build artifacts with `.dockerignore` and release hygiene.
-6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
+1. **Choose the delivery model intentionally:** Native Linux service, PM2, Docker Compose, Kubernetes, or PaaS should match the project scale and operational maturity.
+2. **Create a reproducible build:** Build the release artifact deterministically. If you ship containers, prefer multi-stage builds to keep compilers and dev tooling out of the runtime image.
+3. **Run with least privilege:** Use a non-root runtime user whenever possible and keep the final image or server process as small as practical.
+4. **Externalize runtime configuration:** Load database URLs, JWT secrets, API keys, ports, and environment-specific toggles from env vars or a secret manager, never from committed local files.
+5. **Separate liveness from readiness when the platform supports it:** A lightweight process-alive check can differ from a dependency-aware readiness check used by orchestrators or load balancers.
+6. **Expose operational visibility:** Emit structured logs, stable health output, and metrics or tracing hooks that allow monitoring systems to detect failures quickly.
+7. **Harden the internet-facing edge:** If the backend is public, terminate HTTPS, set security headers, and apply rate limiting or reverse-proxy protections where appropriate.
+8. **Treat migrations as release steps:** Run schema changes deliberately, verify compatibility, and avoid deploys that require manual guesswork in production.
+9. **Add release gates:** CI/CD should build, test, package, deploy, and run smoke checks before declaring success.
+10. **Define rollback criteria before deployment:** Know what signals trigger rollback, how to revert the previous version, and how to protect data consistency if the release fails.
+11. **Adapt the pattern, not the literal example:** Rename files, layers, manifests, and operational tooling to fit the target architecture and platform conventions.
 
 **Instrucciones (ES):**
-1. **Usar builds multi-stage:** Mantén compiladores y dependencias de desarrollo fuera de la imagen final.
-2. **Ejecutar como usuario no root:** Baja privilegios dentro del contenedor siempre que la imagen base lo permita.
-3. **Externalizar secretos y configuración:** Carga URLs de base, secretos JWT, API keys y flags desde env vars o secret managers, nunca desde archivos subidos al repo.
-4. **Exponer health y arranque:** Provee un endpoint de salud y logs de arranque claros para que la plataforma detecte readiness y fallos.
-5. **Empaquetar solo lo necesario:** Excluye pruebas, cachés, `.env` locales y artefactos sobrantes con `.dockerignore` y buena higiene de release.
-6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
+1. **Elige el modelo de entrega con intencion:** Servicio nativo Linux, PM2, Docker Compose, Kubernetes o PaaS deben corresponder al tamano del proyecto y a su madurez operativa.
+2. **Crea un build reproducible:** Genera el artefacto de release de forma determinista. Si entregas contenedores, prefiere builds multi-stage para dejar compiladores y tooling de desarrollo fuera del runtime.
+3. **Corre con minimo privilegio:** Usa un usuario no root cuando sea posible y mantén la imagen final o el proceso del servidor tan pequeno como sea practico.
+4. **Externaliza la configuracion de runtime:** Carga URLs de base, secretos JWT, API keys, puertos y toggles por entorno desde env vars o un secret manager, nunca desde archivos locales versionados.
+5. **Separa liveness de readiness cuando la plataforma lo soporte:** Un chequeo ligero de proceso vivo puede diferir de un chequeo de disponibilidad con dependencias usado por orquestadores o balanceadores.
+6. **Expone visibilidad operativa:** Emite logs estructurados, salida de salud estable y metricas o hooks de tracing que permitan detectar fallos rapido.
+7. **Endurece el borde expuesto a internet:** Si el backend es publico, termina HTTPS, configura security headers y aplica rate limiting o protecciones de reverse proxy cuando corresponda.
+8. **Trata las migraciones como pasos de release:** Ejecuta cambios de esquema con intencion, verifica compatibilidad y evita deploys que requieran adivinacion manual en produccion.
+9. **Agrega release gates:** CI/CD debe build, test, empaquetar, desplegar y correr smoke checks antes de declarar exito.
+10. **Define criterios de rollback antes del despliegue:** Debes saber que senales disparan rollback, como volver a la version previa y como proteger consistencia de datos si el release falla.
+11. **Adapta el patron, no el ejemplo literal:** Renombra archivos, capas, manifiestos y tooling operativo para encajar con la arquitectura y las convenciones de la plataforma objetivo.
 
 ---
 
@@ -84,15 +103,15 @@ Preparar el backend para un despliegue seguro y repetible en staging y producci�
 **Prompt (EN):**
 ```text
 Use the skill @12-production-deployment to harden this backend for production.
-1. Build a multi-stage image that runs as a non-root user and excludes dev-only artifacts.
-2. Load secrets from runtime configuration and expose a health endpoint for orchestration checks.
+1. Package the app with secure runtime config, health/readiness checks, and structured logs.
+2. Define release gates, smoke tests, and rollback criteria for the chosen hosting model.
 ```
 
 **Prompt (ES):**
 ```text
-Usa la skill @12-production-deployment para endurecer este backend para producción.
-1. Construye una imagen multi-stage que corra con usuario no root y excluya artefactos solo de desarrollo.
-2. Carga secretos desde configuración de runtime y expone un endpoint de health para chequeos del orquestador.
+Usa la skill @12-production-deployment para endurecer este backend para produccion.
+1. Empaqueta la app con configuracion segura de runtime, health/readiness y logs estructurados.
+2. Define release gates, smoke tests y criterios de rollback para el hosting elegido.
 ```
 
 ---
@@ -101,25 +120,48 @@ Usa la skill @12-production-deployment para endurecer este backend para producci
 
 ```text
 {project-root}/
-├── Dockerfile
-├── .dockerignore
-├── docker-compose.yml or deploy manifest
-├── .env.production.example
+├── Dockerfile (optional)
+├── .dockerignore (optional)
+├── compose.yaml (optional)
+├── .github/
+│   └── workflows/
+│       └── deploy.{yml|yaml}
+├── deploy/
+│   ├── service-manifest.{yml|yaml|json}
+│   ├── edge/
+│   │   └── reverse-proxy.{conf|toml|json}
+│   ├── process/
+│   │   └── supervisor.{service|conf|json}
+│   └── scripts/
+│       ├── migrate.{sh|ps1}
+│       ├── smoke-check.{sh|ps1}
+│       └── rollback.{sh|ps1}
+├── ops/
+│   └── runbooks/
+│       └── release-checklist.md
 └── src/
     └── health/
-        └── health.controller.{ext} or health route
+        └── health-endpoint.{ext}
 ```
 
-## Adaptation Checklist / Lista de Adaptación
+## Adaptation Checklist / Lista de Adaptacion
 
 **Checklist (EN):**
-- [ ] The runtime image excludes dev-only tooling and secrets.
-- [ ] The container runs without root privileges whenever possible.
-- [ ] Production configuration comes from environment or secret stores, not committed local files.
-- [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
+- [ ] The release artifact is reproducible and excludes dev-only tooling and secrets.
+- [ ] The runtime runs with least privilege whenever the platform allows it.
+- [ ] Production config comes from environment or secret stores, not committed local files.
+- [ ] Health, readiness, logs, and metrics exist in a form the platform can observe.
+- [ ] CI/CD or release scripts include build, test, deploy, and smoke validation steps.
+- [ ] Rollback criteria and migration discipline are defined before shipping.
+- [ ] Internet-facing deployments use HTTPS and appropriate edge protections.
+- [ ] Names, files, layers, manifests, and tooling were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
-- [ ] La imagen final excluye tooling de desarrollo y secretos.
-- [ ] El contenedor corre sin privilegios root siempre que sea posible.
-- [ ] La configuración de producción viene de entorno o secret stores, no de archivos locales subidos al repo.
-- [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.
+- [ ] El artefacto de release es reproducible y excluye tooling de desarrollo y secretos.
+- [ ] El runtime corre con minimo privilegio siempre que la plataforma lo permita.
+- [ ] La configuracion de produccion viene del entorno o de secret stores, no de archivos locales versionados.
+- [ ] Existen health, readiness, logs y metricas en una forma observable por la plataforma.
+- [ ] CI/CD o los scripts de release incluyen pasos de build, test, deploy y smoke validation.
+- [ ] Los criterios de rollback y la disciplina de migraciones se definen antes de publicar.
+- [ ] Los despliegues expuestos a internet usan HTTPS y protecciones adecuadas en el borde.
+- [ ] Los nombres, archivos, capas, manifiestos y tooling se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

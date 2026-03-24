@@ -1,19 +1,19 @@
 # Service Interface Template
 
-Use this template to define the public interface of any service.
+Use this template when the codebase benefits from an explicit service contract. If the project is small, a single service class is also acceptable as long as the transport boundary stays clean and testable.
 
 ## Universal pattern
 
-```
+```text
 interface {Resource}Service:
-    findAll()               → List<{Resource}ResponseDto>
-    findOne(id)             → {Resource}ResponseDto | NotFoundException
-    create(dto)             → {Resource}ResponseDto
-    update(id, dto)         → {Resource}ResponseDto | NotFoundException
-    delete(id)              → void | NotFoundException
+    findAll()               -> List<{Resource}ResponseDto>
+    findOne(id)             -> {Resource}ResponseDto | NotFoundException
+    create(dto)             -> {Resource}ResponseDto
+    update(id, dto)         -> {Resource}ResponseDto | NotFoundException
+    delete(id)              -> void | NotFoundException
     // Add domain-specific methods below:
-    // deactivate(id)       → {Resource}ResponseDto
-    // transfer(id, userId) → {Resource}ResponseDto
+    // deactivate(id)       -> {Resource}ResponseDto
+    // transfer(id, userId) -> {Resource}ResponseDto
 ```
 
 ## Java (Spring Boot)
@@ -25,12 +25,10 @@ public interface {Resource}Service {
     {Resource}ResponseDto create(Create{Resource}Dto dto);
     {Resource}ResponseDto update(Long id, Update{Resource}Dto dto);
     void delete(Long id);
-    // Domain-specific methods:
-    // {Resource}ResponseDto deactivate(Long id);
 }
 ```
 
-## Node.js (TypeScript — Generic)
+## Node.js (TypeScript - Generic)
 
 ```typescript
 export interface {Resource}Service {
@@ -42,7 +40,7 @@ export interface {Resource}Service {
 }
 ```
 
-## Node.js (NestJS — Injectable Service)
+## Node.js (NestJS - Injectable Service)
 
 ```typescript
 import { Injectable, NotFoundException } from '@nestjs/common';
@@ -58,7 +56,7 @@ export class {Resource}Service {
 
     async findAll(): Promise<{Resource}ResponseDto[]> {
         const entities = await this.repo.find();
-        return entities.map(e => this.toDto(e));
+        return entities.map(entity => this.toDto(entity));
     }
 
     async findOne(id: number): Promise<{Resource}ResponseDto> {
@@ -68,8 +66,7 @@ export class {Resource}Service {
     }
 
     private toDto(entity: {Resource}Entity): {Resource}ResponseDto {
-        // Map entity fields to response DTO — never expose internal fields
-        return { id: entity.id, /* ...fields */ };
+        return { id: entity.id /* ...public fields */ };
     }
 }
 ```
@@ -104,25 +101,31 @@ type {Resource}Service interface {
 
 ---
 
-## Implementation skeleton
+## Implementation skeleton (one possible option)
 
-```
-class {Resource}ServiceImpl implements {Resource}Service:
+```text
+class {Resource}ServiceCore implements {Resource}Service:
     constructor:
-        private {resource}Repo: {Resource}Repository  ← injected
-        private otherService: OtherService             ← injected (if needed)
+        private {resource}Repo: {Resource}Repository <- injected
+        private otherService: OtherService <- injected (if needed)
 
     findOne(id):
         entity = this.{resource}Repo.findById(id)
-        if entity == null → throw NotFoundException("{Resource} not found: " + id)
+        if entity == null -> throw NotFoundException("{Resource} not found: " + id)
         return mapToDto(entity)
 
     create(dto):
-        // 1. Business validation (before any persistence)
-        // 2. Map DTO to entity
-        // 3. Persist
-        // 4. Return ResponseDto
-        entity = mapToEntity(dto)
-        saved  = this.{resource}Repo.save(entity)
-        return mapToDto(saved)
+        // 1. Business validation (before persistence)
+        // 2. Optional permission/ownership checks
+        // 3. Map DTO to entity or domain object
+        // 4. Persist through repository
+        // 5. Return response DTO
 ```
+
+If the project does not use explicit interfaces, the same boundary can live in a single `{Resource}Service` class with the same rules and test seams.
+
+## Test seam reminder
+
+- Mock repositories and gateways at the service boundary.
+- Assert business rules, not framework wiring.
+- Do not require HTTP server startup to validate the use case.
