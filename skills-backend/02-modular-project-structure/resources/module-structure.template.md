@@ -1,6 +1,6 @@
 # Module Structure Template
 
-Use this template to scaffold a domain module that is easy to understand at a glance.
+Use this template to scaffold a domain module that is easy to understand at a glance, regardless of whether the project uses `src/modules/`, `src/features/`, `app/domains/`, `internal/`, or another stack-specific source root.
 
 ## Design rule
 
@@ -17,18 +17,39 @@ Start simple and keep the full request-to-persistence flow inside the same domai
 ## Recommended folder structure (per domain)
 
 ```
-src/modules/{domain}/
+{source-root}/{modules-root}/{domain}/
+├── transport/
+│   ├── {domain}.controller.{ext} or router.{ext}
+│   └── dto/
+│       ├── create-{domain}.dto.{ext}
+│       ├── update-{domain}.dto.{ext}
+│       └── {domain}-response.dto.{ext}
+├── application/
+│   ├── {domain}.service.{ext}
+│   └── use-cases/
+├── domain/
+│   ├── models/
+│   └── policies/
+├── infrastructure/
+│   ├── {domain}.repository.{ext}
+│   └── {domain}.entity.{ext}
+├── tests/
+└── index.{ext} or {domain}.module.{ext}
+```
+
+## Minimal variant
+
+If the project is still small, a flatter module is also valid:
+
+```text
+{source-root}/{modules-root}/{domain}/
 ├── dto/
-│   ├── create-{domain}.dto.{ext}      ← Input for POST
-│   ├── update-{domain}.dto.{ext}      ← Input for PUT/PATCH
-│   └── {domain}-response.dto.{ext}    ← Output shape (no internals)
-├── entities/
-│   └── {domain}.entity.{ext}          ← Persistence model / ORM mapping
-├── {domain}.controller.{ext}          ← HTTP controller / router / handler
-├── {domain}.service.{ext}             ← Business rules and orchestration
-├── {domain}.repository.{ext}          ← Database access only
-├── {domain}.module.{ext} or index.{ext} ← Public entrypoint used by the app root
-└── {domain}.spec.{ext}                ← Module tests
+├── {domain}.controller.{ext}
+├── {domain}.service.{ext}
+├── {domain}.repository.{ext}
+├── {domain}.entity.{ext}
+├── index.{ext} or {domain}.module.{ext}
+└── tests/
 ```
 
 ## When the module grows
@@ -36,24 +57,26 @@ src/modules/{domain}/
 - Add local subfolders such as `use-cases/`, `mappers/`, or `tests/` inside the same domain module.
 - Do not create global top-level folders like `src/controllers/` or `src/services/` for the whole app.
 - Keep external imports pointed at the module public entrypoint, not at deep internal files.
+- Choose the depth that fits the project; do not force enterprise layering into a small service that does not need it yet.
 
 ## Shared and core folders
 
 ```
-src/
+{source-root}/
 ├── core/
 │   ├── config/
-│   │   ├── database.config.{ext}       ← DB connection setup
-│   │   ├── jwt.config.{ext}            ← JWT secret + expiration
-│   │   └── app.config.{ext}            ← General app settings
+│   │   ├── app.config.{ext}
+│   │   └── persistence.config.{ext}
 │   ├── auth/
-│   └── logging/
+│   ├── observability/
+│   └── persistence/
 └── shared/
+    ├── contracts/
     ├── middleware/
-    │   ├── auth.middleware.{ext}       ← JWT filter (skill 10)
-    │   └── error.middleware.{ext}      ← Global error handler (skill 07)
+    │   ├── auth.middleware.{ext}
+    │   └── error.middleware.{ext}
     ├── utils/
-    │   └── pagination.util.{ext}       ← Paginated response builder
+    │   └── pagination.util.{ext}
     └── types/
 ```
 
@@ -61,7 +84,7 @@ src/
 
 - [ ] Can I understand the module without opening another feature folder?
 - [ ] Does every file that belongs to one domain stay inside this module?
-- [ ] Are config, auth, logging, and shared helpers outside the domain modules?
+- [ ] Are config, auth, observability, and shared helpers outside the domain modules?
 - [ ] Do other modules import only the public entrypoint?
 
 ## Naming checklist

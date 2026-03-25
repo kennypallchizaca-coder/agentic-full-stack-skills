@@ -1,45 +1,47 @@
 # Relationship Decision Guide
 
-Use this guide to choose the correct relationship type between any two entities.
+Use this guide to choose the correct relationship type between any two entities or records.
 
 ## Decision table
 
-| Scenario | Type | FK location |
-|----------|------|-------------|
-| One `{A}` has many `{B}`. Each `{B}` belongs to one `{A}`. | `1:N` | FK `{a}_id` in `{B}`'s table |
-| One `{A}` has exactly one `{B}`. Each `{B}` belongs to one `{A}`. | `1:1` | FK in the dependent/weaker entity |
-| Many `{A}` associate with many `{B}`. | `N:N` | Join table `{a}_{b}` |
-| Join table `{a}_{b}` has its own fields (e.g., timestamp, status). | `N:N` with entity | Give the join table its own entity class |
+| Scenario | Type | Reference location |
+|----------|------|--------------------|
+| One `{A}` has many `{B}`. Each `{B}` belongs to one `{A}`. | `1:N` | Reference or foreign key in `{B}` |
+| One `{A}` has exactly one `{B}`. Each `{B}` belongs to one `{A}`. | `1:1` | Reference in the dependent side |
+| Many `{A}` associate with many `{B}`. | `N:N` | Join table / relation collection / linking document |
+| The relation itself has fields (for example timestamp, status, actor). | Relation as first-class entity | Model the link as its own record |
 
 ---
 
 ## Strategy checklist
 
-- [ ] Defined which entity is the "owning" side (holds the FK)
-- [ ] Named the join table explicitly: `{entity_a}_{entity_b}` (alphabetical)
-- [ ] Set `fetch = LAZY` on all relationships
-- [ ] Created a repository method to query by FK (instead of navigating collections)
-- [ ] Verified with ORM logging that no N+1 queries are generated
+- [ ] Defined which side owns the reference or foreign key
+- [ ] Named the join structure explicitly when a separate relation record exists
+- [ ] Chosen a load strategy that fits the access pattern
+- [ ] Added repository queries that load related data intentionally instead of navigating everything by default
+- [ ] Reviewed query count or explain plans to avoid accidental N+1 behavior
 
 ---
 
-## LAZY vs EAGER
+## Load strategy options
 
 | Strategy | When to use |
-|----------|------------|
-| `LAZY` (default) | Related data is not always needed — load on demand |
-| `EAGER` | Related data is required in **every** query — use sparingly |
+|----------|-------------|
+| On-demand loading | Related data is not always needed and should load only when requested |
+| Joined or eager loading | Related data is required in nearly every read path |
+| Batched loading | Multiple records need the same related data and the platform supports batching efficiently |
 
-> Rule: if you use EAGER, you must be able to explain why with data.
+> Rule: if a relation is always loaded eagerly, document why that cost is justified.
 
 ---
 
-## Cascade rules
+## Propagation rules
 
-| Cascade | Meaning | Use when |
-|---------|---------|---------|
-| `PERSIST` | Save child when saving parent | Child cannot exist without parent |
-| `MERGE` | Merge child when merging parent | Child is always managed with parent |
-| `REMOVE` | Delete children when deleting parent | Children are owned by parent |
-| `ALL` | All of the above | Only for strict parent-child (never for peers) |
-| (none) | No cascade | Most relationships — each entity managed independently |
+| Propagation choice | Meaning | Use when |
+|--------------------|---------|---------|
+| Propagate create | Creating the parent should also create the child/link | Child cannot exist without parent |
+| Propagate update | Parent updates always carry related changes | The related record is managed as one unit |
+| Propagate delete | Deleting the parent should remove or archive dependents | Dependents are lifecycle-owned by parent |
+| No propagation | Each side is managed independently | Most peer or loosely coupled relations |
+
+If the chosen ORM uses names like `LAZY`, `EAGER`, `PERSIST`, `MERGE`, or `REMOVE`, map those provider-specific terms to the neutral decisions above instead of assuming they are universal.

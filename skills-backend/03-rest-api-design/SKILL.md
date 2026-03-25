@@ -56,13 +56,13 @@ Disenar un contrato HTTP estable para APIs orientadas a recursos, facil de docum
 # 4. Outputs / Salidas
 
 **Outputs (EN):**
-1. Standardized collection and item routes such as `/api/v1/users` and `/api/v1/users/{id}`.
+1. Standardized collection and item routes such as `/{version-prefix}/{resources}` and `/{version-prefix}/{resources}/{id}`, or the equivalent convention used by the target platform.
 2. Clear verb, status-code, and idempotency behavior for each operation.
 3. Stable success/error envelopes with pagination metadata where needed.
 4. An OpenAPI or equivalent machine-readable contract that matches implementation intent.
 
 **Salidas (ES):**
-1. Rutas estandarizadas de coleccion e item como `/api/v1/users` y `/api/v1/users/{id}`.
+1. Rutas estandarizadas de coleccion e item como `/{version-prefix}/{resources}` y `/{version-prefix}/{resources}/{id}`, o la convencion equivalente usada por la plataforma objetivo.
 2. Comportamiento claro de verbos, codigos HTTP e idempotencia por operacion.
 3. Envelopes estables de exito/error con metadata de paginacion cuando aplique.
 4. Un contrato OpenAPI o equivalente legible por maquina que refleje la intencion de implementacion.
@@ -78,7 +78,7 @@ Disenar un contrato HTTP estable para APIs orientadas a recursos, facil de docum
 4. **Put filters in query parameters:** Keep pagination, sorting, searching, and filtering in query params instead of inventing custom action routes.
 5. **Normalize response shapes:** Use a consistent success envelope (for example `data`, `meta`, `message`, `timestamp`, `path`) and a consistent error envelope (for example `status`, `error`, `message`, `details`, `timestamp`, `path`).
 6. **Return correct status codes:** Use `200`, `201`, `204`, `400`, `401`, `403`, `404`, `409`, and `500/503` intentionally. Never return `200` with an error body.
-7. **Version deliberately:** Prefer a clear versioning strategy such as `/api/v1/` unless the target platform already standardizes on header/media-type versioning.
+7. **Version deliberately:** Choose a clear versioning strategy that matches the platform and client ecosystem. Path-based versioning such as `/api/v1/` is common, but header or media-type versioning can be equally valid.
 8. **Protect contract boundaries:** Do not expose passwords, secret tokens, internal flags, or persistence-only fields in API responses.
 9. **Document the API as code:** Maintain OpenAPI/Swagger examples, schemas, and security requirements alongside the implementation so docs do not drift.
 10. **Check the transport boundary:** If the use case depends on arbitrary graph reads, command-style semantics, or server push, confirm REST is still the right fit before forcing it.
@@ -91,7 +91,7 @@ Disenar un contrato HTTP estable para APIs orientadas a recursos, facil de docum
 4. **Pon los filtros en query parameters:** Deja paginacion, orden, busqueda y filtrado en query params en lugar de inventar rutas de accion.
 5. **Normaliza la forma de las respuestas:** Usa un envelope consistente de exito (por ejemplo `data`, `meta`, `message`, `timestamp`, `path`) y un envelope consistente de error (por ejemplo `status`, `error`, `message`, `details`, `timestamp`, `path`).
 6. **Retorna codigos correctos:** Usa `200`, `201`, `204`, `400`, `401`, `403`, `404`, `409` y `500/503` con intencion. Nunca devuelvas `200` con un body de error.
-7. **Versiona de forma deliberada:** Prefiere una estrategia clara como `/api/v1/` salvo que la plataforma objetivo ya estandarice versionado por header o media type.
+7. **Versiona de forma deliberada:** Elige una estrategia de versionado clara que encaje con la plataforma y el ecosistema de clientes. El versionado en path como `/api/v1/` es comun, pero header o media type tambien pueden ser validos.
 8. **Protege los limites del contrato:** No expongas passwords, tokens secretos, flags internos ni campos solo de persistencia dentro de las respuestas.
 9. **Documenta la API como codigo:** Mantén ejemplos, schemas y requisitos de seguridad en OpenAPI/Swagger junto a la implementacion para que la documentacion no derive.
 10. **Revisa el limite del transporte:** Si el caso depende de lecturas de grafo arbitrarias, semantica tipo comando o server push, confirma que REST sigue siendo la mejor opcion antes de forzarlo.

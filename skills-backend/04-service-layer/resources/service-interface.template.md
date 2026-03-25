@@ -4,69 +4,64 @@ Use this template when the codebase benefits from an explicit service contract. 
 
 ## Universal pattern
 
+Service boundaries should describe business operations, not controller wiring. A service interface can be use-case oriented:
+
 ```text
-interface {Resource}Service:
-    findAll()               -> List<{Resource}ResponseDto>
-    findOne(id)             -> {Resource}ResponseDto | NotFoundException
-    create(dto)             -> {Resource}ResponseDto
-    update(id, dto)         -> {Resource}ResponseDto | NotFoundException
-    delete(id)              -> void | NotFoundException
-    // Add domain-specific methods below:
-    // deactivate(id)       -> {Resource}ResponseDto
-    // transfer(id, userId) -> {Resource}ResponseDto
+interface {Feature}Service:
+    create{Resource}(command)        -> {Resource}View
+    update{Resource}(id, command)    -> {Resource}View
+    archive{Resource}(id)            -> void
+    list{Resource}(query)            -> {Resource}Page
+    // Replace these names with operations from the real domain:
+    // approveInvoice(id)
+    // assignOwner(id, principalId)
+    // publishDraft(id)
 ```
 
-## Java (Spring Boot)
+If the feature is simple and truly CRUD-oriented, a CRUD-style contract is acceptable. Do not force CRUD method names when the business language is richer than `create/update/delete`.
+
+## Java
 
 ```java
-public interface {Resource}Service {
-    List<{Resource}ResponseDto> findAll();
-    {Resource}ResponseDto findOne(Long id);
-    {Resource}ResponseDto create(Create{Resource}Dto dto);
-    {Resource}ResponseDto update(Long id, Update{Resource}Dto dto);
-    void delete(Long id);
+public interface {Feature}Service {
+    {Resource}View create{Resource}(Create{Resource}Command command);
+    {Resource}View update{Resource}(Long id, Update{Resource}Command command);
+    void archive{Resource}(Long id);
+    Page<{Resource}View> list{Resource}(List{Resource}Query query);
 }
 ```
 
 ## Node.js (TypeScript - Generic)
 
 ```typescript
-export interface {Resource}Service {
-    findAll(): Promise<{Resource}ResponseDto[]>;
-    findOne(id: number): Promise<{Resource}ResponseDto>;
-    create(dto: Create{Resource}Dto): Promise<{Resource}ResponseDto>;
-    update(id: number, dto: Update{Resource}Dto): Promise<{Resource}ResponseDto>;
-    delete(id: number): Promise<void>;
+export interface {Feature}Service {
+    create{Resource}(command: Create{Resource}Command): Promise<{Resource}View>;
+    update{Resource}(id: string, command: Update{Resource}Command): Promise<{Resource}View>;
+    archive{Resource}(id: string): Promise<void>;
+    list{Resource}(query: List{Resource}Query): Promise<{Resource}Page>;
 }
 ```
 
-## Node.js (NestJS - Injectable Service)
+## Node.js (NestJS example, optional if the project uses it)
 
 ```typescript
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class {Resource}Service {
+export class {Feature}Service {
     constructor(
-        @InjectRepository({Resource}Entity)
-        private readonly repo: Repository<{Resource}Entity>,
+        private readonly repository: {Resource}Repository,
     ) {}
 
-    async findAll(): Promise<{Resource}ResponseDto[]> {
-        const entities = await this.repo.find();
-        return entities.map(entity => this.toDto(entity));
-    }
+    async update{Resource}(id: string, command: Update{Resource}Command): Promise<{Resource}View> {
+        const current = await this.repository.findById(id);
+        if (!current) {
+            throw new {Resource}NotFoundError(id);
+        }
 
-    async findOne(id: number): Promise<{Resource}ResponseDto> {
-        const entity = await this.repo.findOneBy({ id });
-        if (!entity) throw new NotFoundException(`{Resource} not found: ${id}`);
-        return this.toDto(entity);
-    }
-
-    private toDto(entity: {Resource}Entity): {Resource}ResponseDto {
-        return { id: entity.id /* ...public fields */ };
+        const next = apply{Resource}Changes(current, command);
+        const saved = await this.repository.save(next);
+        return to{Resource}View(saved);
     }
 }
 ```
@@ -76,26 +71,25 @@ export class {Resource}Service {
 ```python
 from abc import ABC, abstractmethod
 
-class {Resource}Service(ABC):
+class {Feature}Service(ABC):
     @abstractmethod
-    async def find_all(self) -> list[{Resource}ResponseDto]: ...
+    async def create_{resource}(self, command: Create{Resource}Command) -> {Resource}View: ...
+
     @abstractmethod
-    async def find_one(self, id: int) -> {Resource}ResponseDto: ...
+    async def update_{resource}(self, id: str, command: Update{Resource}Command) -> {Resource}View: ...
+
     @abstractmethod
-    async def create(self, dto: Create{Resource}Dto) -> {Resource}ResponseDto: ...
-    @abstractmethod
-    async def delete(self, id: int) -> None: ...
+    async def list_{resource}(self, query: List{Resource}Query) -> {Resource}Page: ...
 ```
 
 ## Go
 
 ```go
-type {Resource}Service interface {
-    FindAll()  ([]dto.{Resource}Response, error)
-    FindOne(id uint) (*dto.{Resource}Response, error)
-    Create(dto dto.Create{Resource}) (*dto.{Resource}Response, error)
-    Update(id uint, dto dto.Update{Resource}) (*dto.{Resource}Response, error)
-    Delete(id uint) error
+type {Feature}Service interface {
+    Create{Resource}(command dto.Create{Resource}Command) (*dto.{Resource}View, error)
+    Update{Resource}(id string, command dto.Update{Resource}Command) (*dto.{Resource}View, error)
+    Archive{Resource}(id string) error
+    List{Resource}(query dto.List{Resource}Query) (*dto.{Resource}Page, error)
 }
 ```
 
@@ -104,25 +98,23 @@ type {Resource}Service interface {
 ## Implementation skeleton (one possible option)
 
 ```text
-class {Resource}ServiceCore implements {Resource}Service:
+class {Feature}ServiceCore implements {Feature}Service:
     constructor:
-        private {resource}Repo: {Resource}Repository <- injected
-        private otherService: OtherService <- injected (if needed)
+        private repository: {Resource}Repository <- injected
+        private otherGateway: OtherGateway <- injected (if needed)
 
-    findOne(id):
-        entity = this.{resource}Repo.findById(id)
-        if entity == null -> throw NotFoundException("{Resource} not found: " + id)
-        return mapToDto(entity)
+    update{Resource}(id, command):
+        current = repository.findById(id)
+        if current == null -> throw NotFoundError("{Resource} not found: " + id)
 
-    create(dto):
-        // 1. Business validation (before persistence)
-        // 2. Optional permission/ownership checks
-        // 3. Map DTO to entity or domain object
-        // 4. Persist through repository
-        // 5. Return response DTO
+        // 1. Validate business invariants
+        // 2. Check permissions or ownership if needed
+        // 3. Apply domain changes
+        // 4. Persist through the repository
+        // 5. Map to an output/view contract
 ```
 
-If the project does not use explicit interfaces, the same boundary can live in a single `{Resource}Service` class with the same rules and test seams.
+If the project does not use explicit interfaces, the same boundary can live in a single `{Feature}Service` class with the same rules and test seams.
 
 ## Test seam reminder
 

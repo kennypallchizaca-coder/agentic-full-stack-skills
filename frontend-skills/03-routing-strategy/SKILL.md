@@ -114,18 +114,20 @@ Usa la skill @03-routing-strategy para organizar la navegacion de esta app {Fram
 # 7. Recommended File Structure / Estructura Recomendada
 
 ```text
-src/
-├── app/
-│   └── router/
-│       └── routes.{ext}
-├── shared/
-│   └── layouts/
-│       ├── AppLayout.{ext}
-│       └── AuthLayout.{ext}
-└── features/
-    └── {FeatureName}/
+{source-root}/
+├── {router-root}/
+│   └── routes.{ext}
+├── {layout-root}/
+│   ├── public-layout.{ext}
+│   └── protected-layout.{ext}
+└── {feature-root}/
+    └── {feature-name}/
         └── routes.{ext}
 ```
+
+If the stack uses file-based routing, the same separation can live in folders instead of explicit `routes.{ext}` files.
+
+Si el stack usa routing basado en archivos, la misma separacion puede vivir en carpetas en lugar de archivos explicitos `routes.{ext}`.
 
 ## Adaptation Checklist / Lista de Adaptación
 

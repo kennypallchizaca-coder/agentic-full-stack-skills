@@ -100,20 +100,21 @@ Usa la skill @09-advanced-querying para mejorar el endpoint de listado de `{Reso
 # 7. Recommended File Structure / Estructura Recomendada
 
 ```text
-src/
+{source-root}/
 ├── shared/
-│   └── pagination/
+│   └── query/
 │       ├── pagination.dto.{ext}
 │       └── pagination.util.{ext}
-└── modules/
+└── {modules-root}/
     └── {feature}/
-        ├── dto/
-        │   └── query-{feature}.dto.{ext}
-        ├── services/
-        │   ├── {feature}.service.{ext}
-        │   └── {feature}.service.impl.{ext}
-        ├── {feature}.controller.{ext}
-        └── {feature}.repository.{ext}
+        ├── contracts/
+        │   └── query-{feature}.{ext}
+        ├── transport/
+        │   └── {feature}.controller.{ext}
+        ├── application/
+        │   └── {feature}.query-service.{ext}
+        └── persistence/
+            └── {feature}.repository.{ext}
 ```
 
 ## Adaptation Checklist / Lista de Adaptación

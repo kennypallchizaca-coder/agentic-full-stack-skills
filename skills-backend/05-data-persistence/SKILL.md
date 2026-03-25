@@ -10,10 +10,10 @@ date_added: "2026-03-10"
 # 1. Skill Description
 
 **Description (EN):**
-Persistence code should be explicit about how data is stored, queried, and migrated. This skill organizes repositories and ORM models so services can rely on a clean data access layer without coupling business logic to SQL or framework internals.
+Persistence code should be explicit about how data is stored, queried, and migrated. This skill organizes repositories plus persistence schemas, entities, or documents so services can rely on a clean data access layer without coupling business logic to SQL or framework internals.
 
 **Descripción (ES):**
-La persistencia debe dejar claro cómo se guardan, consultan y migran los datos. Esta skill organiza repositorios y modelos ORM para que los servicios dependan de una capa de acceso a datos limpia, sin acoplar la lógica de negocio al SQL ni a detalles internos del framework.
+La persistencia debe dejar claro como se guardan, consultan y migran los datos. Esta skill organiza repositorios junto con schemas, entidades o documentos de persistencia para que los servicios dependan de una capa de acceso a datos limpia, sin acoplar la logica de negocio al SQL ni a detalles internos del framework.
 
 ---
 
@@ -100,17 +100,15 @@ Usa la skill @05-data-persistence para agregar persistencia a `{FeatureName}`.
 # 7. Recommended File Structure / Estructura Recomendada
 
 ```text
-src/
-└── modules/
+{source-root}/
+└── {modules-root}/
     └── {feature}/
-        ├── entities/
-        │   └── {feature}.entity.{ext}
-        ├── repositories/
-        │   └── {feature}.repository.{ext}
-        ├── dto/
-        └── services/
-            ├── {feature}.service.{ext}
-            └── {feature}.service.impl.{ext}
+        ├── persistence/
+        │   ├── {feature}.schema-or-entity.{ext}
+        │   ├── {feature}.repository.{ext}
+        │   └── {feature}.mapper.{ext}
+        └── domain/
+            └── {feature}.model.{ext}
 migrations/
 └── {timestamp}-{change-name}.{ext}
 ```

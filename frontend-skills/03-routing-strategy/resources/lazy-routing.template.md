@@ -2,6 +2,28 @@
 
 Lazy loading defers loading code until a specific route is visited. It reduces the initial load time of the application.
 
+Use the framework sections below as translation examples, not as a universal folder structure. Replace route names, layout names, and file locations with the conventions of the target project.
+
+## Universal Pattern
+
+```text
+{router-root}/routes.{ext}
+├── public shell
+│   ├── {public-home-route}
+│   └── {sign-in-or-sign-up-route}
+├── protected shell
+│   ├── {feature-home-route}
+│   └── {feature-detail-route}
+└── fallback / not-found route
+```
+
+General rules:
+- Keep layouts eager when they are reused on most pages.
+- Lazy-load feature views or route modules at route boundaries.
+- Keep route names and file paths aligned with the business language of the target app.
+
+---
+
 ## Vue (Vue Router 4)
 
 Vue uses standard ES modules dynamic imports.
@@ -10,43 +32,41 @@ Filename: `src/app/router/index.ts`
 ```typescript
 import { createRouter, createWebHistory } from 'vue-router'
 
-// Eager load layouts (always needed)
-import MainLayout from '@/app/layouts/MainLayout.vue'
-import AuthLayout from '@/app/layouts/AuthLayout.vue'
+import PublicLayout from '@/app/layouts/PublicLayout.vue'
+import ProtectedLayout from '@/app/layouts/ProtectedLayout.vue'
 
 const routes = [
   {
     path: '/',
-    component: MainLayout, // Renders the navbar/sidebar
+    component: ProtectedLayout,
     children: [
       {
         path: '',
-        name: 'Dashboard',
-        // Lazy load the view only when visited
-        component: () => import('@/features/dashboard/views/DashboardView.vue')
+        name: 'FeatureHome',
+        component: () => import('@/features/{feature}/views/FeatureHomeView.vue')
       },
       {
-        path: 'invoices',
-        name: 'Invoices',
-        component: () => import('@/features/invoices/views/InvoiceListView.vue')
+        path: ':itemId',
+        name: 'FeatureDetail',
+        component: () => import('@/features/{feature}/views/FeatureDetailView.vue')
       }
     ]
   },
   {
-    path: '/auth',
-    component: AuthLayout, // Centered empty layout
+    path: '/access',
+    component: PublicLayout,
     children: [
       {
-        path: 'login',
-        name: 'Login',
-        component: () => import('@/features/auth/views/LoginView.vue')
+        path: 'sign-in',
+        name: 'SignIn',
+        component: () => import('@/features/access/views/SignInView.vue')
       }
     ]
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import('@/app/layouts/NotFoundView.vue')
+    component: () => import('@/app/views/NotFoundView.vue')
   }
 ]
 
@@ -67,48 +87,47 @@ Filename: `src/app/router/index.tsx`
 import { lazy, Suspense } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
-import MainLayout from '@/app/layouts/MainLayout'
-import AuthLayout from '@/app/layouts/AuthLayout'
+import PublicLayout from '@/app/layouts/PublicLayout'
+import ProtectedLayout from '@/app/layouts/ProtectedLayout'
 import LoadingFallback from '@/app/components/LoadingFallback'
 
-// Lazy load views
-const DashboardView = lazy(() => import('@/features/dashboard/views/DashboardView'))
-const InvoiceListView = lazy(() => import('@/features/invoices/views/InvoiceListView'))
-const LoginView = lazy(() => import('@/features/auth/views/LoginView'))
-const NotFoundView = lazy(() => import('@/app/layouts/NotFoundView'))
+const FeatureHomeView = lazy(() => import('@/features/{feature}/views/FeatureHomeView'))
+const FeatureDetailView = lazy(() => import('@/features/{feature}/views/FeatureDetailView'))
+const SignInView = lazy(() => import('@/features/access/views/SignInView'))
+const NotFoundView = lazy(() => import('@/app/views/NotFoundView'))
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <MainLayout />,
+    element: <ProtectedLayout />,
     children: [
       {
-        index: true, // Same as path: ''
+        index: true,
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <DashboardView />
+            <FeatureHomeView />
           </Suspense>
         )
       },
       {
-        path: 'invoices',
+        path: ':itemId',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <InvoiceListView />
+            <FeatureDetailView />
           </Suspense>
         )
       }
     ]
   },
   {
-    path: '/auth',
-    element: <AuthLayout />,
+    path: '/access',
+    element: <PublicLayout />,
     children: [
       {
-        path: 'login',
+        path: 'sign-in',
         element: (
           <Suspense fallback={<LoadingFallback />}>
-            <LoginView />
+            <SignInView />
           </Suspense>
         )
       }
@@ -129,50 +148,61 @@ export const router = createBrowserRouter([
 
 ## Angular (Standalone Components)
 
-Angular 15+ allows lazy loading entire routes using dynamic imports to Standalone Components.
+Angular 15+ allows lazy loading entire routes using dynamic imports to standalone components.
 
 Filename: `src/app/app.routes.ts`
 ```typescript
 import { Routes } from '@angular/router';
-import { MainLayoutComponent } from '@/app/layouts/main-layout.component';
-import { AuthLayoutComponent } from '@/app/layouts/auth-layout.component';
+import { PublicLayoutComponent } from '@/app/layouts/public-layout.component';
+import { ProtectedLayoutComponent } from '@/app/layouts/protected-layout.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: MainLayoutComponent,
+    component: ProtectedLayoutComponent,
     children: [
       {
         path: '',
-        title: 'Dashboard',
-        loadComponent: () => import('@/features/dashboard/views/dashboard.component')
-          .then(m => m.DashboardComponent)
+        title: 'Feature Home',
+        loadComponent: () => import('@/features/{feature}/views/feature-home.component')
+          .then(m => m.FeatureHomeComponent)
       },
       {
-        path: 'invoices',
-        title: 'Invoices',
-        loadComponent: () => import('@/features/invoices/views/invoice-list.component')
-          .then(m => m.InvoiceListComponent)
+        path: ':itemId',
+        title: 'Feature Detail',
+        loadComponent: () => import('@/features/{feature}/views/feature-detail.component')
+          .then(m => m.FeatureDetailComponent)
       }
     ]
   },
   {
-    path: 'auth',
-    component: AuthLayoutComponent,
+    path: 'access',
+    component: PublicLayoutComponent,
     children: [
       {
-        path: 'login',
-        title: 'Login',
-        loadComponent: () => import('@/features/auth/views/login.component')
-          .then(m => m.LoginComponent)
+        path: 'sign-in',
+        title: 'Sign In',
+        loadComponent: () => import('@/features/access/views/sign-in.component')
+          .then(m => m.SignInComponent)
       }
     ]
   },
   {
     path: '**',
     title: 'Not Found',
-    loadComponent: () => import('@/app/layouts/not-found.component')
+    loadComponent: () => import('@/app/views/not-found.component')
       .then(m => m.NotFoundComponent)
   }
 ];
 ```
+
+---
+
+## File-Based Routers
+
+If the stack uses file-based routing (for example Next.js, Nuxt, SvelteKit, Remix-style conventions, or Astro content routes), apply the same ideas at folder boundaries:
+
+- Keep public and protected sections separated by route groups or top-level folders.
+- Lazy-load only where the platform benefits from it.
+- Keep a clear fallback or not-found entry point.
+- Replace every placeholder in this document with project-specific names before shipping.

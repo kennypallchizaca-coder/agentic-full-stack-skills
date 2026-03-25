@@ -75,26 +75,26 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 ```
 
-Filename: `src/features/favorites/services/favorites.repository.ts`
+Filename: `src/features/{feature}/data/{feature}.repository.ts`
 ```typescript
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '@/shared/baas/firebase';
 
-interface FavoriteInput {
-  productId: string;
-  name: string;
+interface {Resource}Input {
+  {field1}: string;
+  {field2}: string;
 }
 
-const favoritesCollection = collection(db, 'favorites');
+const resourceCollection = collection(db, '{collection-name}');
 
-export const FavoritesRepository = {
+export const {Resource}Repository = {
   async findAll() {
-    const snapshot = await getDocs(favoritesCollection);
+    const snapshot = await getDocs(resourceCollection);
     return snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   },
 
-  async create(data: FavoriteInput) {
-    return addDoc(favoritesCollection, data);
+  async create(data: {Resource}Input) {
+    return addDoc(resourceCollection, data);
   },
 };
 ```
@@ -102,3 +102,4 @@ export const FavoritesRepository = {
 Client-side warning:
 - Do not put admin logic in this repository.
 - Use Cloud Functions or your own backend for privileged operations.
+- Replace the collection name, fields, and repository name with the bounded context of the target project.

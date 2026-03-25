@@ -71,7 +71,7 @@ Crear una capa HTTP mantenible y testeable que los componentes puedan consumir s
 1. **Load base URL from environment config:** Centralize the API URL in environment variables or configuration files. Never hardcode URLs in services or components.
 2. **Create one client per backend context:** Centralize timeout, JSON defaults, and credential behavior in a single shared client instance.
 3. **Attach auth the safe way:** Prefer `withCredentials` or framework-native cookie support. Only inject bearer headers manually when the backend contract truly requires it.
-4. **Wrap endpoints in repositories/services:** Components should call `UsersRepository.list()` rather than constructing raw URLs. Define explicit response interfaces for all endpoint return types.
+4. **Wrap endpoints in repositories/services:** Components should call a shared repository or service such as `{Feature}Repository.list()` rather than constructing raw URLs. Define explicit response interfaces for all endpoint return types.
 5. **Normalize failures:** Map backend error payloads to one predictable shape and route `401` handling through the shared auth reset flow.
 6. **Cancel stale requests automatically:** Use patterns like `switchMap` or framework-native resource APIs to cancel in-flight requests when parameters change. This prevents stale data from overwriting current results during rapid pagination or filter changes.
 7. **Implement retry for transient failures:** Apply retry logic (2-3 attempts) for network errors or 5xx responses, with fallback values to prevent the UI from breaking entirely.
@@ -83,7 +83,7 @@ Crear una capa HTTP mantenible y testeable que los componentes puedan consumir s
 1. **Cargar la URL base desde configuracion de entorno:** Centraliza la URL de API en variables de entorno o archivos de configuracion. Nunca hardcodees URLs en servicios ni componentes.
 2. **Crear un cliente por contexto backend:** Centraliza timeout, defaults JSON y comportamiento de credenciales en una sola instancia compartida del cliente.
 3. **Adjuntar auth de forma segura:** Prefiere `withCredentials` o soporte nativo de cookies del framework. Solo inyecta bearer headers manualmente cuando el contrato backend realmente lo exija.
-4. **Envolver endpoints en repositorios o servicios:** Los componentes deberian llamar `UsersRepository.list()` en lugar de construir URLs crudas. Define interfaces de respuesta explicitas para los tipos de retorno de cada endpoint.
+4. **Envolver endpoints en repositorios o servicios:** Los componentes deberian llamar un repositorio o servicio compartido como `{Feature}Repository.list()` en lugar de construir URLs crudas. Define interfaces de respuesta explicitas para los tipos de retorno de cada endpoint.
 5. **Normalizar fallos:** Mapea los payloads de error backend a una forma predecible y envia el manejo de `401` por el flujo compartido de reset de auth.
 6. **Cancelar requests obsoletas automaticamente:** Usa patrones como `switchMap` o APIs de recursos nativas del framework para cancelar requests en vuelo cuando los parametros cambien. Esto evita que datos obsoletos sobreescriban resultados actuales durante paginacion o cambios de filtro rapidos.
 7. **Implementar retry para fallos transitorios:** Aplica logica de reintento (2-3 intentos) para errores de red o respuestas 5xx, con valores de fallback para evitar que la UI se rompa completamente.
@@ -122,23 +122,26 @@ Usa la skill @09-data-fetching para estructurar el acceso API en esta app {Frame
 # 7. Recommended File Structure / Estructura Recomendada
 
 ```text
-src/
-├── environments/
-│   ├── environment.ts
-│   └── environment.prod.ts
+{source-root}/
+├── {config-root}/
+│   └── api-config.{ext}
 ├── shared/
 │   └── api/
 │       ├── api-client.{ext}
 │       ├── api-errors.{ext}
 │       └── auth-interceptor.{ext}
-└── features/
-    └── {FeatureName}/
+└── {feature-root}/
+    └── {feature-name}/
         ├── models/
         │   └── {feature}.model.{ext}
-        └── api/
+        └── data/
             ├── {feature}.repository.{ext}
             └── {feature}.repository.spec.{ext}
 ```
+
+If the stack uses generated clients, query libraries, or server-side loaders, keep the same separation even if the filenames change.
+
+Si el stack usa clientes generados, librerias de query o loaders server-side, manten la misma separacion aunque cambien los nombres de archivo.
 
 ## Adaptation Checklist / Lista de Adaptación
 

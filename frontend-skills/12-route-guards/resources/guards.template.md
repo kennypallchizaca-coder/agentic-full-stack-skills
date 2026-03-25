@@ -17,6 +17,8 @@ const isBootstrapping = () => sessionStatus() === 'unknown';
 
 Assume `bootstrapSession()` asks the backend for `/me` or an equivalent endpoint and updates the shared auth store.
 
+Replace the route placeholders below with the real auth entry path and post-login landing route used by the target project.
+
 ---
 
 ## Vue (Vue Router 4)
@@ -26,6 +28,9 @@ Filename: `src/app/router/index.ts`
 import { router } from './router-definition';
 import { useAuthStore } from '@/shared/stores/auth.store';
 
+const authEntryPath = '/sign-in';
+const authenticatedHomePath = '/';
+
 router.beforeEach(async (to) => {
   const authStore = useAuthStore();
 
@@ -34,11 +39,11 @@ router.beforeEach(async (to) => {
   }
 
   if (to.meta.requiresAuth && authStore.status !== 'authenticated') {
-    return { path: '/auth/login', query: { returnUrl: to.fullPath } };
+    return { path: authEntryPath, query: { returnUrl: to.fullPath } };
   }
 
   if (to.meta.requiresGuest && authStore.status === 'authenticated') {
-    return { path: '/' };
+    return { path: authenticatedHomePath };
   }
 });
 ```
@@ -52,6 +57,8 @@ Filename: `src/app/router/guards/RequireAuth.tsx`
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuthStore } from '@/shared/stores/auth.store';
 
+const authEntryPath = '/sign-in';
+
 export const RequireAuth = () => {
   const location = useLocation();
   const status = useAuthStore((state) => state.status);
@@ -61,7 +68,7 @@ export const RequireAuth = () => {
   }
 
   if (status !== 'authenticated') {
-    return <Navigate to="/auth/login" replace state={{ returnTo: location.pathname }} />;
+    return <Navigate to={authEntryPath} replace state={{ returnTo: location.pathname }} />;
   }
 
   return <Outlet />;
@@ -78,6 +85,8 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthStore } from '@/shared/stores/auth.store';
 
+const authEntryRoute = ['/sign-in'];
+
 export const requireAuthGuard: CanActivateFn = async (_, state) => {
   const authStore = inject(AuthStore);
   const router = inject(Router);
@@ -87,7 +96,7 @@ export const requireAuthGuard: CanActivateFn = async (_, state) => {
   }
 
   if (authStore.status() !== 'authenticated') {
-    return router.createUrlTree(['/auth/login'], {
+    return router.createUrlTree(authEntryRoute, {
       queryParams: { returnUrl: state.url },
     });
   }

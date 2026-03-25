@@ -1,66 +1,73 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "JWTClaims",
-    "description": "Standard JWT payload claims for any backend authentication system (Skill 10 - jwt-authentication)",
-    "type": "object",
-    "required": [
-        "sub",
-        "id",
-        "roles",
-        "iat",
-        "exp"
-    ],
-    "properties": {
-        "sub": {
-            "type": "string",
-            "description": "Subject — the user's identifier field (email, username, phone, etc.)",
-            "example": "user@example.com"
-        },
-        "id": {
-            "type": "integer",
-            "description": "The user's database ID for fast lookup without additional queries",
-            "example": 42
-        },
-        "roles": {
-            "type": "array",
-            "description": "List of role names the user has — used by the authorization layer (skill 11)",
-            "items": {
-                "type": "string"
-            },
-            "example": [
-                "ROLE_USER",
-                "ROLE_EDITOR"
-            ]
-        },
-        "iat": {
-            "type": "integer",
-            "description": "Issued At — Unix timestamp (seconds) when the token was created",
-            "example": 1735225640
-        },
-        "exp": {
-            "type": "integer",
-            "description": "Expiration — Unix timestamp (seconds) when the token expires. Reject if current time > exp.",
-            "example": 1735312040
-        }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JWTClaims",
+  "description": "Standard JWT payload claims for any backend authentication system (Skill 10 - jwt-authentication)",
+  "type": "object",
+  "required": ["sub", "iat", "exp"],
+  "properties": {
+    "sub": {
+      "type": "string",
+      "description": "Subject identifier for the authenticated principal",
+      "example": "user@example.com"
     },
-    "examples": [
-        {
-            "sub": "admin@example.com",
-            "id": 1,
-            "roles": [
-                "ROLE_ADMIN"
-            ],
-            "iat": 1735225640,
-            "exp": 1735312040
-        },
-        {
-            "sub": "john.doe@example.com",
-            "id": 42,
-            "roles": [
-                "ROLE_USER"
-            ],
-            "iat": 1735225640,
-            "exp": 1735312040
-        }
-    ]
+    "principalId": {
+      "type": ["string", "integer"],
+      "description": "Optional internal principal identifier used for fast lookups",
+      "example": 42
+    },
+    "roles": {
+      "type": "array",
+      "description": "Optional role names used by the authorization layer when the project uses RBAC",
+      "items": {
+        "type": "string"
+      },
+      "example": ["admin", "editor"]
+    },
+    "scopes": {
+      "type": "array",
+      "description": "Optional fine-grained scopes or permissions",
+      "items": {
+        "type": "string"
+      },
+      "example": ["catalog:read", "catalog:write"]
+    },
+    "tenantId": {
+      "type": "string",
+      "description": "Optional tenant or workspace identifier for multi-tenant systems",
+      "example": "tenant-acme"
+    },
+    "jti": {
+      "type": "string",
+      "description": "Optional token identifier for revocation or audit tracking",
+      "example": "jwt_01HZXQW8QJ5J0TQBP8V1J4B6N6"
+    },
+    "iat": {
+      "type": "integer",
+      "description": "Issued At — Unix timestamp (seconds) when the token was created",
+      "example": 1735225640
+    },
+    "exp": {
+      "type": "integer",
+      "description": "Expiration — Unix timestamp (seconds) when the token expires",
+      "example": 1735312040
+    }
+  },
+  "examples": [
+    {
+      "sub": "admin@example.com",
+      "principalId": 1,
+      "roles": ["admin"],
+      "scopes": ["billing:read", "billing:write"],
+      "iat": 1735225640,
+      "exp": 1735312040
+    },
+    {
+      "sub": "john.doe@example.com",
+      "principalId": 42,
+      "scopes": ["catalog:read"],
+      "tenantId": "tenant-acme",
+      "iat": 1735225640,
+      "exp": 1735312040
+    }
+  ]
 }

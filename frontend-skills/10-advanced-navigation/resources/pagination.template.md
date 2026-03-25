@@ -1,6 +1,8 @@
 # URL-Driven Pagination Matrix
 
-La paginación agnóstica moderna NO actualiza una variable local de `page` que obliga a hacer prop-drilling. Actualiza la URL para que cualquier cambio persista entre recargas.
+La paginacion agnostica moderna NO actualiza una variable local de `page` que obliga a hacer prop-drilling. Actualiza la URL para que cualquier cambio persista entre recargas.
+
+Las clases CSS y el mecanismo de recarga de datos son placeholders. Adaptalos al design system, router y capa de datos del proyecto objetivo.
 
 ---
 
@@ -18,27 +20,25 @@ export const Pagination = ({ totalPages }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = Number(searchParams.get('page')) || 1;
 
-  // Render logic blocks for 5 buttons
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   const goToPage = (page: number) => {
-    setSearchParams({ page: page.toString() }); 
-    // This updates '?page=X' instantly without a hard reload.
-    // The parent component listens to searchParams logic and triggers Axios.
+    setSearchParams({ page: page.toString() });
+    // The parent screen reacts to the URL and asks the repository/query layer for the new page.
   };
 
   return (
-    <div className="join">
+    <nav className="pagination" aria-label="Pagination">
       {pages.map((p) => (
         <button
           key={p}
           onClick={() => goToPage(p)}
-          className={`join-item btn ${p === currentPage ? 'btn-primary' : ''}`}
+          className={`pagination__button ${p === currentPage ? 'is-active' : ''}`}
         >
           {p}
         </button>
       ))}
-    </div>
+    </nav>
   );
 };
 ```
@@ -47,7 +47,7 @@ export const Pagination = ({ totalPages }: Props) => {
 
 ## Angular (Signals + RouterLink)
 
-Angular is able to bind the `[queryParams]` naturally to `[routerLink]` bindings without manual functions.
+Angular can bind `[queryParams]` naturally to `[routerLink]` bindings without manual URL string manipulation.
 
 Filename: `src/app/shared/components/pagination.component.ts`
 ```typescript
@@ -57,11 +57,11 @@ import { Component, computed, input, linkedSignal } from '@angular/core';
   selector: 'app-pagination',
   standalone: true,
   template: `
-    <div class="join">
+    <nav class="pagination" aria-label="Pagination">
       @for (page of getPagesList(); track page) {
         <button
-          class="join-item btn"
-          [class.btn-primary]="page === activePage()"
+          class="pagination__button"
+          [class.is-active]="page === activePage()"
           [routerLink]="[]"
           [queryParams]="{ page: page }"
           (click)="activePage.set(page)"
@@ -69,7 +69,7 @@ import { Component, computed, input, linkedSignal } from '@angular/core';
           {{ page }}
         </button>
       }
-    </div>
+    </nav>
   `
 })
 export class PaginationComponent {
@@ -106,15 +106,15 @@ const goToPage = (page: number) => {
 </script>
 
 <template>
-  <div class="join">
-    <button 
-      v-for="p in pages" 
+  <nav class="pagination" aria-label="Pagination">
+    <button
+      v-for="p in pages"
       :key="p"
       @click="goToPage(p)"
-      :class="['join-item btn', { 'btn-primary': p === currentPage }]"
+      :class="['pagination__button', { 'is-active': p === currentPage }]"
     >
       {{ p }}
     </button>
-  </div>
+  </nav>
 </template>
 ```

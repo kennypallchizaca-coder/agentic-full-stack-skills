@@ -72,7 +72,7 @@ These resources help adapt the skills to different languages, frameworks, and ho
 | 03 | [transport-decision-guide.md](./03-rest-api-design/resources/transport-decision-guide.md) | Decide whether REST is the right fit before forcing it |
 | 04 | [service-interface.template.md](./04-service-layer/resources/service-interface.template.md) | Service boundary template with optional explicit contract |
 | 04 | [service-test-strategy.md](./04-service-layer/resources/service-test-strategy.md) | Minimum testing plan for service-level use cases |
-| 05 | [base-entity.template.md](./05-data-persistence/resources/base-entity.template.md) | Common baseline for persistence entities |
+| 05 | [shared-persistence-fields.template.md](./05-data-persistence/resources/shared-persistence-fields.template.md) | Shared persistence field patterns without assuming inheritance |
 | 05 | [migration-strategy.md](./05-data-persistence/resources/migration-strategy.md) | Safe schema-change and migration guidance |
 | 06 | [validation-rules-reference.md](./06-dto-and-validation/resources/validation-rules-reference.md) | Reusable validation-rule catalog |
 | 07 | [`07-error-handling/resources/error-response.schema.json`](./07-error-handling/resources/error-response.schema.json) | JSON schema for consistent API error envelopes |

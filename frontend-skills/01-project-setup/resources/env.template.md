@@ -1,19 +1,17 @@
 # Environment Exposure (Variables de Entorno Client-Side)
 
-Al estar en Frontend, las variables viajan literalmente descritas en el archivo `.js` final que el usuario web descarga.
-
-Es OBLIGATORIO que los Frameworks de Frontend posean un mecanismo de "Guard barrera", donde ignoren cualquier variable del `.env` que NO contenga un prefijo prefijado por el motor (así un desarrollador no filtra accidentalmente su `DB_PASSWORD` en el .env al frontend).
+En frontend, cualquier valor expuesto al bundle puede terminar en el navegador del usuario. Por eso cada framework define una barrera entre variables publicas y privadas. Usa siempre el mecanismo oficial del stack en lugar de asumir que cualquier clave del `.env` es segura para cliente.
 
 ## Vite (React, Vue)
 
-- Prefijo Obligatorio: `VITE_`
-- Invocación: `import.meta.env.VITE_API_URL`
+- Public exposure prefix: `VITE_`
+- Access pattern: `import.meta.env.VITE_API_URL`
 
 ```env
-VITE_API_URL=http://localhost:8080/api
+VITE_API_URL=https://api.example.com
 VITE_STRIPE_PUBLIC_KEY=pk_test_123
 
-# ESTO SERÁ IGNORADO Y PROTEGIDO POR VITE:
+# Server-only values remain private:
 DB_PASSWORD=server-only-value
 ```
 
@@ -21,38 +19,44 @@ DB_PASSWORD=server-only-value
 
 ## Astro
 
-- Prefijo Obligatorio: `PUBLIC_`
-- Invocación: `import.meta.env.PUBLIC_API_URL`
+- Public exposure prefix: `PUBLIC_`
+- Access pattern: `import.meta.env.PUBLIC_API_URL`
 
 ```env
-PUBLIC_API_URL=http://localhost:8080/api
+PUBLIC_API_URL=https://api.example.com
 
-# Astro corre en Edge/Server también, lo que NO sea PUBLIC_ lo guardará en Server context:
+# Astro also runs in server/edge contexts; values without `PUBLIC_` stay server-side.
 SECRET_API_KEY=server-only-value
 ```
 
 ---
 
-## Create React App (CRA Vainilla Obsoleto)
+## Create React App (legacy)
 
-- Prefijo Obligatorio: `REACT_APP_`
-- Invocación: `process.env.REACT_APP_API_URL`
+- Legacy public prefix: `REACT_APP_`
+- Access pattern: `process.env.REACT_APP_API_URL`
 
 ```env
-REACT_APP_API_URL=http://localhost:8080/api
+REACT_APP_API_URL=https://api.example.com
 ```
 
 ---
 
-## Angular (Environments nativos)
+## Angular (native environments)
 
-Angular ignora los `.env` tradicionales y usa archivos Typescript intercambiables en tiempo de build mediante reemplazo (File Replacements). Sin embargo, herramientas como `@ngx-env/builder` permiten parsear `.env` usando `NG_APP_`.
+Angular usually does not depend on `.env` prefixes by default; it commonly swaps Typescript config files at build time through file replacements. If a project adds `.env` support, it must define explicitly which variables are safe to expose to the browser.
 
-Lo estándar en Angular oficial:
+Common Angular pattern:
 Filename: `src/environments/environment.ts`
 ```typescript
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api'
+  apiUrl: 'https://api.example.com'
 };
 ```
+
+## Universal Rule
+
+- Treat every browser-exposed variable as public information.
+- Keep database credentials, private API keys, signing secrets, and service-account credentials outside the frontend runtime.
+- If the framework offers both public and private env scopes, document the boundary in the project README or setup checklist.

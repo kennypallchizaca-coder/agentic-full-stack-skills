@@ -6,7 +6,7 @@ Use this template when a feature benefits from separating orchestration from reu
 
 - The orchestration boundary owns route state, repository calls, and feature-level side effects.
 - The reusable UI boundary receives explicit data and emits explicit interactions.
-- The exact shape of the boundary changes by framework.
+- The exact shape of the boundary changes by framework and by feature.
 
 ---
 
@@ -15,18 +15,18 @@ Use this template when a feature benefits from separating orchestration from reu
 **Reusable rendering component**
 ```typescript
 @Component({
-  selector: 'app-user-card',
+  selector: 'app-resource-card',
   standalone: true,
   template: `
     <article class="card">
-      <h2>{{ user().name }}</h2>
-      <button type="button" (click)="deleteRequested.emit(user().id)">Delete</button>
+      <h2>{{ item().title }}</h2>
+      <button type="button" (click)="primaryAction.emit(item().id)">Open</button>
     </article>
   `,
 })
-export class UserCardComponent {
-  user = input.required<User>();
-  deleteRequested = output<number>();
+export class ResourceCardComponent {
+  item = input.required<ResourceSummary>();
+  primaryAction = output<string>();
 }
 ```
 
@@ -34,20 +34,20 @@ export class UserCardComponent {
 ```typescript
 @Component({
   standalone: true,
-  imports: [UserCardComponent],
+  imports: [ResourceCardComponent],
   template: `
-    @if (usersResource.isLoading()) {
+    @if (itemsResource.isLoading()) {
       <p>Loading...</p>
     } @else {
-      @for (user of usersResource.value(); track user.id) {
-        <app-user-card [user]="user" (deleteRequested)="handleDelete($event)" />
+      @for (item of itemsResource.value(); track item.id) {
+        <app-resource-card [item]="item" (primaryAction)="handlePrimaryAction($event)" />
       }
     }
   `,
 })
-export class UserPage {
-  private repo = inject(UsersRepository);
-  usersResource = rxResource({ loader: () => this.repo.findAll() });
+export class FeaturePage {
+  private repo = inject(FeatureRepository);
+  itemsResource = rxResource({ loader: () => this.repo.findAll() });
 }
 ```
 
@@ -58,16 +58,16 @@ export class UserPage {
 **Reusable rendering component**
 ```tsx
 type Props = {
-  user: User;
-  onDelete: (id: number) => void;
+  item: ResourceSummary;
+  onPrimaryAction: (id: string) => void;
 };
 
-export function UserCard({ user, onDelete }: Props) {
+export function ResourceCard({ item, onPrimaryAction }: Props) {
   return (
     <article className="card">
-      <h2>{user.name}</h2>
-      <button type="button" onClick={() => onDelete(user.id)}>
-        Delete
+      <h2>{item.title}</h2>
+      <button type="button" onClick={() => onPrimaryAction(item.id)}>
+        Open
       </button>
     </article>
   );
@@ -76,10 +76,12 @@ export function UserCard({ user, onDelete }: Props) {
 
 **Feature orchestration page**
 ```tsx
-export function UserPage() {
-  const { users, isLoading, removeUser } = useUsersFeature();
+export function FeaturePage() {
+  const { items, isLoading, openItem } = useFeatureViewModel();
   if (isLoading) return <p>Loading...</p>;
-  return users.map((user) => <UserCard key={user.id} user={user} onDelete={removeUser} />);
+  return items.map((item) => (
+    <ResourceCard key={item.id} item={item} onPrimaryAction={openItem} />
+  ));
 }
 ```
 
@@ -90,14 +92,14 @@ export function UserPage() {
 **Reusable rendering component**
 ```vue
 <script setup lang="ts">
-defineProps<{ user: User }>();
-const emit = defineEmits<{ deleteRequested: [id: number] }>();
+defineProps<{ item: ResourceSummary }>();
+const emit = defineEmits<{ primaryAction: [id: string] }>();
 </script>
 
 <template>
   <article class="card">
-    <h2>{{ user.name }}</h2>
-    <button type="button" @click="emit('deleteRequested', user.id)">Delete</button>
+    <h2>{{ item.title }}</h2>
+    <button type="button" @click="emit('primaryAction', item.id)">Open</button>
   </article>
 </template>
 ```
@@ -109,12 +111,12 @@ const emit = defineEmits<{ deleteRequested: [id: number] }>();
 **Server shell plus interactive island**
 ```astro
 ---
-import UsersIsland from '../islands/users-island';
-const users = await getUsers();
+import FeatureIsland from '../islands/feature-island';
+const items = await loadFeatureItems();
 ---
 
-<Layout title="Users">
-  <UsersIsland users={users} client:load />
+<Layout title="{Feature}">
+  <FeatureIsland items={items} client:load />
 </Layout>
 ```
 

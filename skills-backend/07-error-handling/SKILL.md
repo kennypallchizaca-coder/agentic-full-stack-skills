@@ -20,13 +20,13 @@ Los `try/catch` dispersos crean APIs inconsistentes y esconden problemas operati
 # 2. Skill Objective
 
 **Objective (EN):**
-Standardize how the backend throws, logs, and returns errors across the project's transport and execution boundaries.
-- Use this skill when: The project exposes HTTP endpoints, background jobs, or external integrations that can fail.
+Standardize how the backend throws, logs, and returns errors across the project's client-facing transport boundary, especially HTTP APIs.
+- Use this skill when: The project exposes HTTP endpoints or another client-facing transport that needs a stable error contract.
 - Do not use this skill when: You are only writing throwaway scripts with no client-facing contract.
 
 **Objetivo (ES):**
-Estandarizar cómo el backend lanza, registra y devuelve errores a través de las distintas fronteras de transporte y ejecución del proyecto.
-- Úsese cuando: El proyecto exponga endpoints HTTP, jobs en segundo plano o integraciones externas que puedan fallar.
+Estandarizar como el backend lanza, registra y devuelve errores a traves de la frontera de transporte orientada a clientes, especialmente APIs HTTP.
+- Usese cuando: El proyecto exponga endpoints HTTP u otro transporte orientado a clientes que necesite un contrato de error estable.
 - No se use cuando: Solo se escriban scripts descartables sin contrato hacia clientes.
 
 ---
@@ -36,7 +36,7 @@ Estandarizar cómo el backend lanza, registra y devuelve errores a través de la
 **Inputs (EN):**
 1. `Error Types`: Validation, not found, conflict, unauthorized, forbidden, external dependency failures.
 2. `Logging Strategy`: Console, structured logger, APM, or centralized observability.
-3. `Response Schema`: Standard error body expected by clients.
+3. `Response Schema`: Standard error body expected by API clients.
 
 **Entradas (ES):**
 1. `Error Types`: Validación, no encontrado, conflicto, no autorizado, prohibido y fallos de dependencias externas.
@@ -49,7 +49,7 @@ Estandarizar cómo el backend lanza, registra y devuelve errores a través de la
 
 **Outputs (EN):**
 1. Domain/application error classes or enums.
-2. A global exception filter, middleware, or handler.
+2. A global exception filter, middleware, or handler for the client-facing transport.
 3. Safe client responses plus actionable logs for operators.
 
 **Salidas (ES):**
@@ -62,20 +62,22 @@ Estandarizar cómo el backend lanza, registra y devuelve errores a través de la
 # 5. Execution Steps
 
 **Instructions (EN):**
-1. **Define known error categories:** Distinguish **validation errors** (DTO format, missing fields), **business errors** (not-found, conflict, auth, domain-rule violations), and **technical errors** (database failures, external dependencies, unexpected exceptions). Each category maps to specific HTTP status ranges.
-2. **Translate errors centrally:** Use a single middleware/filter/handler to map exceptions to HTTP status codes and the shared error schema.
-3. **Log with context:** Include request ID, route, actor, and dependency details when available, but avoid leaking secrets or PII.
-4. **Separate expected from unexpected:** Business errors should be cleanly exposed; unknown errors should return generic `500` responses.
+1. **Define known error categories:** Distinguish **validation errors** (DTO format, missing fields), **business errors** (not-found, conflict, auth, domain-rule violations), and **technical errors** (database failures, external dependencies, unexpected exceptions). Each category maps to specific transport-level outcomes.
+2. **Translate errors centrally:** Use a single middleware/filter/handler to map exceptions to HTTP status codes or the equivalent client-facing transport contract.
+3. **Log with context:** Include request ID or correlation ID, route or operation name, actor, and dependency details when available, but avoid leaking secrets or PII.
+4. **Separate expected from unexpected:** Business errors should be cleanly exposed; unknown errors should return generic `500` responses or the transport-equivalent internal failure contract.
 5. **Keep controllers/services focused:** Throw meaningful errors and let the global layer decide how to serialize them.
-6. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
+6. **Reuse categories outside HTTP without forcing the same schema:** Background jobs or integrations can share error taxonomy and logging rules even if they do not return the HTTP envelope shown in this skill.
+7. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
-1. **Definir categorías conocidas:** Distingue **errores de validación** (formato del DTO, campos faltantes), **errores de negocio** (no encontrado, conflicto, auth, violaciones de reglas del dominio) y **errores técnicos** (fallos de base de datos, dependencias externas, excepciones inesperadas). Cada categoría mapea a rangos HTTP específicos.
-2. **Traducir errores en un punto central:** Usa un middleware, filtro o handler único para convertir excepciones en códigos HTTP y en el esquema compartido de error.
-3. **Loggear con contexto:** Incluye request ID, ruta, actor y detalles de dependencias cuando existan, pero sin filtrar secretos ni PII.
-4. **Separar lo esperado de lo inesperado:** Los errores de negocio pueden exponerse limpiamente; los desconocidos deben devolver `500` genérico.
-5. **Mantener foco en controladores y servicios:** Lanza errores significativos y deja que la capa global decida cómo serializarlos.
-6. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
+1. **Definir categorias conocidas:** Distingue **errores de validacion** (formato del DTO, campos faltantes), **errores de negocio** (no encontrado, conflicto, auth, violaciones de reglas del dominio) y **errores tecnicos** (fallos de base de datos, dependencias externas, excepciones inesperadas). Cada categoria mapea a resultados concretos del transporte.
+2. **Traducir errores en un punto central:** Usa un middleware, filtro o handler unico para convertir excepciones en codigos HTTP o en el contrato equivalente del transporte orientado a clientes.
+3. **Loggear con contexto:** Incluye request ID o correlation ID, ruta u operacion, actor y detalles de dependencias cuando existan, pero sin filtrar secretos ni PII.
+4. **Separar lo esperado de lo inesperado:** Los errores de negocio pueden exponerse limpiamente; los desconocidos deben devolver `500` generico o el contrato equivalente de fallo interno.
+5. **Mantener foco en controladores y servicios:** Lanza errores significativos y deja que la capa global decida como serializarlos.
+6. **Reutilizar categorias fuera de HTTP sin forzar el mismo schema:** Los jobs o integraciones pueden compartir taxonomia y logging aunque no devuelvan el envelope HTTP mostrado en esta skill.
+7. **Adapta el patron, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 

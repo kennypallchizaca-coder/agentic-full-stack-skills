@@ -1,76 +1,78 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "PaginatedResponse",
-    "description": "Standard paginated response shape for any list endpoint (Skill 09 - advanced-querying)",
-    "type": "object",
-    "required": [
-        "content",
-        "totalElements",
-        "totalPages",
-        "number",
-        "size",
-        "first",
-        "last"
-    ],
-    "properties": {
-        "content": {
-            "type": "array",
-            "description": "Array of items for the current page. Each item uses the {Resource}ResponseDto shape.",
-            "items": {
-                "type": "object"
-            }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PaginatedResponse",
+  "description": "Standard paginated response shape for any list endpoint (Skill 09 - advanced-querying)",
+  "type": "object",
+  "required": ["data", "meta"],
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "Array of items for the current page.",
+      "items": {
+        "type": "object"
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["total", "page", "limit"],
+      "properties": {
+        "total": {
+          "type": "integer",
+          "description": "Total number of records matching the active filters",
+          "example": 1250
         },
-        "totalElements": {
-            "type": "integer",
-            "description": "Total number of records matching the active filters (not just the current page)",
-            "example": 1250
+        "page": {
+          "type": "integer",
+          "description": "Current page number using the convention chosen by the API",
+          "example": 1
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Number of items requested per page after normalization and max-limit enforcement",
+          "example": 10
         },
         "totalPages": {
-            "type": "integer",
-            "description": "Total number of pages: ceil(totalElements / size)",
-            "example": 125
+          "type": "integer",
+          "description": "Optional total page count when the API chooses to expose it",
+          "example": 125
         },
-        "number": {
-            "type": "integer",
-            "description": "Current page index (zero-based)",
-            "example": 0
+        "hasNext": {
+          "type": "boolean",
+          "description": "Optional navigation hint indicating whether another page exists",
+          "example": true
         },
-        "size": {
-            "type": "integer",
-            "description": "Number of items per page as applied in this response",
-            "example": 10
-        },
-        "first": {
-            "type": "boolean",
-            "description": "true if this is the first page (number === 0)",
-            "example": true
-        },
-        "last": {
-            "type": "boolean",
-            "description": "true if this is the last page ((number + 1) * size >= totalElements)",
-            "example": false
+        "hasPrevious": {
+          "type": "boolean",
+          "description": "Optional navigation hint indicating whether a previous page exists",
+          "example": false
         }
-    },
-    "examples": [
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "examples": [
+    {
+      "data": [
         {
-            "content": [
-                {
-                    "id": 1,
-                    "name": "Product A",
-                    "price": 99.99
-                },
-                {
-                    "id": 2,
-                    "name": "Product B",
-                    "price": 149.99
-                }
-            ],
-            "totalElements": 1250,
-            "totalPages": 125,
-            "number": 0,
-            "size": 10,
-            "first": true,
-            "last": false
+          "id": 1,
+          "name": "Product A",
+          "price": 99.99
+        },
+        {
+          "id": 2,
+          "name": "Product B",
+          "price": 149.99
         }
-    ]
+      ],
+      "meta": {
+        "total": 1250,
+        "page": 1,
+        "limit": 10,
+        "totalPages": 125,
+        "hasNext": true,
+        "hasPrevious": false
+      }
+    }
+  ]
 }

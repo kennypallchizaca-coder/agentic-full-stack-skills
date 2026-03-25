@@ -107,13 +107,13 @@ Usa la skill @01-project-bootstrap para inicializar un nuevo servicio backend en
 ```text
 {project-root}/
 ├── .env.example
-├── src/
-│   ├── main.{ext}
-│   ├── app.{ext}
+├── {source-root}/
+│   ├── {entry-point}.{ext}
+│   ├── {app-bootstrap}.{ext}
 │   └── health/
-│       └── health.controller.{ext}
-└── config/
-    └── env.{ext}
+│       └── health-endpoint.{ext}
+└── {config-root}/
+    └── runtime-config.{ext}
 ```
 
 ## Adaptation Checklist / Lista de Adaptacion

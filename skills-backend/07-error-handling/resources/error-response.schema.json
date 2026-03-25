@@ -1,9 +1,9 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "ErrorResponse",
-  "description": "Standard error response shape for any backend API (Skill 07 - error-handling)",
+  "description": "Standard HTTP API error response shape for client-facing transports (Skill 07 - error-handling)",
   "type": "object",
-  "required": ["timestamp", "status", "error", "message", "path"],
+  "required": ["timestamp", "status", "error", "message"],
   "properties": {
     "timestamp": {
       "type": "string",
@@ -13,24 +13,32 @@
     },
     "status": {
       "type": "integer",
-      "description": "HTTP status code",
-      "enum": [400, 401, 403, 404, 409, 422, 500],
+      "description": "HTTP status code or the equivalent client-facing status",
+      "enum": [400, 401, 403, 404, 409, 422, 500, 503],
       "example": 404
     },
     "error": {
       "type": "string",
-      "description": "Short name of the HTTP error",
+      "description": "Short, client-safe error label",
       "examples": ["Not Found", "Bad Request", "Forbidden", "Conflict", "Internal Server Error"]
     },
     "message": {
       "type": "string",
       "description": "Human-readable, client-safe error message. Never include stack traces or internal details.",
-      "example": "Order not found: 99"
+      "example": "Resource not found"
     },
     "path": {
       "type": "string",
-      "description": "The request path that caused the error",
-      "example": "/api/orders/99"
+      "description": "Optional request path for HTTP transports",
+      "example": "/api/resources/99"
+    },
+    "requestId": {
+      "type": "string",
+      "description": "Optional correlation or request identifier for incident tracking",
+      "example": "req_01HZXQ7Q7BX9GJ6V2T0W8NZ7YQ"
+    },
+    "details": {
+      "description": "Optional machine-readable validation or dependency details when the contract allows them"
     }
   },
   "additionalProperties": false,
@@ -39,22 +47,25 @@
       "timestamp": "2025-06-15T10:30:00.000Z",
       "status": 404,
       "error": "Not Found",
-      "message": "Order not found: 99",
-      "path": "/api/orders/99"
+      "message": "Resource not found",
+      "path": "/api/resources/99",
+      "requestId": "req_01HZXQ7Q7BX9GJ6V2T0W8NZ7YQ"
     },
     {
       "timestamp": "2025-06-15T10:31:00.000Z",
       "status": 400,
       "error": "Bad Request",
-      "message": "name: must not be blank, price: must be greater than 0",
-      "path": "/api/products"
+      "message": "Validation failed",
+      "details": {
+        "name": ["must not be blank"],
+        "price": ["must be greater than 0"]
+      }
     },
     {
       "timestamp": "2025-06-15T10:32:00.000Z",
       "status": 500,
       "error": "Internal Server Error",
-      "message": "An unexpected error occurred",
-      "path": "/api/orders"
+      "message": "An unexpected error occurred"
     }
   ]
 }
