@@ -12,8 +12,8 @@ date_added: "2026-03-10"
 **Description (EN):**
 BaaS platforms reduce backend work, but they also blur security boundaries if used carelessly. This skill standardizes official SDK setup, capability-based adapters, and the rule that privileged operations must stay behind security rules or server-side functions.
 
-**Descripcion (ES):**
-Las plataformas BaaS reducen trabajo backend, pero tambien difuminan fronteras de seguridad si se usan sin cuidado. Esta skill estandariza el setup con SDK oficial, adaptadores por capacidad y la regla de que las operaciones privilegiadas deben quedar detras de reglas de seguridad o funciones server-side.
+**Descripción (ES):**
+Las plataformas BaaS reducen trabajo backend, pero también difuminan fronteras de seguridad si se usan sin cuidado. Esta skill estándariza el setup con SDK oficial, adaptadores por capacidad y la regla de que las operaciónes privilegiadas deben quedar detrás de reglas de seguridad o funciones server-side.
 
 Related resources:
 - [firebase-setup.template.md](./resources/firebase-setup.template.md)
@@ -29,9 +29,9 @@ Integrate Firebase or an equivalent BaaS safely without turning components into 
 - Do not use this skill when: The frontend talks only to a custom backend and does not need a direct cloud SDK.
 
 **Objetivo (ES):**
-Integrar Firebase o un BaaS equivalente de forma segura sin convertir componentes en codigo de infraestructura.
-- Use esta skill cuando: La app dependa de un SDK oficial BaaS para auth, base de datos, storage o realtime.
-- No use esta skill cuando: El frontend solo hable con un backend propio y no necesite SDK cloud directo.
+Integrar Firebase o un BaaS equivalente de forma segura sin convertir componentes en código de infraestructura.
+- Úsese cuando: La app dependa de un SDK oficial BaaS para auth, base de datos, storage o realtime.
+- No se use cuando: El frontend solo hable con un backend propio y no necesite SDK cloud directo.
 
 ---
 
@@ -62,8 +62,8 @@ Integrar Firebase o un BaaS equivalente de forma segura sin convertir componente
 **Salidas (ES):**
 1. Un archivo singleton para inicializar el provider.
 2. Adaptadores por capacidad o repositorios consumidos por el resto de la app.
-3. Limites claros entre operaciones seguras del cliente y flujos privilegiados del lado servidor.
-4. Un handoff documentado hacia el manejo del ciclo de sesion y la proteccion de rutas.
+3. Limites claros entre operaciónes seguras del cliente y flujos privilegiados del lado servidor.
+4. Un handoff documentado hacia el manejo del ciclo de sesión y la protección de rutas.
 
 ---
 
@@ -82,14 +82,14 @@ Integrar Firebase o un BaaS equivalente de forma segura sin convertir componente
 
 **Instrucciones (ES):**
 1. **Modela primero las capacidades del provider:** Decide si la app usa auth, base de datos, storage, realtime o functions antes de exponer llamadas crudas del SDK a los features.
-2. **Inicializa el SDK una sola vez:** Exporta una unica instancia inicializada del app o client desde un modulo compartido.
-3. **Carga solo configuracion publica:** Las client API keys pueden ser publicas por diseno, pero admin keys y secretos de servicio deben quedarse server-side.
+2. **Inicializa el SDK una sola vez:** Exporta una única instancia inicializada del app o client desde un módulo compartido.
+3. **Carga solo configuración publica:** Las client API keys pueden ser publicas por diseño, pero admin keys y secretos de servicio deben quedarse server-side.
 4. **Envuelve el uso del SDK por capacidad:** Los componentes deben llamar repositorios, adaptadores o servicios de la app, no primitivas crudas del SDK por todas partes.
-5. **Mantén separado el ciclo de auth:** La hidratacion de sesion, el logout y la recuperacion ante `401` pertenecen a la Skill 06; el setup del provider y sus hooks especificos viven aqui.
-6. **Mantén separada la proteccion de rutas:** Los guards y la navegacion protegida pertenecen a la Skill 12, incluso cuando el estado auth nace en el provider BaaS.
-7. **Haz cumplir la proteccion del lado backend:** Usa rules, RLS, App Check o server/edge functions para operaciones privilegiadas.
+5. **Mantén separado el ciclo de auth:** La hidratación de sesión, el logout y la recuperación ante `401` pertenecen a la Skill 06; el setup del provider y sus hooks especificos viven aqui.
+6. **Mantén separada la protección de rutas:** Los guards y la navegación protegida pertenecen a la Skill 12, incluso cuando el estado auth nace en el provider BaaS.
+7. **Haz cumplir la protección del lado backend:** Usa rules, RLS, App Check o server/edge functions para operaciónes privilegiadas.
 8. **Documenta capacidades no cubiertas:** Si el provider elegido no cubre todo, deja claro que partes siguen dependiendo de un backend propio.
-9. **Adapta el patron, no el ejemplo literal:** Renombra archivos, adaptadores del provider, puentes de sesion y limites server-side para ajustarlos al BaaS elegido, el framework y el lenguaje del proyecto.
+9. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, adaptadores del provider, puentes de sesión y límites server-side para ajustarlos al BaaS elegido, el framework y el lenguaje del proyecto.
 
 ---
 
@@ -105,8 +105,8 @@ Use the skill @11-baas-integration to integrate `{BaaSProvider}` into this {Fram
 **Prompt (ES):**
 ```text
 Usa la skill @11-baas-integration para integrar `{BaaSProvider}` en esta app {Framework}.
-1. Crea un bootstrap unico del SDK y adaptadores por capacidad para las funciones del provider que la app realmente usa.
-2. Mantén las escrituras privilegiadas detras de rules o funciones server-side y delega el ciclo de sesion y la proteccion de rutas a las capas de auth y guards.
+1. Crea un bootstrap único del SDK y adaptadores por capacidad para las funciones del provider que la app realmente usa.
+2. Mantén las escrituras privilegiadas detrás de rules o funciones server-side y delega el ciclo de sesión y la protección de rutas a las capas de auth y guards.
 ```
 
 ---
@@ -129,7 +129,7 @@ src/
             └── auth.store.{ext}
 ```
 
-## Adaptation Checklist / Lista de Adaptacion
+## Adaptation Checklist / Lista de Adaptación
 
 **Checklist (EN):**
 - [ ] The SDK is initialized exactly once.
@@ -142,7 +142,7 @@ src/
 **Checklist (ES):**
 - [ ] El SDK se inicializa exactamente una vez.
 - [ ] Ninguna service key ni credencial admin se expone al bundle del cliente.
-- [ ] Las primitivas crudas del SDK quedan ocultas detras de adaptadores por capacidad o repositorios.
-- [ ] Las rules de seguridad o funciones server-side hacen cumplir operaciones privilegiadas mas alla de la UI.
-- [ ] El limite entre setup del provider, ciclo de sesion y proteccion de rutas esta documentado con claridad.
-- [ ] Los nombres, archivos, adaptadores del provider, puentes de sesion y limites server-side se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.
+- [ ] Las primitivas crudas del SDK quedan ocultas detrás de adaptadores por capacidad o repositorios.
+- [ ] Las rules de seguridad o funciones server-side hacen cumplir operaciónes privilegiadas más allá de la UI.
+- [ ] El límite entre setup del provider, ciclo de sesión y protección de rutas está documentado con claridad.
+- [ ] Los nombres, archivos, adaptadores del provider, puentes de sesión y límites server-side se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

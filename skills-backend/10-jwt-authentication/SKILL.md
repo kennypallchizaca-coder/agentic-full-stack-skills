@@ -15,6 +15,9 @@ Authentication must protect credentials, issue trustworthy tokens, and keep secr
 **Descripción (ES):**
 La autenticación debe proteger credenciales, emitir tokens confiables y mantener secretos fuera del código fuente. Un JWT (JSON Web Token) es un token autocontenido y firmado digitalmente compuesto por tres partes — **header** (algoritmo y tipo), **payload** (claims sobre el usuario) y **signature** (prueba de integridad) — transmitido como `header.payload.signature`. Esta skill define un flujo JWT listo para producción con hashing de contraseñas, claims mínimos, manejo de secretos, ciclo de vida del token y límites claros de validación. La autenticación basada en tokens (stateless) es el método preferido para APIs REST porque escala horizontalmente y funciona entre dominios, a diferencia de enfoques basados en sesión que requieren estado en el servidor.
 
+Related resources:
+- [jwt-claims.schema.json](./resources/jwt-claims.schema.json)
+
 ---
 
 # 2. Skill Objective

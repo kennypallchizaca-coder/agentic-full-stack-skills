@@ -5,15 +5,23 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
 [![Skills](https://img.shields.io/badge/Skills-12-blueviolet)]()
 
+**Compatible AI Agents & Models:**  
+[![Cursor](https://img.shields.io/badge/Cursor-AI-000000.svg?logo=cursor)]()
+[![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-Enabled-eeeeee.svg?logo=github)]()
+[![Windsurf](https://img.shields.io/badge/Windsurf-Ready-blue.svg)]()
+[![Gemini](https://img.shields.io/badge/Gemini-Supported-1A73E8.svg?logo=google-gemini)]()
+[![Claude](https://img.shields.io/badge/Claude-Supported-D97757.svg)]()
+[![ChatGPT/Codex](https://img.shields.io/badge/ChatGPT%2FCodex-Supported-412991.svg?logo=openai)]()
+
 ---
 
 ## About this library
 
 This frontend library gives an AI assistant a reusable playbook for setup, component boundaries, routing, forms, feedback, auth, data fetching, styling, and navigation without assuming a single framework.
 
-Scope notes:
-- The strongest source coverage comes from Angular and Astro concepts.
-- React, Vue, and similar stacks are supported through portable patterns, not framework-specific cookbooks in this repository.
+**Based On (Origins):**
+- The strongest source coverage comes directly from the enterprise **Astro and Angular** modules of the `CONCEPTOS-FRONTEND-BACKEND` architecture.
+- React, Vue, and similar stacks are fully supported through these portable patterns, ensuring your AI builds robust boundaries instead of brittle, framework-specific cookbooks.
 - The library is designed for real application work: SPAs, hybrid-rendered apps, and frontend delivery strategy with release readiness.
 
 ---
@@ -66,7 +74,6 @@ These templates and references help adapt the skills to different frameworks whi
 | 01 | [frontend-deployment-strategy.md](./01-project-setup/resources/frontend-deployment-strategy.md) | Decide between static, SPA, and hybrid delivery targets |
 | 02 | [component-primitives.matrix.md](./02-component-architecture/resources/component-primitives.matrix.md) | Map component primitives across Angular, React, Vue, and Astro |
 | 02 | [smart-dumb-pattern.template.md](./02-component-architecture/resources/smart-dumb-pattern.template.md) | Explain container/presentational split as one optional composition pattern |
-| 03 | [lazy-routing.template.md](./03-routing-strategy/resources/lazy-routing.template.md) | Organize nested routes, lazy boundaries, and layout-aware navigation |
 | 03 | [rendering-strategy.matrix.md](./03-routing-strategy/resources/rendering-strategy.matrix.md) | Compare CSR, SSR, SSG, ISR, and islands by use case |
 | 04 | [dynamic-form-patterns.md](./04-form-orchestration/resources/dynamic-form-patterns.md) | Handle repeatable groups, conditional fields, and nested forms |
 | 04 | [validation-engine.matrix.md](./04-form-orchestration/resources/validation-engine.matrix.md) | Choose a validation/form engine that matches the target stack |
@@ -75,7 +82,6 @@ These templates and references help adapt the skills to different frameworks whi
 | 07 | [styling-strategy.matrix.md](./07-styling-system/resources/styling-strategy.matrix.md) | Compare utility CSS, scoped CSS, CSS-in-JS, and token-first setups |
 | 08 | [global-store.template.md](./08-state-management/resources/global-store.template.md) | Structure portable shared-state patterns without coupling to one library |
 | 09 | [http-testing.matrix.md](./09-data-fetching/resources/http-testing.matrix.md) | Cover repository, interceptor, form, and guard-adjacent transport tests |
-| 09 | [interceptors.template.md](./09-data-fetching/resources/interceptors.template.md) | Wire auth-aware request/response behavior into a shared HTTP client |
 | 10 | [pagination.template.md](./10-advanced-navigation/resources/pagination.template.md) | Normalize URL-driven pagination and navigation metadata |
 | 11 | [baas-adapter-pattern.md](./11-baas-integration/resources/baas-adapter-pattern.md) | Separate provider bootstrap from capability adapters |
 | 11 | [firebase-setup.template.md](./11-baas-integration/resources/firebase-setup.template.md) | Example setup for Firebase-style provider wiring |

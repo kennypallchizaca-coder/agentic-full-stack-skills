@@ -10,10 +10,10 @@ date_added: "2026-03-10"
 # 1. Skill Description
 
 **Description (EN):**
-A professional backend grows by business domains, not by technical dumping grounds. This skill defines a domain-first structure so a teammate can open `catalog/`, `billing/`, `identity/`, `notifications/`, or any other business area and quickly understand where requests enter, where business rules live, where data access happens, and where tests belong.
+A professional backend grows by business domains, not by technical dumping grounds. This skill defines a domain-first structure so a teammate can open `catalog/`, `billing/`, `identity/`, `notifications/`, or any other business area and quickly understand where requests enter, where business rules live, where data access happens, and where tests belong. A domain module should be understandable in isolation — opening its folder should reveal the request entry point, the business logic, the persistence layer, the data contracts, and the public file that other modules are allowed to import.
 
 **Descripción (ES):**
-Un backend profesional crece por dominios del negocio, no por carpetas técnicas sin contexto. Esta skill define una estructura orientada a dominios para que alguien pueda abrir `catalog/`, `billing/`, `identity/`, `notifications/` o cualquier otra área del negocio y entender rápido dónde entra la petición, dónde vive la lógica, dónde está la persistencia y dónde se prueban esos cambios.
+Un backend profesional crece por dominios del negocio, no por carpetas técnicas sin contexto. Esta skill define una estructura orientada a dominios para que alguien pueda abrir `catalog/`, `billing/`, `identity/`, `notifications/` o cualquier otra área del negocio y entender rápido dónde entra la petición, dónde vive la lógica, dónde está la persistencia y dónde se prueban esos cambios. Un módulo de dominio debe poder entenderse de forma aislada — al abrir su carpeta debe verse claramente el punto de entrada de la petición, la lógica de negocio, la persistencia, los contratos de datos y el archivo público que otros módulos pueden importar.
 
 ---
 
@@ -56,16 +56,6 @@ Crear una estructura backend modular que escale de forma limpia entre frameworks
 1. Un árbol de carpetas orientado a features dentro de la raíz de código del proyecto (`src/`, `app/`, `internal/` o el equivalente del stack).
 2. Reglas claras para que los archivos de un solo dominio vivan dentro del módulo y lo transversal vaya a `core/`, `shared/`, `common/` o el equivalente del proyecto.
 3. Una capa raíz predecible para registrar rutas o módulos y un límite público claro por módulo.
-
----
-
-## Core Principle / Principio Central
-
-**Principle (EN):**
-A domain module should be understandable in isolation. Opening its folder should reveal the request entry point, the business logic, the persistence layer, the data contracts, and the public file that other modules are allowed to import.
-
-**Principio (ES):**
-Un módulo de dominio debe poder entenderse de forma aislada. Al abrir su carpeta debe verse claramente el punto de entrada de la petición, la lógica de negocio, la persistencia, los contratos de datos y el archivo público que otros módulos pueden importar.
 
 ---
 

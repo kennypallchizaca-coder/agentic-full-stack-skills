@@ -15,6 +15,9 @@ Navigation is part of application state and also part of the user experience. Th
 **Descripción (ES):**
 La navegación también es estado de la aplicación y parte de la experiencia visual. Esta skill trata al router como la fuente de verdad para breadcrumbs, paginación, filtros y URLs compartibles, y además organiza ayudas visibles de navegación como hero summaries, consistencia del layout shell y componentes de retorno rápido.
 
+Related resources:
+- [pagination.template.md](./resources/pagination.template.md)
+
 ---
 
 # 2. Skill Objective

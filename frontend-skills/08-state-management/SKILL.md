@@ -15,6 +15,9 @@ Global state becomes dangerous when it turns into a dumping ground. This skill d
 **Descripción (ES):**
 El estado global se vuelve peligroso cuando se convierte en un basurero. Esta skill define cómo mantener el state del cliente pequeño, explícito y apropiado para cada framework, separando caché del servidor, estado UI y estado de sesión. Los frameworks modernos ofrecen primitivas reactivas — como signals, resources y cargadores de datos basados en observables — que gestionan datos del servidor sin contaminar los stores del cliente. Úsalas para caché del servidor en vez de sincronizar manualmente respuestas de API en el estado global.
 
+Related resources:
+- [global-store.template.md](./resources/global-store.template.md)
+
 ---
 
 # 2. Skill Objective

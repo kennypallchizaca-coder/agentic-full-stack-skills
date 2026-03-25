@@ -12,18 +12,18 @@ date_added: "2026-03-10"
 **Description (EN):**
 Authentication is more than a login form. The frontend must restore session state on boot, react to expired sessions, coordinate protected navigation, and avoid unsafe token storage patterns. This skill defines that session lifecycle end to end while keeping provider SDK wiring and route protection in their own layers.
 
-**Descripcion (ES):**
-La autenticacion es mucho mas que un formulario de login. El frontend debe restaurar la sesion al arrancar, reaccionar a sesiones expiradas, coordinar navegacion protegida y evitar patrones inseguros de almacenamiento de tokens. Esta skill define ese ciclo de sesion de punta a punta manteniendo el wiring del provider y la proteccion de rutas en capas separadas.
+**Descripción (ES):**
+La autenticación es mucho mas que un formulario de login. El frontend debe restaurar la sesión al arrancar, reaccionar a sesiónes expiradas, coordinar navegación protegida y evitar patrónes inseguros de almacenamiento de tokens. Esta skill define ese ciclo de sesión de punta a punta manteniendo el wiring del provider y la protección de rutas en capas separadas.
 
 Boundary note:
 - Skill 06 owns session lifecycle and hydration.
 - Skill 11 owns provider SDK or BaaS integration.
 - Skill 12 owns route protection and navigation enforcement.
 
-Nota de limites:
-- La Skill 06 es duena del ciclo de sesion y la hidratacion.
-- La Skill 11 es duena del SDK del provider o la integracion BaaS.
-- La Skill 12 es duena de la proteccion de rutas y del enforcement de navegacion.
+Nota de límites:
+- La Skill 06 es duena del ciclo de sesión y la hidratación.
+- La Skill 11 es duena del SDK del provider o la integración BaaS.
+- La Skill 12 es duena de la protección de rutas y del enforcement de navegación.
 
 ---
 
@@ -36,10 +36,10 @@ Implement a reliable session flow for SPA or hybrid frontend applications that f
 - Security preference: Prefer `httpOnly`, `secure`, `sameSite` cookies. Use `localStorage` or `sessionStorage` only if the architecture explicitly requires it and the tradeoff is documented.
 
 **Objetivo (ES):**
-Implementar un flujo de sesion confiable para aplicaciones frontend SPA o hibridas que encaje con la arquitectura de auth elegida.
-- Use esta skill cuando: Construyas flujos de login/logout, dashboards protegidos o hidratacion inicial de apps autenticadas.
-- No use esta skill cuando: La autenticacion este delegada por completo a un SDK BaaS que ya expone estado reactivo de sesion y no se necesite un ciclo de sesion propio.
-- Preferencia de seguridad: Prioriza cookies `httpOnly`, `secure`, `sameSite`. Usa `localStorage` o `sessionStorage` solo si la arquitectura lo exige de forma explicita y el riesgo queda documentado.
+Implementar un flujo de sesión confiable para aplicaciónes frontend SPA o hibridas que encaje con la arquitectura de auth elegida.
+- Úsese cuando: Construyas flujos de login/logout, dashboards protegidos o hidratación inicial de apps autenticadas.
+- No se use cuando: La autenticación este delegada por completo a un SDK BaaS que ya expone estado reactivo de sesión y no se necesite un ciclo de sesión propio.
+- Preferencia de seguridad: Prioriza cookies `httpOnly`, `secure`, `sameSite`. Usa `localStorage` o `sessionStorage` solo si la arquitectura lo exige de forma explícita y el riesgo queda documentado.
 
 ---
 
@@ -53,7 +53,7 @@ Implementar un flujo de sesion confiable para aplicaciones frontend SPA o hibrid
 **Entradas (ES):**
 1. `Auth Endpoints`: `login`, `logout`, `me` y opcionalmente `refresh`.
 2. `Session Transport`: Cookies seguras, token en memoria o almacenamiento alternativo documentado.
-3. `Global State`: Store/servicio que expone el estado de sesion al shell de la app y a los guards.
+3. `Global State`: Store/servicio que expone el estado de sesión al shell de la app y a los guards.
 
 ---
 
@@ -66,8 +66,8 @@ Implementar un flujo de sesion confiable para aplicaciones frontend SPA o hibrid
 
 **Salidas (ES):**
 1. Un repositorio o servicio de auth que hable con el backend o con el adaptador del provider.
-2. Un store global de sesion con estados explicitos como `unknown`, `authenticated` y `guest`.
-3. Una rutina de hidratacion y un flujo de logout reutilizados por guards y manejo de errores HTTP.
+2. Un store global de sesión con estados explícitos como `unknown`, `authenticated` y `guest`.
+3. Una rutina de hidratación y un flujo de logout reutilizados por guards y manejo de errores HTTP.
 
 ---
 
@@ -84,12 +84,12 @@ Implementar un flujo de sesion confiable para aplicaciones frontend SPA o hibrid
 
 **Instrucciones (ES):**
 1. **Crea el repositorio de auth:** Aisla las llamadas `login`, `logout`, `me` y `refresh` fuera de los componentes UI.
-2. **Modela estados de sesion explicitos:** La app debe distinguir entre "aun verificando sesion" y "definitivamente deslogueado".
-3. **Hidrata al arrancar:** Al iniciar la app, llama a `/me`, `refresh` o al adaptador de sesion del provider antes de renderizar rutas protegidas.
-4. **Centraliza logout:** Una unica accion `logout()` debe limpiar el estado de sesion, ejecutar logout backend o del provider si aplica y redirigir de forma segura.
-5. **Maneja `401` una sola vez:** Enruta las respuestas HTTP `401` por el mismo camino de logout o reset de sesion para evitar logica duplicada y UI obsoleta.
-6. **Mantén claros los limites:** El wiring del provider queda en la Skill 11 y el enforcement de rutas queda en la Skill 12 para que el ciclo de sesion siga siendo portable.
-7. **Adapta el patron, no el ejemplo literal:** Renombra archivos, flujos, estados de auth y puntos de integracion para ajustarlos al framework, el modelo de sesion y el lenguaje de negocio del proyecto objetivo.
+2. **Modela estados de sesión explícitos:** La app debe distinguir entre "aun verificando sesión" y "definitivamente deslogueado".
+3. **Hidrata al arrancar:** Al iniciar la app, llama a `/me`, `refresh` o al adaptador de sesión del provider antes de renderizar rutas protegidas.
+4. **Centraliza logout:** Una única accion `logout()` debe limpiar el estado de sesión, ejecutar logout backend o del provider si aplica y redirigir de forma segura.
+5. **Maneja `401` una sola vez:** Enruta las respuestas HTTP `401` por el mismo camino de logout o reset de sesión para evitar lógica duplicada y UI obsoleta.
+6. **Mantén claros los límites:** El wiring del provider queda en la Skill 11 y el enforcement de rutas queda en la Skill 12 para que el ciclo de sesión siga siendo portable.
+7. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, flujos, estados de auth y puntos de integración para ajustarlos al framework, el modelo de sesión y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -104,9 +104,9 @@ Use the skill @06-authentication-flow to implement session management in this {F
 
 **Prompt (ES):**
 ```text
-Usa la skill @06-authentication-flow para implementar gestion de sesion en esta app {Framework}.
+Usa la skill @06-authentication-flow para implementar gestion de sesión en esta app {Framework}.
 1. Construye un repositorio de auth y un store global con estados `unknown`, `authenticated` y `guest`.
-2. Hidrata la sesion al arrancar la app, envia cada `401` por el mismo flujo de reset y mantén el provider y la proteccion de rutas en capas separadas.
+2. Hidrata la sesión al arrancar la app, envia cada `401` por el mismo flujo de reset y mantén el provider y la protección de rutas en capas separadas.
 ```
 
 ---
@@ -127,7 +127,7 @@ src/
             └── LoginForm.{ext}
 ```
 
-## Adaptation Checklist / Lista de Adaptacion
+## Adaptation Checklist / Lista de Adaptación
 
 **Checklist (EN):**
 - [ ] A page refresh preserves the real session state after hydration.
@@ -137,8 +137,8 @@ src/
 - [ ] Names, files, flows, auth states, and integration points were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
-- [ ] Un refresh de pagina preserva el estado real de la sesion despues de la hidratacion.
-- [ ] Las rutas protegidas esperan el bootstrap de sesion antes de redirigir.
+- [ ] Un refresh de página preserva el estado real de la sesión después de la hidratación.
+- [ ] Las rutas protegidas esperan el bootstrap de sesión antes de redirigir.
 - [ ] La persistencia de tokens no se guarda en `localStorage` salvo que el proyecto documente esa excepcion y acepte el riesgo.
-- [ ] El setup del SDK del provider y la proteccion de rutas no se mezclan con la misma capa del ciclo de sesion.
-- [ ] Los nombres, archivos, flujos, estados de auth y puntos de integracion se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.
+- [ ] El setup del SDK del provider y la protección de rutas no se mezclan con la misma capa del ciclo de sesión.
+- [ ] Los nombres, archivos, flujos, estados de auth y puntos de integración se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

@@ -13,7 +13,7 @@ date_added: "2026-03-10"
 Routing is the structural backbone of a frontend application. This skill organizes route trees, layouts, dynamic segments, render-mode boundaries, lazy loading, and fallback screens so navigation remains scalable and understandable across frameworks.
 
 **Descripción (ES):**
-El routing es la columna estructural de una aplicacion frontend. Esta skill organiza arboles de rutas, layouts, segmentos dinamicos, fronteras de renderizado, lazy loading y pantallas fallback para que la navegacion escale y siga siendo entendible entre frameworks.
+El routing es la columna estructural de una aplicación frontend. Esta skill organiza arboles de rutas, layouts, segmentos dinámicos, fronteras de renderizado, lazy loading y pantallas fallback para que la navegación escale y siga siendo entendible entre frameworks.
 
 ---
 
@@ -26,8 +26,8 @@ Design a route system that separates public and private areas while keeping perf
 
 **Objetivo (ES):**
 Disenar un sistema de rutas que separe areas publicas y privadas mientras mantiene rendimiento, estrategia de renderizado y mantenibilidad bajo control en distintas arquitecturas de router.
-- Usese cuando: La aplicacion tenga multiples paginas, layouts anidados o code splitting por ruta.
-- No se use cuando: Un widget pequeno o modal no tenga un modelo de navegacion propio.
+- Úsese cuando: La aplicación tenga multiples paginas, layouts anidados o code splitting por ruta.
+- No se use cuando: Un widget pequeño o modal no tenga un modelo de navegación propio.
 
 ---
 
@@ -40,8 +40,8 @@ Disenar un sistema de rutas que separe areas publicas y privadas mientras mantie
 4. `Rendering Strategy`: CSR, SSR, SSG, ISR, islands, or equivalent route/runtime behavior expected by the product.
 
 **Entradas (ES):**
-1. `Router Mechanism`: Router del framework, file-based router o capa equivalente de navegacion.
-2. `Route Tree`: Paginas publicas, protegidas, rutas dinamicas de detalle y vistas de error.
+1. `Router Mechanism`: Router del framework, file-based router o capa equivalente de navegación.
+2. `Route Tree`: Paginas publicas, protegidas, rutas dinámicas de detalle y vistas de error.
 3. `Layout Needs`: Shells como app layout, auth layout, dashboard layout o public layout.
 4. `Rendering Strategy`: CSR, SSR, SSG, ISR, islands o comportamiento equivalente de runtime/ruta esperado por el producto.
 
@@ -57,7 +57,7 @@ Disenar un sistema de rutas que separe areas publicas y privadas mientras mantie
 
 **Salidas (ES):**
 1. Una definicion de rutas estructurada con layouts anidados.
-2. Paginas o modulos lazy-loaded cuando corresponda.
+2. Paginas o módulos lazy-loaded cuando corresponda.
 3. Comportamiento fallback determinista para rutas desconocidas.
 4. Una decision documentada sobre como cooperan routing y renderizado en el stack objetivo.
 
@@ -77,13 +77,13 @@ Disenar un sistema de rutas que separe areas publicas y privadas mientras mantie
 
 **Instrucciones (ES):**
 1. **Mapear primero el arbol de rutas:** Identifica rutas publicas, protegidas, de detalle y fallback antes de escribir codigo.
-2. **Elegir intencionalmente el modelo de renderizado:** Decide si cada ruta o shell sera client-rendered, server-rendered, estatico o basado en islands antes de cablear la navegacion.
-3. **Agrupar rutas por layout:** Coloca cada ruta bajo el shell que posee la navegacion compartida y el marco visual correspondiente.
-4. **Aplicar lazy loading en limites de ruta:** Divide paginas o modulos grandes en fronteras de ruta para reducir el costo del bundle inicial.
-5. **Soportar segmentos dinamicos con intencion:** Manten los params explicitos y alineados con las necesidades del feature.
-6. **Alinear el comportamiento de enlaces con el stack:** Usa primitivas del router, convenciones file-based, prefetch o links nativos segun el modelo de navegacion y renderizado del framework.
+2. **Elegir intenciónalmente el modelo de renderizado:** Decide si cada ruta o shell sera client-rendered, server-rendered, estatico o basado en islands antes de cablear la navegación.
+3. **Agrupar rutas por layout:** Coloca cada ruta bajo el shell que posee la navegación compartida y el marco visual correspondiente.
+4. **Aplicar lazy loading en límites de ruta:** Divide paginas o módulos grandes en fronteras de ruta para reducir el costo del bundle inicial.
+5. **Soportar segmentos dinámicos con intención:** Manten los params explícitos y alineados con las necesidades del feature.
+6. **Alinear el comportamiento de enlaces con el stack:** Usa primitivas del router, convenciones file-based, prefetch o links nativos segun el modelo de navegación y renderizado del framework.
 7. **Agregar una ruta fallback final:** Las rutas desconocidas deben aterrizar en una vista consistente de no encontrado y no en una pantalla en blanco.
-8. **Adapta el patron, no el ejemplo literal:** Renombra archivos, grupos de rutas, layouts y convenciones para ajustarlos al router, framework y modelo de navegacion del proyecto objetivo.
+8. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, grupos de rutas, layouts y convenciones para ajustarlos al router, framework y modelo de navegación del proyecto objetivo.
 
 For render-mode tradeoffs and framework examples, see [rendering-strategy.matrix.md](./resources/rendering-strategy.matrix.md).
 
@@ -103,10 +103,10 @@ Use the skill @03-routing-strategy to organize navigation in this {Framework} ap
 
 **Prompt (ES):**
 ```text
-Usa la skill @03-routing-strategy para organizar la navegacion de esta app {Framework}.
+Usa la skill @03-routing-strategy para organizar la navegación de esta app {Framework}.
 1. Separa las rutas publicas y privadas bajo sus layouts correspondientes.
 2. Elige un modelo de routing y renderizado que encaje con el stack y el producto.
-3. Aplica lazy loading y una ruta final de no encontrado para que la navegacion sea escalable y segura.
+3. Aplica lazy loading y una ruta final de no encontrado para que la navegación sea escalable y segura.
 ```
 
 ---
@@ -127,7 +127,7 @@ Usa la skill @03-routing-strategy para organizar la navegacion de esta app {Fram
 
 If the stack uses file-based routing, the same separation can live in folders instead of explicit `routes.{ext}` files.
 
-Si el stack usa routing basado en archivos, la misma separacion puede vivir en carpetas en lugar de archivos explicitos `routes.{ext}`.
+Si el stack usa routing basado en archivos, la misma separación puede vivir en carpetas en lugar de archivos explícitos `routes.{ext}`.
 
 ## Adaptation Checklist / Lista de Adaptación
 
@@ -139,7 +139,7 @@ Si el stack usa routing basado en archivos, la misma separacion puede vivir en c
 - [ ] Names, files, route groups, layouts, and conventions were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
-- [ ] Las areas publicas y protegidas estan agrupadas bajo layouts claros.
+- [ ] Las areas publicas y protegidas están agrupadas bajo layouts claros.
 - [ ] Las decisiones de routing respetan el modelo de renderizado del stack y no asumen comportamiento SPA por defecto.
 - [ ] El lazy loading por ruta se usa donde realmente reduce el costo de carga inicial.
 - [ ] Las rutas desconocidas resuelven una experiencia consistente de no encontrado.

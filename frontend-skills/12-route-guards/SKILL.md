@@ -15,6 +15,9 @@ Route guards should enforce navigation rules without flicker, loops, or stale se
 **Descripción (ES):**
 Los route guards deben hacer cumplir reglas de navegación sin flicker, loops ni supuestos viejos sobre la sesión. Los guards interceptan intentos de navegación y deciden si permitir, denegar o redirigir según el estado de sesión y la metadata de la ruta. Múltiples tipos de guard sirven para propósitos distintos: **auth guards** protegen rutas privadas, **guest guards** bloquean el acceso de usuarios autenticados a login/register, **role guards** restringen áreas privilegiadas y **deactivation guards** previenen salir de rutas con cambios sin guardar. Esta skill hace que los guards dependan de estado explícito de sesión y metadata de rutas, no de checks frágiles de almacenamiento del navegador.
 
+Related resources:
+- [guards.template.md](./resources/guards.template.md)
+
 ---
 
 # 2. Skill Objective

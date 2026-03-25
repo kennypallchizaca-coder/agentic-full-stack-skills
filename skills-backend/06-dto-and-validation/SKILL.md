@@ -15,6 +15,9 @@ Input validation is a security boundary, not optional polish. A DTO (Data Transf
 **Descripción (ES):**
 La validación de entrada es una frontera de seguridad, no un adorno opcional. Un DTO (Objeto de Transferencia de Datos) está diseñado específicamente para transportar datos entre capas — **no** es un modelo de dominio (que representa entidades y reglas de negocio) ni una entidad de persistencia (que mapea al esquema de la base de datos). Esta skill introduce DTOs o esquemas de request que permiten solo campos aceptados, validan tipos y formatos, y frenan payloads inválidos antes de tocar lógica de negocio o persistencia. Los DTOs también refuerzan la seguridad al impedir que clientes establezcan campos que no deberían controlar, como `id`, `role` o `createdAt`.
 
+Related resources:
+- [validation-rules-reference.md](./resources/validation-rules-reference.md)
+
 ---
 
 # 2. Skill Objective

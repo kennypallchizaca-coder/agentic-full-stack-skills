@@ -12,8 +12,8 @@ date_added: "2026-03-10"
 **Description (EN):**
 A strong frontend starts with predictable structure. This skill defines the minimum setup needed to keep imports clean, quality checks repeatable, configuration explicit, environment variables safe, and delivery rules understandable across modern frontend frameworks.
 
-**Descripcion (ES):**
-Un frontend solido empieza con una estructura predecible. Esta skill define la configuracion minima necesaria para mantener imports limpios, checks de calidad repetibles, configuracion explicita, variables de entorno seguras y reglas de entrega comprensibles en frameworks frontend modernos.
+**Descripción (ES):**
+Un frontend solido empieza con una estructura predecible. Esta skill define la configuración minima necesaria para mantener imports limpios, checks de calidad repetibles, configuración explícita, variables de entorno seguras y reglas de entrega comprensibles en frameworks frontend modernos.
 
 Related resources:
 - [env.template.md](./resources/env.template.md)
@@ -32,8 +32,8 @@ Prepare a new or existing frontend project for maintainable development, predict
 
 **Objetivo (ES):**
 Preparar un proyecto frontend nuevo o existente para un desarrollo mantenible, con checks de entrega predecibles y decisiones de despliegue portables dentro del stack elegido.
-- Use esta skill cuando: Inicialices una app frontend, limpies configuracion inconsistente o estandarices imports, archivos de entorno y comandos de entrega.
-- No use esta skill cuando: Solo cambies el comportamiento de un componente aislado sin impacto en la configuracion del proyecto.
+- Úsese cuando: Inicialices una app frontend, limpies configuración inconsistente o estándarices imports, archivos de entorno y comandos de entrega.
+- No se use cuando: Solo cambies el comportamiento de un componente aislado sin impacto en la configuración del proyecto.
 
 ---
 
@@ -48,7 +48,7 @@ Preparar un proyecto frontend nuevo o existente para un desarrollo mantenible, c
 **Entradas (ES):**
 1. `Frontend Runtime`: El runtime UI y el modelo de componentes elegidos para el proyecto.
 2. `Tooling Layer`: La cadena de build, compilacion, pruebas y preview que resuelve imports y variables de entorno.
-3. `Environment Rules`: Que valores son publicos para el cliente, cuales deben permanecer del lado servidor y como los consumen los targets de hosting.
+3. `Environment Rules`: Que valores son públicos para el cliente, cuales deben permanecer del lado servidor y como los consumen los targets de hosting.
 4. `Quality Baseline`: Formatter, linter, type-check, build, preview y comandos opcionales de deploy esperados por el equipo.
 
 ---
@@ -75,7 +75,7 @@ Preparar un proyecto frontend nuevo o existente para un desarrollo mantenible, c
 
 **Instructions (EN):**
 1. **Enable strict development defaults:** Turn on strict typing or equivalent compiler checks whenever the stack supports it.
-2. **Establish one quality gate vocabulary:** Keep formatter, linter, type-check, build, preview, and deploy-related commands obvious and stable so humans and agents can validate changes the same way every time.
+2. **Establish one quality gate vocabulary:** Keep formatter, linter, type-check, build, preview, and deploy-related commands obvious and stable so humans and agents can válidate changes the same way every time.
 3. **Create import aliases:** Define a stable alias such as `@/` for the main source folder and mirror that setup in the bundler, compiler, linter, and test runner.
 4. **Separate public and private env values:** Only expose variables explicitly intended for the client bundle, and document the exposure rule per stack.
 5. **Document the config contract:** Leave `.env.example`, alias docs, base scripts, and target-specific hosting notes clear enough for any contributor or agent to bootstrap the project safely.
@@ -85,13 +85,13 @@ Preparar un proyecto frontend nuevo o existente para un desarrollo mantenible, c
 
 **Instrucciones (ES):**
 1. **Activa defaults estrictos de desarrollo:** Habilita tipado estricto o checks equivalentes del compilador siempre que el stack lo soporte.
-2. **Establece un vocabulario unico de calidad:** Mantén formatter, linter, type-check, build, preview y comandos relacionados con deploy obvios y estables para que humanos y agentes validen cambios del mismo modo.
-3. **Crea aliases de importacion:** Define un alias estable como `@/` para la carpeta principal de codigo y replica esa configuracion en bundler, compilador, linter y test runner.
+2. **Establece un vocabulario único de calidad:** Mantén formatter, linter, type-check, build, preview y comandos relacionados con deploy obvios y estables para que humanos y agentes validen cambios del mismo modo.
+3. **Crea aliases de importacion:** Define un alias estable como `@/` para la carpeta principal de código y replica esa configuración en bundler, compilador, linter y test runner.
 4. **Separa variables publicas y privadas:** Expon al bundle cliente solo las variables pensadas para el navegador y documenta la regla por stack.
-5. **Documenta el contrato de configuracion:** Deja `.env.example`, documentacion de aliases, scripts base y notas de hosting lo suficientemente claras para que cualquier colaborador o agente inicialice el proyecto con seguridad.
-6. **Elige con intencion los targets de entrega:** Identifica si el proyecto se publica como archivos estaticos, hosting SPA con fallback o runtime hibrido/servidor antes de cablear comandos de despliegue.
-7. **Mantén la estructura simple:** Prefiere una raiz limpia con codigo fuente, config, scripts de calidad y archivos de entorno en vez de una configuracion dispersa e improvisada.
-8. **Adapta el patron, no el ejemplo literal:** Renombra archivos, capas, configuraciones y convenciones para ajustarlos al framework, tooling y lenguaje de negocio del proyecto objetivo.
+5. **Documenta el contrato de configuración:** Deja `.env.example`, documentación de aliases, scripts base y notas de hosting lo suficientemente claras para que cualquier colaborador o agente inicialice el proyecto con seguridad.
+6. **Elige con intención los targets de entrega:** Identifica si el proyecto se publica como archivos estaticos, hosting SPA con fallback o runtime hibrido/servidor antes de cablear comandos de despliegue.
+7. **Mantén la estructura simple:** Prefiere una raiz limpia con código fuente, config, scripts de calidad y archivos de entorno en vez de una configuración dispersa e improvisada.
+8. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, configuraciónes y convenciones para ajustarlos al framework, tooling y lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -107,7 +107,7 @@ Use the skill @01-project-setup to standardize the foundation of this frontend c
 
 **Prompt (ES):**
 ```text
-Usa la skill @01-project-setup para estandarizar la base de este proyecto frontend.
+Usa la skill @01-project-setup para estándarizar la base de este proyecto frontend.
 1. Activa checks estrictos del compilador, define aliases reutilizables y expone solo variables seguras para el cliente.
 2. Deja claros los comandos de formatter, linter, type-check, build, preview y deploy para futuros colaboradores.
 3. Documenta si el proyecto se publica como salida estatica, SPA o hibrida antes de automatizar el despliegue.
@@ -129,7 +129,7 @@ Usa la skill @01-project-setup para estandarizar la base de este proyecto fronte
 └── README.md
 ```
 
-## Adaptation Checklist / Lista de Adaptacion
+## Adaptation Checklist / Lista de Adaptación
 
 **Checklist (EN):**
 - [ ] Top-level imports resolve through a documented alias instead of deep relative paths.
@@ -142,7 +142,7 @@ Usa la skill @01-project-setup para estandarizar la base de este proyecto fronte
 **Checklist (ES):**
 - [ ] Los imports de alto nivel se resuelven mediante un alias documentado en lugar de rutas relativas profundas.
 - [ ] Las variables publicas usan el prefijo o mecanismo correcto de exposicion del framework.
-- [ ] Los comandos de formatter, linter, type-check, build, preview y deploy son faciles de encontrar y ejecutar.
+- [ ] Los comandos de formatter, linter, type-check, build, preview y deploy son fáciles de encontrar y ejecutar.
 - [ ] Las suposiciones de entrega estatica, SPA o hibrida quedan documentadas antes de automatizar el despliegue.
-- [ ] Cualquier colaborador puede clonar el proyecto y entender rapidamente su configuracion base.
-- [ ] Los nombres, archivos, capas, configuraciones y convenciones se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.
+- [ ] Cualquier colaborador puede clonar el proyecto y entender rapidamente su configuración base.
+- [ ] Los nombres, archivos, capas, configuraciónes y convenciones se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

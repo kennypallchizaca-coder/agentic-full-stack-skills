@@ -15,6 +15,9 @@ List endpoints become dangerous when they fetch everything by default. This skil
 **Descripción (ES):**
 Los endpoints de listado se vuelven peligrosos cuando traen todo por defecto. Esta skill introduce query parameters validados, paginación con límites, campos ordenables y metadata estable para que la API escale sin sorprender ni a clientes ni a la base.
 
+Related resources:
+- [paginated-response.schema.json](./resources/paginated-response.schema.json)
+
 ---
 
 # 2. Skill Objective

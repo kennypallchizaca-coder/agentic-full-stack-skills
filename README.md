@@ -1,357 +1,152 @@
-# Universal Full-Stack Skills
+# Universal Full-Stack AI Skills Library
 ### 24 bilingual `SKILL.md` guides for portable frontend and backend work
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Frontend Skills](https://img.shields.io/badge/Frontend-12_Skills-blue.svg)
-![Backend Skills](https://img.shields.io/badge/Backend-12_Skills-green.svg)
-![Bilingual](https://img.shields.io/badge/Bilingual-EN%20%7C%20ES-orange.svg)
-![Node 20+](https://img.shields.io/badge/Node-20%2B-339933.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+[![Frontend Skills](https://img.shields.io/badge/Frontend-12_Skills-blue.svg)](./frontend-skills/README.md)
+[![Backend Skills](https://img.shields.io/badge/Backend-12_Skills-green.svg)](./skills-backend/README.md)
+[![Bilingual](https://img.shields.io/badge/Bilingual-EN%20%7C%20ES-orange.svg)]()
+[![Validated](https://img.shields.io/badge/Status-Validated-success.svg)]()
 
-![Repository Architecture](./assets/readme/repository-architecture.svg)
+**Compatible AI Agents & Models:**  
+[![Cursor](https://img.shields.io/badge/Cursor-AI-000000.svg?logo=cursor)]()
+[![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-Enabled-eeeeee.svg?logo=github)]()
+[![Windsurf](https://img.shields.io/badge/Windsurf-Ready-blue.svg)]()
+[![Gemini](https://img.shields.io/badge/Gemini-Supported-1A73E8.svg?logo=google-gemini)]()
+[![Claude](https://img.shields.io/badge/Claude-Supported-D97757.svg)]()
+[![ChatGPT/Codex](https://img.shields.io/badge/ChatGPT%2FCodex-Supported-412991.svg?logo=openai)]()
 
-This repository is a **documentation-driven skill library** for AI coding assistants. It packages reusable frontend and backend playbooks as structured `SKILL.md` files, backed by templates, matrices, JSON schemas, validation tooling, and publication guidance.
+This repository is a **production-ready, documentation-driven skill library** tailored specifically for AI coding assistants (like Cursor, GitHub Copilot, Gemini, Codex, Windsurf, and Claude). It packages reusable frontend and backend playbooks as structured `SKILL.md` files, ensuring that your AI assistant builds with coherent, robust architecture rather than improvising from generic internet examples.
 
-The content is based on the `CONCEPTOS-FRONTEND-BACKEND` concept material and then rewritten into portable patterns that can be adapted across frameworks instead of copying one stack as if it were universal.
+The content is directly based on the `CONCEPTOS-FRONTEND-BACKEND` internal architectures—specifically translating robust Angular/Astro frontend principles and modular REST-first backend principles into portable, framework-agnostic patterns that any AI can apply to React, Vue, Go, Node, or Python. All skills are strictly bilingual (English/Spanish).
 
 ## Table of Contents
 
 - [Purpose](#purpose)
-- [What the Project Includes](#what-the-project-includes)
-- [How It Works](#how-it-works)
+- [Based On (Origins)](#based-on-origins)
+- [Why AI Agents Need This](#why-ai-agents-need-this)
+- [How to Use This Repository](#how-to-use-this-repository)
 - [Repository Structure](#repository-structure)
-- [Organization Principles](#organization-principles)
-- [Top-Level Files and Directories](#top-level-files-and-directories)
 - [Frontend Skill Catalog](#frontend-skill-catalog)
 - [Backend Skill Catalog](#backend-skill-catalog)
-- [Installation](#installation)
-- [Usage](#usage)
 - [Validation and Automation](#validation-and-automation)
-- [Alignment to the Source Concepts](#alignment-to-the-source-concepts)
-- [Security and Publishing](#security-and-publishing)
-- [Scope and Non-Goals](#scope-and-non-goals)
 - [License](#license)
 
 ## Purpose
 
-AI assistants are powerful, but they often drift when a codebase lacks explicit implementation rules.
+AI assistants are powerful, but they often drift when a codebase lacks explicit implementation rules or context.
 
-This repository exists to provide:
+This repository provides:
+- **Portable implementation guidance** for common tasks across any modern framework.
+- **Clear architectural boundaries** covering routing, service layers, data fetching, authorization, and deployment.
+- **Strictly validated structures** that ensure consistent execution (checked via `validate-skills.mjs`).
+- **Bilingual instructions** in English and explicitly normalized Spanish with proper accents.
 
-- **portable implementation guidance** for common frontend and backend tasks
-- **clear architectural boundaries** around routing, services, auth, validation, deployment, and more
-- **bilingual documentation** in English and Spanish
-- **structured reuse** through a consistent `SKILL.md` format
-- **validation before publication** so the repository can stay coherent over time
+This is not a runnable application template; it is an **operating system of knowledge** for AI-assisted software development.
 
-It is not a runnable application. It is a reusable knowledge and workflow layer for AI-assisted development.
+## Based On (Origins)
 
-## What the Project Includes
+These skills are not random AI generations. They are structured extractions from the **`CONCEPTOS-FRONTEND-BACKEND`** documentation baseline. 
 
-- **24 skills total**
-  - 12 frontend skills in [frontend-skills/README.md](./frontend-skills/README.md)
-  - 12 backend skills in [skills-backend/README.md](./skills-backend/README.md)
-- **Support resources**
-  - Markdown templates
-  - Decision matrices
-  - Checklists
-  - JSON schemas
-- **Repository-level documentation**
-  - [GUIDE_ALIGNMENT.md](./GUIDE_ALIGNMENT.md)
-  - [SECURITY.md](./SECURITY.md)
-  - [LICENSE](./LICENSE)
-- **Validation tooling**
-  - [`scripts/validate-skills.mjs`](./scripts/validate-skills.mjs)
-- **Automation**
-  - GitHub Actions validation workflow
-  - Dependabot configuration for GitHub Actions and npm metadata
+Specifically, they synthesize:
+- **Frontend:** Enterprise-grade boundaries heavily inspired by Angular and Astro architectures (strict component contracts, injected services, standalone route guards, strict state management) translated into patterns that apply equally well to React, Vue, or Svelte.
+- **Backend:** Clean architecture and modular monolith principles (separated transport, service, and persistence layers, strict DTO boundaries, decoupled security patterns) translated into agnostic instructions that work across Node.js, Python, Go, Java, or .NET. 
 
-Each `SKILL.md` follows a stable structure:
+## Why AI Agents Need This
 
-```text
-1. Skill Description
-2. Skill Objective
-3. Inputs / Entradas
-4. Outputs / Salidas
-5. Execution Steps
-6. Example Usage (Prompt)
-7. Recommended File Structure / Estructura Recomendada
-```
+When you ask an AI to "build a login form," it often generates a monolith. By providing a skill like `@04-form-orchestration` or `@10-jwt-authentication`, the AI is forced to follow a specific, professional-grade pattern. 
 
-## How It Works
+**Each `SKILL.md` rigidly defines:**
+1. **Description / Descripción:** What the skill is and why it matters.
+2. **Objective / Objetivo:** When to use it and when NOT to use it.
+3. **Inputs / Entradas:** What the agent needs to know before starting.
+4. **Outputs / Salidas:** What the exact deliverable should look like.
+5. **Execution Steps / Instrucciones:** A step-by-step implementation guide.
+6. **Example Usage / Prompt:** A ready-to-use prompt template.
+7. **Adaptation Checklist:** Verification rules to ensure the AI didn't blindly copy-paste.
 
-![Skill Lifecycle](./assets/readme/skill-lifecycle.svg)
+## How to Use This Repository
 
-At a high level, the repository works like this:
+1. **Clone or copy** the `frontend-skills/` or `skills-backend/` folders into your active workspace.
+2. **Instruct your AI** to reference specific skills by name.
 
-1. A concept source defines the original topic.
-2. The topic is rewritten into a portable `SKILL.md`.
-3. Extra resources are attached when examples, matrices, schemas, or checklists are useful.
-4. The validator checks structure, links, and JSON files.
-5. An AI assistant consumes the selected skill during implementation work.
+**Example Prompts:**
+> "Use the **@03-routing-strategy** skill from `frontend-skills` to define layouts, lazy routes, and the right rendering mode for this app."
+
+> "Use the **@04-service-layer** skill from `skills-backend` to move the `Order` workflow out of controllers and into a reusable, testable boundary."
+
+> "Combine **@06-authentication-flow** and **@12-route-guards** to secure our React application."
 
 ## Repository Structure
 
 ```text
 .
-├── .github/
-│   ├── dependabot.yml
-│   └── workflows/
-│       └── validate-skills.yml
-├── assets/
-│   ├── README.md
-│   └── readme/
-│       ├── repository-architecture.svg
-│       └── skill-lifecycle.svg
-├── frontend-skills/
+├── frontend-skills/          # 12 framework-agnostic UI skills
 │   ├── 01-project-setup/
-│   ├── 02-component-architecture/
-│   ├── 03-routing-strategy/
-│   ├── 04-form-orchestration/
-│   ├── 05-ui-feedback-system/
-│   ├── 06-authentication-flow/
-│   ├── 07-styling-system/
-│   ├── 08-state-management/
-│   ├── 09-data-fetching/
-│   ├── 10-advanced-navigation/
-│   ├── 11-baas-integration/
-│   ├── 12-route-guards/
+│   ├── ...
+│   └── README.md
+├── skills-backend/           # 12 REST-first backend skills
+│   ├── 01-project-bootstrap/
+│   ├── ...
 │   └── README.md
 ├── scripts/
-│   └── validate-skills.mjs
-├── skills-backend/
-│   ├── 01-project-bootstrap/
-│   ├── 02-modular-project-structure/
-│   ├── 03-rest-api-design/
-│   ├── 04-service-layer/
-│   ├── 05-data-persistence/
-│   ├── 06-dto-and-validation/
-│   ├── 07-error-handling/
-│   ├── 08-entity-relationships/
-│   ├── 09-advanced-querying/
-│   ├── 10-jwt-authentication/
-│   ├── 11-authorization/
-│   ├── 12-production-deployment/
-│   └── README.md
-├── .editorconfig
-├── .gitattributes
-├── .gitignore
-├── GUIDE_ALIGNMENT.md
-├── LICENSE
-├── package.json
-├── README.md
-└── SECURITY.md
+│   └── validate-skills.mjs   # Validation tooling
+├── GUIDE_ALIGNMENT.md        # Traceability & source concepts
+├── SECURITY.md               # Publishing safety rules
+├── package.json              # Minimal Node metadata for validator
+└── README.md
 ```
-
-## Organization Principles
-
-The repository is intentionally organized around stable boundaries so it can keep growing without becoming messy:
-
-- **Root level stays minimal** for public entry documents, repository metadata, automation, and validation tooling.
-- **Each skill remains self-contained** inside its numbered folder, with its own `SKILL.md` and local `resources/` when extra material is needed.
-- **Frontend and backend stay separated by domain** rather than mixing templates, examples, and schemas in one shared bucket.
-- **Static visuals are namespaced by audience** so README assets live in `assets/readme/` instead of being scattered at the repository root.
-- **Validation stays isolated in `scripts/`** so documentation structure can evolve without coupling to application code.
-
-## Top-Level Files and Directories
-
-| Path | Type | Purpose |
-|---|---|---|
-| `.github/` | Directory | Repository automation, including validation workflow and Dependabot configuration |
-| `assets/` | Directory | Namespaced static assets, including public README diagrams |
-| `frontend-skills/` | Directory | Frontend skill set and support resources |
-| `skills-backend/` | Directory | Backend skill set and support resources |
-| `scripts/` | Directory | Validation tooling |
-| `.editorconfig` | File | Shared text-formatting rules |
-| `.gitattributes` | File | Line-ending and binary-file handling rules |
-| `.gitignore` | File | Publication hygiene and local artifact exclusions |
-| `GUIDE_ALIGNMENT.md` | File | Source traceability, synthesis notes, scope, and provenance |
-| `LICENSE` | File | MIT license |
-| `package.json` | File | Minimal Node metadata and `npm run validate` script |
-| `README.md` | File | Public project overview |
-| `SECURITY.md` | File | Publication and security review guidance |
 
 ## Frontend Skill Catalog
 
 | # | Skill | Focus |
 |---|---|---|
-| 01 | [project-setup](./frontend-skills/01-project-setup/SKILL.md) | Setup, aliases, environment hygiene, and delivery baseline |
-| 02 | [component-architecture](./frontend-skills/02-component-architecture/SKILL.md) | Component boundaries, composition rules, and reusable UI primitives |
-| 03 | [routing-strategy](./frontend-skills/03-routing-strategy/SKILL.md) | Layouts, lazy loading, route organization, and rendering strategy |
-| 04 | [form-orchestration](./frontend-skills/04-form-orchestration/SKILL.md) | Form structure, validation, async checks, and server-error mapping |
-| 05 | [ui-feedback-system](./frontend-skills/05-ui-feedback-system/SKILL.md) | UI feedback states, heuristics, accessibility, and user guidance |
-| 06 | [authentication-flow](./frontend-skills/06-authentication-flow/SKILL.md) | Session lifecycle, hydration, and auth state transitions |
-| 07 | [styling-system](./frontend-skills/07-styling-system/SKILL.md) | Tokens, theming, responsive styling, and stack-aware CSS choices |
-| 08 | [state-management](./frontend-skills/08-state-management/SKILL.md) | Shared client state and separation from remote cache |
-| 09 | [data-fetching](./frontend-skills/09-data-fetching/SKILL.md) | HTTP clients, repositories, interceptors, and transport-aware tests |
-| 10 | [advanced-navigation](./frontend-skills/10-advanced-navigation/SKILL.md) | Breadcrumbs, URL pagination, and navigation-supporting UI patterns |
-| 11 | [baas-integration](./frontend-skills/11-baas-integration/SKILL.md) | BaaS provider integration through capability adapters |
-| 12 | [route-guards](./frontend-skills/12-route-guards/SKILL.md) | Auth-aware and guest-aware route protection |
+| 01 | [project-setup](./frontend-skills/01-project-setup/SKILL.md) | Setup, aliases, environment hygiene, delivery |
+| 02 | [component-architecture](./frontend-skills/02-component-architecture/SKILL.md) | Component boundaries, reusable UI primitives |
+| 03 | [routing-strategy](./frontend-skills/03-routing-strategy/SKILL.md) | Layouts, lazy loading, rendering strategy |
+| 04 | [form-orchestration](./frontend-skills/04-form-orchestration/SKILL.md) | Form structure, async validation, server-error map |
+| 05 | [ui-feedback-system](./frontend-skills/05-ui-feedback-system/SKILL.md) | UI feedback states, accessibility, guidance |
+| 06 | [authentication-flow](./frontend-skills/06-authentication-flow/SKILL.md) | Session lifecycle, auth state transitions |
+| 07 | [styling-system](./frontend-skills/07-styling-system/SKILL.md) | Tokens, theming, responsive styling |
+| 08 | [state-management](./frontend-skills/08-state-management/SKILL.md) | Shared client state, cache separation |
+| 09 | [data-fetching](./frontend-skills/09-data-fetching/SKILL.md) | HTTP clients, interceptors, transport tests |
+| 10 | [advanced-navigation](./frontend-skills/10-advanced-navigation/SKILL.md) | Breadcrumbs, URL pagination, URL state |
+| 11 | [baas-integration](./frontend-skills/11-baas-integration/SKILL.md) | BaaS provider integration via adapters |
+| 12 | [route-guards](./frontend-skills/12-route-guards/SKILL.md) | Auth/guest route protection |
 
-For the full frontend resource index, see [frontend-skills/README.md](./frontend-skills/README.md).
+*(For templates and schemas, see [frontend-skills/README.md](./frontend-skills/README.md))*
 
 ## Backend Skill Catalog
 
 | # | Skill | Focus |
 |---|---|---|
-| 01 | [project-bootstrap](./skills-backend/01-project-bootstrap/SKILL.md) | Entry point, runtime bootstrap, and base health contract |
-| 02 | [modular-project-structure](./skills-backend/02-modular-project-structure/SKILL.md) | Feature-based structure and layer boundaries |
-| 03 | [rest-api-design](./skills-backend/03-rest-api-design/SKILL.md) | REST contracts, envelopes, versioning, and OpenAPI discipline |
-| 04 | [service-layer](./skills-backend/04-service-layer/SKILL.md) | Reusable business logic and transport-independent services |
-| 05 | [data-persistence](./skills-backend/05-data-persistence/SKILL.md) | Repositories, entities, migrations, and persistence boundaries |
-| 06 | [dto-and-validation](./skills-backend/06-dto-and-validation/SKILL.md) | DTO/schema boundaries and request validation |
-| 07 | [error-handling](./skills-backend/07-error-handling/SKILL.md) | Exception mapping and safe client-facing errors |
-| 08 | [entity-relationships](./skills-backend/08-entity-relationships/SKILL.md) | Ownership, relations, serialization, and data-shape boundaries |
-| 09 | [advanced-querying](./skills-backend/09-advanced-querying/SKILL.md) | Filtering, sorting, and paginated response patterns |
-| 10 | [jwt-authentication](./skills-backend/10-jwt-authentication/SKILL.md) | Login, token issuance, token validation, and claims discipline |
-| 11 | [authorization](./skills-backend/11-authorization/SKILL.md) | RBAC, ownership, and layered access checks |
-| 12 | [production-deployment](./skills-backend/12-production-deployment/SKILL.md) | Release readiness, observability, CI/CD, rollback, and runtime selection |
+| 01 | [project-bootstrap](./skills-backend/01-project-bootstrap/SKILL.md) | Entry point, boostrap, health contracts |
+| 02 | [modular-project-structure](./skills-backend/02-modular-project-structure/SKILL.md) | Feature-based directory structures |
+| 03 | [rest-api-design](./skills-backend/03-rest-api-design/SKILL.md) | REST contracts, versioning, OpenAPI |
+| 04 | [service-layer](./skills-backend/04-service-layer/SKILL.md) | Transport-independent business logic |
+| 05 | [data-persistence](./skills-backend/05-data-persistence/SKILL.md) | Repositories, migrations, persistence models |
+| 06 | [dto-and-validation](./skills-backend/06-dto-and-validation/SKILL.md) | Request validation, schema boundaries |
+| 07 | [error-handling](./skills-backend/07-error-handling/SKILL.md) | Exception mapping, safe client errors |
+| 08 | [entity-relationships](./skills-backend/08-entity-relationships/SKILL.md) | Relations, ownership, and serialization |
+| 09 | [advanced-querying](./skills-backend/09-advanced-querying/SKILL.md) | Filtering, paginated response patterns |
+| 10 | [jwt-authentication](./skills-backend/10-jwt-authentication/SKILL.md) | Login, token logic, claims generation |
+| 11 | [authorization](./skills-backend/11-authorization/SKILL.md) | Policy checks, layered access control |
+| 12 | [production-deployment](./skills-backend/12-production-deployment/SKILL.md) | Delivery, observability, CI/CD, rollbacks |
 
-For the full backend resource index, see [skills-backend/README.md](./skills-backend/README.md).
-
-## Installation
-
-### Requirements
-
-- **Node.js 20 or newer**
-- **Git** to clone or copy the repository
-
-### Clone the repository
-
-```bash
-git clone <your-repository-url>
-cd universal-full-stack-skills
-```
-
-### Validate the repository
-
-```bash
-npm run validate
-```
-
-### Notes
-
-- No runtime dependencies are required to read or reuse the skills.
-- No application build step is needed because this is not a deployable app.
-- You can copy the whole repository or only `frontend-skills/` or `skills-backend/`, depending on your use case.
-
-## Usage
-
-### Recommended usage flow
-
-1. Identify the implementation area you need.
-2. Open the matching skill folder.
-3. Point the AI assistant to the exact skill by name.
-4. Include project-specific constraints in your prompt.
-5. Re-run validation before publishing repository changes.
-
-### Example prompts
-
-```text
-Use the @03-routing-strategy skill from frontend-skills to define layouts, route boundaries, and the best rendering mode for this application.
-```
-
-```text
-Use the @04-form-orchestration skill from frontend-skills to structure this form, handle async validation, and map backend validation errors into the UI.
-```
-
-```text
-Use the @03-rest-api-design skill from skills-backend to define the HTTP contract for Orders, including envelopes, query parameters, and OpenAPI-ready structure.
-```
-
-```text
-Use the @12-production-deployment skill from skills-backend to prepare this backend for staging and production with health checks, release gates, smoke checks, and rollback criteria.
-```
-
-### How to combine skills
-
-Many tasks benefit from combining multiple skills. Examples:
-
-- `@03-routing-strategy` + `@06-authentication-flow` + `@12-route-guards`
-- `@04-service-layer` + `@06-dto-and-validation` + `@07-error-handling`
-- `@03-rest-api-design` + `@09-advanced-querying` + `@12-production-deployment`
+*(For templates and schemas, see [skills-backend/README.md](./skills-backend/README.md))*
 
 ## Validation and Automation
 
-### Local validation
-
-Run:
+All content is heavily validated to ensure rigorous structure. Run:
 
 ```bash
 npm run validate
 ```
 
-The validator checks:
-
-- required `SKILL.md` structure
-- relative markdown links
-- JSON resource validity
-- basic repository integrity for publication
-
-### GitHub Actions
-
-The repository includes [`.github/workflows/validate-skills.yml`](./.github/workflows/validate-skills.yml), which runs validation on:
-
-- pushes to `main`
-- pushes to `master`
-- pull requests
-
-### Dependabot
-
-The repository also includes [`.github/dependabot.yml`](./.github/dependabot.yml) for:
-
-- **weekly** updates to GitHub Actions dependencies
-- **monthly** updates to npm metadata dependencies
-
-## Alignment to the Source Concepts
-
-The repository is intentionally traceable back to the original concept source.
-
-[GUIDE_ALIGNMENT.md](./GUIDE_ALIGNMENT.md) documents:
-
-- which source files support each skill
-- whether each skill is **Direct** or **Synthesized**
-- where cross-framework adaptation was necessary
-- known gaps and non-goals
-
-This is important because the repository is not pretending to be a raw copy of the original material. It is a structured rewrite designed for portability and public reuse.
-
-## Security and Publishing
-
-Before publishing updates, review [SECURITY.md](./SECURITY.md).
-
-Important publishing rules:
-
-- do not commit real secrets
-- do not publish private local paths or workstation-specific metadata
-- do not include third-party material without publication rights
-- keep privileged BaaS actions behind server-side or rules-based protection
-
-The repository is currently configured in [package.json](./package.json) with:
-
-```json
-{
-  "name": "universal-full-stack-skills",
-  "private": true
-}
-```
-
-That `private` flag helps prevent accidental `npm publish`. If you ever want to package this for npm, change that intentionally as part of a dedicated packaging step.
-
-## Scope and Non-Goals
-
-This repository is strongest for:
-
-- portable frontend application patterns
-- REST-first backend architecture
-- explicit auth, validation, error-handling, and deployment boundaries
-- AI-assisted implementation workflows that benefit from reusable operating procedures
-
-This repository does **not** claim:
-
-- complete framework-specific API coverage for every frontend or backend stack
-- first-class skill families for GraphQL, gRPC, WebSockets, or SSE
-- a standalone testing track yet, even though testing guidance exists in several resources
-- to replace engineering judgment or architecture review
+This ensures:
+1. Every `SKILL.md` adheres to the strict 7-part format.
+2. All Markdown relative links correctly resolve to existing files.
+3. All attached `.json` schemas and templates are valid.
+4. No orphan dependencies exist.
 
 ## License
 

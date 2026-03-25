@@ -13,7 +13,7 @@ date_added: "2026-03-10"
 Calling APIs directly from components quickly creates duplication, hidden auth bugs, and inconsistent error handling. This skill defines a shared network layer with one client, typed repositories, predictable handling of credentials, retries, failures, and transport-level tests. In modern reactive frameworks, data fetching also benefits from resource-based patterns (such as `resource()` or `rxResource()`) that automatically manage loading states, request cancellation, and reactivity to parameter changes.
 
 **Descripción (ES):**
-Consumir APIs directamente desde componentes crea rapido duplicacion, bugs de auth ocultos y manejo inconsistente de errores. Esta skill define una capa de red compartida con un solo cliente, repositorios tipados, tratamiento predecible de credenciales, reintentos, fallos y pruebas de transporte. En frameworks reactivos modernos, el consumo de datos tambien se beneficia de patrones basados en recursos (como `resource()` o `rxResource()`) que gestionan automaticamente estados de carga, cancelacion de requests y reactividad a cambios de parametros.
+Consumir APIs directamente desde componentes crea rápido duplicacion, bugs de auth ocultos y manejo inconsistente de errores. Esta skill define una capa de red compartida con un solo cliente, repositorios tipados, tratamiento predecible de credenciales, reintentos, fallos y pruebas de transporte. En frameworks reactivos modernos, el consumo de datos también se beneficia de patrónes basados en recursos (como `resource()` o `rxResource()`) que gestionan automaticamente estados de carga, cancelacion de requests y reactividad a cambios de parametros.
 
 ---
 
@@ -27,9 +27,9 @@ Create a maintainable and testable HTTP layer that components can consume withou
 
 **Objetivo (ES):**
 Crear una capa HTTP mantenible y testeable que los componentes puedan consumir sin conocer detalles del transporte, adaptandola al stack de API y auth objetivo.
-- Usese cuando: La app hable con endpoints REST, GraphQL o APIs internas y necesite comportamiento reutilizable de requests.
-- No se use cuando: Un proof of concept minimo solo haga una request descartable.
-- Preferencia de seguridad: Prioriza sesiones por cookie con `withCredentials` por encima de leer tokens desde `localStorage`.
+- Úsese cuando: La app hable con endpoints REST, GraphQL o APIs internas y necesite comportamiento reutilizable de requests.
+- No se use cuando: Un proof of concept mínimo solo haga una request descartable.
+- Preferencia de seguridad: Prioriza sesiónes por cookie con `withCredentials` por encima de leer tokens desde `localStorage`.
 
 ---
 
@@ -42,10 +42,10 @@ Crear una capa HTTP mantenible y testeable que los componentes puedan consumir s
 4. `Testing Surface`: Repository success/failure cases, interceptor behavior, cancellation rules, and retry expectations that should remain stable.
 
 **Entradas (ES):**
-1. `Base API Config`: URL base cargada desde configuracion de entorno (no hardcodeada), timeout, modo de credenciales y headers por defecto.
+1. `Base API Config`: URL base cargada desde configuración de entorno (no hardcodeada), timeout, modo de credenciales y headers por defecto.
 2. `Auth Strategy`: Cookies seguras, token en memoria o bearer fallback documentado.
 3. `Error Contract`: Forma compartida de respuesta para fallos 4xx y 5xx que todos los repositorios usen.
-4. `Testing Surface`: Casos de exito/fallo de repositorios, comportamiento de interceptores, reglas de cancelacion y expectativas de retry que deban permanecer estables.
+4. `Testing Surface`: Casos de éxito/fallo de repositorios, comportamiento de interceptores, reglas de cancelacion y expectativas de retry que deban permanecer estables.
 
 ---
 
@@ -59,7 +59,7 @@ Crear una capa HTTP mantenible y testeable que los componentes puedan consumir s
 
 **Salidas (ES):**
 1. Una instancia centralizada del cliente API configurada con URL de entorno, timeout y credenciales.
-2. Repositorios o servicios por feature que mapean endpoints a metodos tipados con interfaces de respuesta explicitas.
+2. Repositorios o servicios por feature que mapean endpoints a métodos tipados con interfaces de respuesta explícitas.
 3. Manejo global de respuestas para `401` (disparar reset de auth), `403` (mostrar permiso denegado) y fallos del servidor (mostrar feedback amigable al usuario).
 4. Una matriz minima de pruebas que proteja contratos de repositorio, comportamiento de interceptores y mapeo de fallos.
 
@@ -80,16 +80,16 @@ Crear una capa HTTP mantenible y testeable que los componentes puedan consumir s
 10. **Adapt the pattern, not the literal example:** Rename files, clients, repositories, and auth hooks to match the target project's framework, API contract, and business language.
 
 **Instrucciones (ES):**
-1. **Cargar la URL base desde configuracion de entorno:** Centraliza la URL de API en variables de entorno o archivos de configuracion. Nunca hardcodees URLs en servicios ni componentes.
+1. **Cargar la URL base desde configuración de entorno:** Centraliza la URL de API en variables de entorno o archivos de configuración. Nunca hardcodees URLs en servicios ni componentes.
 2. **Crear un cliente por contexto backend:** Centraliza timeout, defaults JSON y comportamiento de credenciales en una sola instancia compartida del cliente.
 3. **Adjuntar auth de forma segura:** Prefiere `withCredentials` o soporte nativo de cookies del framework. Solo inyecta bearer headers manualmente cuando el contrato backend realmente lo exija.
-4. **Envolver endpoints en repositorios o servicios:** Los componentes deberian llamar un repositorio o servicio compartido como `{Feature}Repository.list()` en lugar de construir URLs crudas. Define interfaces de respuesta explicitas para los tipos de retorno de cada endpoint.
+4. **Envolver endpoints en repositorios o servicios:** Los componentes deberian llamar un repositorio o servicio compartido como `{Feature}Repository.list()` en lugar de construir URLs crudas. Define interfaces de respuesta explícitas para los tipos de retorno de cada endpoint.
 5. **Normalizar fallos:** Mapea los payloads de error backend a una forma predecible y envia el manejo de `401` por el flujo compartido de reset de auth.
-6. **Cancelar requests obsoletas automaticamente:** Usa patrones como `switchMap` o APIs de recursos nativas del framework para cancelar requests en vuelo cuando los parametros cambien. Esto evita que datos obsoletos sobreescriban resultados actuales durante paginacion o cambios de filtro rapidos.
-7. **Implementar retry para fallos transitorios:** Aplica logica de reintento (2-3 intentos) para errores de red o respuestas 5xx, con valores de fallback para evitar que la UI se rompa completamente.
-8. **Proteger la frontera de transporte con pruebas:** Cubre exito/fallo de repositorios, reset por `401`, construccion de query params, retry y flujos sensibles a cancelacion sin depender de un stack completo de navegador.
-9. **Mantener componentes agnosticos al transporte:** La UI debe enfocarse en loading, empty, success y error, no en plumbing HTTP. Prefiere patrones basados en recursos (`resource()`, `rxResource()`, librerias de query) que provean estados integrados como `isLoading()`, `value()` y `error()`.
-10. **Adapta el patron, no el ejemplo literal:** Renombra archivos, clientes, repositorios y hooks de auth para ajustarlos al framework, el contrato API y el lenguaje de negocio del proyecto objetivo.
+6. **Cancelar requests obsoletas automaticamente:** Usa patrónes como `switchMap` o APIs de recursos nativas del framework para cancelar requests en vuelo cuando los parametros cambien. Esto evita que datos obsoletos sobreescriban resultados actuales durante paginación o cambios de filtro rápidos.
+7. **Implementar retry para fallos transitorios:** Aplica lógica de reintento (2-3 intentos) para errores de red o respuestas 5xx, con valores de fallback para evitar que la UI se rompa completamente.
+8. **Proteger la frontera de transporte con pruebas:** Cubre éxito/fallo de repositorios, reset por `401`, construccion de query params, retry y flujos sensibles a cancelacion sin depender de un stack completo de navegador.
+9. **Mantener componentes agnosticos al transporte:** La UI debe enfocarse en loading, empty, success y error, no en plumbing HTTP. Prefiere patrónes basados en recursos (`resource()`, `rxResource()`, librerias de query) que provean estados integrados como `isLoading()`, `value()` y `error()`.
+10. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, clientes, repositorios y hooks de auth para ajustarlos al framework, el contrato API y el lenguaje de negocio del proyecto objetivo.
 
 For repository/interceptor test scenarios, see [http-testing.matrix.md](./resources/http-testing.matrix.md).
 
@@ -141,7 +141,7 @@ Usa la skill @09-data-fetching para estructurar el acceso API en esta app {Frame
 
 If the stack uses generated clients, query libraries, or server-side loaders, keep the same separation even if the filenames change.
 
-Si el stack usa clientes generados, librerias de query o loaders server-side, manten la misma separacion aunque cambien los nombres de archivo.
+Si el stack usa clientes generados, librerias de query o loaders server-side, manten la misma separación aunque cambien los nombres de archivo.
 
 ## Adaptation Checklist / Lista de Adaptación
 
@@ -156,11 +156,11 @@ Si el stack usa clientes generados, librerias de query o loaders server-side, ma
 - [ ] Names, files, clients, repositories, and auth hooks were adapted to the target project instead of copying the example structure literally.
 
 **Checklist (ES):**
-- [ ] Los componentes nunca embeben URLs API crudas ni logica de auth headers.
-- [ ] La URL base de API se carga desde configuracion de entorno, no hardcodeada.
-- [ ] Las respuestas `401` disparan el camino compartido de reset de sesion.
+- [ ] Los componentes nunca embeben URLs API crudas ni lógica de auth headers.
+- [ ] La URL base de API se carga desde configuración de entorno, no hardcodeada.
+- [ ] Las respuestas `401` disparan el camino compartido de reset de sesión.
 - [ ] Las requests obsoletas se cancelan cuando los parametros cambian (paginacion, filtros).
-- [ ] Los tipos de respuesta usan interfaces explicitas, no `any`.
+- [ ] Los tipos de respuesta usan interfaces explícitas, no `any`.
 - [ ] Las pruebas de repositorio o interceptor protegen construccion de queries, fallos de auth y comportamiento sensible a retry/cancelacion.
 - [ ] El almacenamiento de tokens en el navegador no es la recomendacion por defecto.
 - [ ] Los nombres, archivos, clientes, repositorios y hooks de auth se adaptaron al proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

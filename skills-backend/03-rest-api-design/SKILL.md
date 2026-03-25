@@ -12,8 +12,8 @@ date_added: "2026-03-10"
 **Description (EN):**
 REST APIs stay maintainable when they are stateless, resource-oriented, and documented as an explicit contract. This skill standardizes route naming, HTTP verb semantics, idempotency, query parameter design, response envelopes, versioning, and OpenAPI quality so clients can integrate without guessing.
 
-**Descripcion (ES):**
-Las APIs REST se mantienen sanas cuando son stateless, orientadas a recursos y documentadas como un contrato explicito. Esta skill estandariza nombres de rutas, semantica de verbos HTTP, idempotencia, diseno de query parameters, envelopes de respuesta, versionado y calidad de OpenAPI para que los clientes puedan integrarse sin adivinar.
+**Descripción (ES):**
+Las APIs REST se mantienen sanas cuando son stateless, orientadas a recursos y documentadas como un contrato explícito. Esta skill estandariza nombres de rutas, semántica de verbos HTTP, idempotencia, diseño de query parameters, envelopes de respuesta, versionado y calidad de OpenAPI para que los clientes puedan integrarse sin adivinar.
 
 Related resources:
 - [api-contract.template.md](./resources/api-contract.template.md)
@@ -33,9 +33,9 @@ Design a stable HTTP contract for resource-style APIs that is easy to document, 
 - Do not use this skill when: The use case is better modeled as GraphQL, RPC/command endpoints, or real-time push streams.
 
 **Objetivo (ES):**
-Disenar un contrato HTTP estable para APIs orientadas a recursos, facil de documentar, probar, consumir y evolucionar sin romper clientes.
-- Use esta skill cuando: Definas endpoints CRUD, recursos anidados, paginacion/filtrado o contratos REST publicos o internos.
-- No use esta skill cuando: El caso encaje mejor como GraphQL, endpoints RPC/comando o streams de tiempo real.
+Diseñar un contrato HTTP estable para APIs orientadas a recursos, fácil de documentar, probar, consumir y evolucionar sin romper clientes.
+- Úsese cuando: Definas endpoints CRUD, recursos anidados, paginación/filtrado o contratos REST públicos o internos.
+- No se use cuando: El caso encaje mejor como GraphQL, endpoints RPC/comando o streams de tiempo real.
 
 ---
 
@@ -47,8 +47,8 @@ Disenar un contrato HTTP estable para APIs orientadas a recursos, facil de docum
 3. `Contract Rules`: Auth requirements, response envelope, versioning expectations, and sensitive-field exclusions.
 
 **Entradas (ES):**
-1. `Resource Model`: Nombres de recursos, reglas de ownership y limites entre coleccion e item.
-2. `Operations`: Necesidades de lectura, creacion, reemplazo, actualizacion parcial, eliminacion, busqueda y filtrado.
+1. `Resource Model`: Nombres de recursos, reglas de ownership y límites entre colección e item.
+2. `Operations`: Necesidades de lectura, creación, reemplazo, actualización parcial, eliminación, búsqueda y filtrado.
 3. `Contract Rules`: Requisitos de auth, envelope de respuesta, expectativas de versionado y exclusiones de campos sensibles.
 
 ---
@@ -62,10 +62,10 @@ Disenar un contrato HTTP estable para APIs orientadas a recursos, facil de docum
 4. An OpenAPI or equivalent machine-readable contract that matches implementation intent.
 
 **Salidas (ES):**
-1. Rutas estandarizadas de coleccion e item como `/{version-prefix}/{resources}` y `/{version-prefix}/{resources}/{id}`, o la convencion equivalente usada por la plataforma objetivo.
-2. Comportamiento claro de verbos, codigos HTTP e idempotencia por operacion.
-3. Envelopes estables de exito/error con metadata de paginacion cuando aplique.
-4. Un contrato OpenAPI o equivalente legible por maquina que refleje la intencion de implementacion.
+1. Rutas estandarizadas de colección e item como `/{version-prefix}/{resources}` y `/{version-prefix}/{resources}/{id}`, o la convención equivalente usada por la plataforma objetivo.
+2. Comportamiento claro de verbos, códigos HTTP e idempotencia por operación.
+3. Envelopes estables de éxito/error con metadata de paginación cuando aplique.
+4. Un contrato OpenAPI o equivalente legible por máquina que refleje la intención de implementación.
 
 ---
 
@@ -85,17 +85,17 @@ Disenar un contrato HTTP estable para APIs orientadas a recursos, facil de docum
 11. **Adapt the pattern, not the literal example:** Rename files, layers, contracts, and integrations to match the target project's architecture, framework conventions, and business language.
 
 **Instrucciones (ES):**
-1. **Modela la API alrededor de recursos:** Usa sustantivos en plural, separa rutas de coleccion y de item, y evita verbos de accion en el path.
-2. **Mantén el contrato stateless:** Cada request debe traer la informacion necesaria para procesarse. No dependas de estado de sesion oculto para entender una ruta.
-3. **Mapea verbos a la intencion correcta:** `GET` lee, `POST` crea, `PUT` reemplaza, `PATCH` actualiza parcialmente y `DELETE` elimina. Revisa el comportamiento ante reintentos antes de elegir el verbo.
-4. **Pon los filtros en query parameters:** Deja paginacion, orden, busqueda y filtrado en query params en lugar de inventar rutas de accion.
-5. **Normaliza la forma de las respuestas:** Usa un envelope consistente de exito (por ejemplo `data`, `meta`, `message`, `timestamp`, `path`) y un envelope consistente de error (por ejemplo `status`, `error`, `message`, `details`, `timestamp`, `path`).
-6. **Retorna codigos correctos:** Usa `200`, `201`, `204`, `400`, `401`, `403`, `404`, `409` y `500/503` con intencion. Nunca devuelvas `200` con un body de error.
-7. **Versiona de forma deliberada:** Elige una estrategia de versionado clara que encaje con la plataforma y el ecosistema de clientes. El versionado en path como `/api/v1/` es comun, pero header o media type tambien pueden ser validos.
-8. **Protege los limites del contrato:** No expongas passwords, tokens secretos, flags internos ni campos solo de persistencia dentro de las respuestas.
-9. **Documenta la API como codigo:** Mantén ejemplos, schemas y requisitos de seguridad en OpenAPI/Swagger junto a la implementacion para que la documentacion no derive.
-10. **Revisa el limite del transporte:** Si el caso depende de lecturas de grafo arbitrarias, semantica tipo comando o server push, confirma que REST sigue siendo la mejor opcion antes de forzarlo.
-11. **Adapta el patron, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
+1. **Modela la API alrededor de recursos:** Usa sustantivos en plural, separa rutas de colección y de item, y evita verbos de acción en el path.
+2. **Mantén el contrato stateless:** Cada request debe traer la información necesaria para procesarse. No dependas de estado de sesión oculto para entender una ruta.
+3. **Mapea verbos a la intención correcta:** `GET` lee, `POST` crea, `PUT` reemplaza, `PATCH` actualiza parcialmente y `DELETE` elimina. Revisa el comportamiento ante reintentos antes de elegir el verbo.
+4. **Pon los filtros en query parameters:** Deja paginación, orden, búsqueda y filtrado en query params en lugar de inventar rutas de acción.
+5. **Normaliza la forma de las respuestas:** Usa un envelope consistente de éxito (por ejemplo `data`, `meta`, `message`, `timestamp`, `path`) y un envelope consistente de error (por ejemplo `status`, `error`, `message`, `details`, `timestamp`, `path`).
+6. **Retorna códigos correctos:** Usa `200`, `201`, `204`, `400`, `401`, `403`, `404`, `409` y `500/503` con intención. Nunca devuelvas `200` con un body de error.
+7. **Versiona de forma deliberada:** Elige una estrategia de versionado clara que encaje con la plataforma y el ecosistema de clientes. El versionado en path como `/api/v1/` es común, pero header o media type también pueden ser válidos.
+8. **Protege los límites del contrato:** No expongas passwords, tokens secretos, flags internos ni campos solo de persistencia dentro de las respuestas.
+9. **Documenta la API como código:** Mantén ejemplos, schemas y requisitos de seguridad en OpenAPI/Swagger junto a la implementación para que la documentación no derive.
+10. **Revisa el límite del transporte:** Si el caso depende de lecturas de grafo arbitrarias, semántica tipo comando o server push, confirma que REST sigue siendo la mejor opción antes de forzarlo.
+11. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -111,8 +111,8 @@ Use the skill @03-rest-api-design to define the HTTP contract for `{ResourceName
 **Prompt (ES):**
 ```text
 Usa la skill @03-rest-api-design para definir el contrato HTTP de `{ResourceName}`.
-1. Crea endpoints de coleccion e item con verbos, codigos, envelopes y versionado correctos.
-2. Produce un contrato listo para OpenAPI y senala si este caso no deberia modelarse como REST.
+1. Crea endpoints de colección e item con verbos, códigos, envelopes y versionado correctos.
+2. Produce un contrato listo para OpenAPI y señala si este caso no debería modelarse como REST.
 ```
 
 ---
@@ -134,7 +134,7 @@ src/
             └── {resource}.contract-test.{ext}
 ```
 
-## Adaptation Checklist / Lista de Adaptacion
+## Adaptation Checklist / Lista de Adaptación
 
 **Checklist (EN):**
 - [ ] Endpoints use plural resource nouns consistently.
@@ -148,10 +148,10 @@ src/
 
 **Checklist (ES):**
 - [ ] Los endpoints usan sustantivos de recurso en plural de forma consistente.
-- [ ] Los query parameters manejan paginacion, orden y filtros en lugar de rutas de accion.
-- [ ] Los codigos de estado y reglas de idempotencia coinciden con los verbos HTTP elegidos.
-- [ ] Las respuestas de exito y error siguen una forma de envelope estable.
-- [ ] El contrato esta documentado en OpenAPI/Swagger o un artefacto equivalente.
+- [ ] Los query parameters manejan paginación, orden y filtros en lugar de rutas de acción.
+- [ ] Los códigos de estado y reglas de idempotencia coinciden con los verbos HTTP elegidos.
+- [ ] Las respuestas de éxito y error siguen una forma de envelope estable.
+- [ ] El contrato está documentado en OpenAPI/Swagger o un artefacto equivalente.
 - [ ] Los datos sensibles nunca salen en el contrato de respuesta.
 - [ ] REST fue elegido de forma intencional y no forzada frente a GraphQL, RPC o streaming.
 - [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

@@ -12,8 +12,8 @@ date_added: "2026-03-10"
 **Description (EN):**
 Controllers should handle transport concerns, not business decisions. This skill defines a service layer where validations, workflows, calculations, and orchestration live behind a clean use-case boundary with explicit dependency injection and test seams.
 
-**Descripcion (ES):**
-Los controladores deben manejar transporte, no decisiones de negocio. Esta skill define una capa de servicios donde validaciones, flujos, calculos y orquestacion viven detras de un limite limpio de caso de uso, con inyeccion de dependencias explicita y puntos claros para pruebas.
+**Descripción (ES):**
+Los controladores deben manejar transporte, no decisiones de negocio. Esta skill define una capa de servicios donde validaciones, flujos, cálculos y orquestación viven detrás de un límite limpio de caso de uso, con inyección de dependencias explícita y puntos claros para pruebas.
 
 Related resources:
 - [service-interface.template.md](./resources/service-interface.template.md)
@@ -29,9 +29,9 @@ Create services that encapsulate business logic and remain reusable across contr
 - Do not use this skill when: The change is limited to transport metadata or a trivial pass-through with no business behavior.
 
 **Objetivo (ES):**
-Crear servicios que encapsulen logica de negocio y puedan reutilizarse entre controladores, jobs, pruebas, consumidores de mensajes y distintos estilos de framework.
-- Use esta skill cuando: La logica ya supera el parseo de requests o varios endpoints comparten el mismo flujo de negocio.
-- No use esta skill cuando: El cambio se limita a metadatos de transporte o a un passthrough trivial sin comportamiento de negocio.
+Crear servicios que encapsulen lógica de negocio y puedan reutilizarse entre controladores, jobs, pruebas, consumidores de mensajes y distintos estilos de framework.
+- Úsese cuando: La lógica ya supera el parseo de requests o varios endpoints comparten el mismo flujo de negocio.
+- No se use cuando: El cambio se limita a metadatos de transporte o a un passthrough trivial sin comportamiento de negocio.
 
 ---
 
@@ -43,9 +43,9 @@ Crear servicios que encapsulen logica de negocio y puedan reutilizarse entre con
 3. `Domain Rules`: Validations, invariants, permissions, calculations, and side effects.
 
 **Entradas (ES):**
-1. `Use Case`: La accion de negocio a implementar, como crear una orden o aprobar un pago.
+1. `Use Case`: La acción de negocio a implementar, como crear una orden o aprobar un pago.
 2. `Dependencies`: Repositorios, gateways, colas, caches o servicios externos requeridos por el flujo.
-3. `Domain Rules`: Validaciones, invariantes, permisos, calculos y efectos secundarios.
+3. `Domain Rules`: Validaciones, invariantes, permisos, cálculos y efectos secundarios.
 
 ---
 
@@ -59,9 +59,9 @@ Crear servicios que encapsulen logica de negocio y puedan reutilizarse entre con
 
 **Salidas (ES):**
 1. Un controlador o adaptador de transporte delgado que solo traduzca entrada/salida.
-2. Un contrato de servicio y su implementacion cuando el proyecto se beneficie de interfaces explicitas, o al menos un limite de servicio claramente aislado.
+2. Un contrato de servicio y su implementación cuando el proyecto se beneficie de interfaces explícitas, o al menos un límite de servicio claramente aislado.
 3. Reglas de negocio que puedan probarse sin levantar un servidor HTTP.
-4. Wiring claro de inyeccion de dependencias para repositorios e integraciones externas.
+4. Wiring claro de inyección de dependencias para repositorios e integraciones externas.
 
 ---
 
@@ -81,15 +81,15 @@ Crear servicios que encapsulen logica de negocio y puedan reutilizarse entre con
 
 **Instrucciones (ES):**
 1. **Mantén los controladores delgados:** Parsea `route/query/body`, llama al servicio y mapea el resultado de vuelta a HTTP u otro transporte.
-2. **Inyecta dependencias de forma explicita:** Usa constructor injection o el equivalente del framework para que repositorios y clientes sean visibles, reemplazables y faciles de mockear.
-3. **Centraliza las reglas de negocio en el servicio:** Validaciones, calculos, chequeos de permiso, orquestacion y ramas del flujo deben vivir aqui y no en los controladores.
+2. **Inyecta dependencias de forma explícita:** Usa constructor injection o el equivalente del framework para que repositorios y clientes sean visibles, reemplazables y fáciles de mockear.
+3. **Centraliza las reglas de negocio en el servicio:** Validaciones, cálculos, chequeos de permiso, orquestación y ramas del flujo deben vivir aquí y no en los controladores.
 4. **Mantén los objetos de transporte fuera del caso de uso:** Los servicios deben recibir DTOs o argumentos planos, no objetos crudos como `Request`, `Response` o contexto del framework.
 5. **Deja que los servicios coordinen repositorios:** Los controladores no deben hablar directo con persistencia ni con gateways externos cuando hay un caso de uso de por medio.
 6. **Lanza errores de dominio con significado:** Emite errores de negocio que la capa global de errores pueda traducir a respuestas HTTP o resultados de cola.
-7. **Disena para reutilizar mas alla de HTTP:** Un metodo de servicio debe poder usarse desde jobs, schedulers, consumidores de colas, comandos CLI o pruebas.
-8. **Crea un punto de prueba deliberado:** Prueba happy paths, fallos de validacion, fallos de dependencias y ramas de negocio con mocks, fakes o test doubles.
-9. **Usa interfaces cuando ayuden al codebase:** Si el proyecto estandariza Interface + Implementation, mantén los controladores acoplados al contrato. En codebases pequenos, una sola clase de servicio es valida si el limite sigue limpio y testeable.
-10. **Adapta el patron, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
+7. **Diseña para reutilizar más allá de HTTP:** Un método de servicio debe poder usarse desde jobs, schedulers, consumidores de colas, comandos CLI o pruebas.
+8. **Crea un punto de prueba deliberado:** Prueba happy paths, fallos de validación, fallos de dependencias y ramas de negocio con mocks, fakes o test doubles.
+9. **Usa interfaces cuando ayuden al codebase:** Si el proyecto estandariza Interface + Implementation, mantén los controladores acoplados al contrato. En codebases pequeños, una sola clase de servicio es válida si el límite sigue limpio y testeable.
+10. **Adapta el patrón, no el ejemplo literal:** Renombra archivos, capas, contratos e integraciones para ajustarlos a la arquitectura, las convenciones del framework y el lenguaje de negocio del proyecto objetivo.
 
 ---
 
@@ -106,7 +106,7 @@ Use the skill @04-service-layer to implement the `{UseCase}` workflow.
 ```text
 Usa la skill @04-service-layer para implementar el flujo `{UseCase}`.
 1. Deja el controlador limitado al mapeo de transporte y mueve las reglas de negocio a un servicio reutilizable.
-2. Agrega un plan de pruebas para ramas de exito, fallo de validacion y fallo de dependencias.
+2. Agrega un plan de pruebas para ramas de éxito, fallo de validación y fallo de dependencias.
 ```
 
 ---
@@ -127,7 +127,7 @@ src/
             └── {feature}.service.spec.{ext}
 ```
 
-## Adaptation Checklist / Lista de Adaptacion
+## Adaptation Checklist / Lista de Adaptación
 
 **Checklist (EN):**
 - [ ] Controllers do not contain business calculations, workflow branching, or persistence logic.
@@ -138,9 +138,9 @@ src/
 - [ ] Names, files, layers, and integrations were adapted to the target project's conventions instead of copying the example structure literally.
 
 **Checklist (ES):**
-- [ ] Los controladores no contienen calculos de negocio, ramas de flujo ni logica de persistencia.
+- [ ] Los controladores no contienen cálculos de negocio, ramas de flujo ni lógica de persistencia.
 - [ ] Los servicios reciben DTOs o argumentos planos en lugar de objetos crudos de transporte.
-- [ ] Los repositorios y gateways se inyectan de forma explicita y se coordinan desde el limite del servicio.
+- [ ] Los repositorios y gateways se inyectan de forma explícita y se coordinan desde el límite del servicio.
 - [ ] El caso de uso principal puede probarse sin levantar un servidor HTTP.
-- [ ] La cobertura de pruebas incluye ramas de exito, fallo de validacion y fallo de dependencias.
+- [ ] La cobertura de pruebas incluye ramas de éxito, fallo de validación y fallo de dependencias.
 - [ ] Los nombres, archivos, capas e integraciones se adaptaron a las convenciones del proyecto objetivo en lugar de copiar literalmente la estructura de ejemplo.

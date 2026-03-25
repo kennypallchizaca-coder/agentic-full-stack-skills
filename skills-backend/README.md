@@ -5,15 +5,24 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](../LICENSE)
 [![Skills](https://img.shields.io/badge/Skills-12-blueviolet)]()
 
+**Compatible AI Agents & Models:**  
+[![Cursor](https://img.shields.io/badge/Cursor-AI-000000.svg?logo=cursor)]()
+[![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-Enabled-eeeeee.svg?logo=github)]()
+[![Windsurf](https://img.shields.io/badge/Windsurf-Ready-blue.svg)]()
+[![Gemini](https://img.shields.io/badge/Gemini-Supported-1A73E8.svg?logo=google-gemini)]()
+[![Claude](https://img.shields.io/badge/Claude-Supported-D97757.svg)]()
+[![ChatGPT/Codex](https://img.shields.io/badge/ChatGPT%2FCodex-Supported-412991.svg?logo=openai)]()
+
 ---
 
 ## About this library
 
 This backend library gives an AI assistant a reusable playbook for clean API architecture, request validation, data access, security, and production delivery without tying the guidance to one runtime or framework.
 
-Scope notes:
-- The backend set is REST-first. OpenAPI guidance lives inside [03-rest-api-design](./03-rest-api-design/SKILL.md), not as a separate skill.
-- GraphQL, gRPC, WebSockets, and SSE appear as transport-boundary decisions, but they are not first-class skill tracks in this repository.
+**Based On (Origins):**
+- This content is explicitly extracted from the **REST-first modular monolith** blueprints of the `CONCEPTOS-FRONTEND-BACKEND` architecture.
+- OpenAPI guidance lives inside [03-rest-api-design](./03-rest-api-design/SKILL.md), serving as the single source of truth for the API contract.
+- GraphQL, gRPC, WebSockets, and SSE appear as transport decisions, not first-class tracks.
 - The strongest coverage is for service-style web backends that expose HTTP APIs and need operational discipline.
 
 ---
@@ -49,7 +58,7 @@ Run `npm run validate` before publishing updates. The validator checks every `SK
 | **08** | [**entity-relationships**](./08-entity-relationships/SKILL.md) | Models ownership, relations, and safe serialization boundaries | Modela ownership, relaciones y limites seguros de serializacion | 🟡 Medium |
 | **09** | [**advanced-querying**](./09-advanced-querying/SKILL.md) | Adds safe filtering, sorting, and paginated metadata | Agrega filtros, orden y metadata paginada de forma segura | 🟢 Low |
 | **10** | [**jwt-authentication**](./10-jwt-authentication/SKILL.md) | Implements secure login, token issuance, and token validation | Implementa login seguro, emision y validacion de tokens | 🔴 High |
-| **11** | [**authorization**](./11-authorization/SKILL.md) | Applies RBAC, ownership, and layered access checks | Aplica RBAC, ownership y controles de acceso por capas | 🔴 High |
+| **11** | [**authorization**](./11-authorization/SKILL.md) | Applies policy checks, ownership, and layered access control | Aplica politicas, ownership y control de acceso por capas | 🔴 High |
 | **12** | [**production-deployment**](./12-production-deployment/SKILL.md) | Hardens release, observability, CI/CD, and rollback readiness | Endurece release, observabilidad, CI/CD y rollback | 🔴 High |
 
 ---
@@ -75,14 +84,10 @@ These resources help adapt the skills to different languages, frameworks, and ho
 | 05 | [shared-persistence-fields.template.md](./05-data-persistence/resources/shared-persistence-fields.template.md) | Shared persistence field patterns without assuming inheritance |
 | 05 | [migration-strategy.md](./05-data-persistence/resources/migration-strategy.md) | Safe schema-change and migration guidance |
 | 06 | [validation-rules-reference.md](./06-dto-and-validation/resources/validation-rules-reference.md) | Reusable validation-rule catalog |
-| 07 | [`07-error-handling/resources/error-response.schema.json`](./07-error-handling/resources/error-response.schema.json) | JSON schema for consistent API error envelopes |
 | 08 | [relationship-decision.md](./08-entity-relationships/resources/relationship-decision.md) | Choose cardinality, ownership, and serialization boundaries |
 | 09 | [`09-advanced-querying/resources/paginated-response.schema.json`](./09-advanced-querying/resources/paginated-response.schema.json) | JSON schema for paginated collection responses |
 | 10 | [`10-jwt-authentication/resources/jwt-claims.schema.json`](./10-jwt-authentication/resources/jwt-claims.schema.json) | JSON schema for minimal JWT claim payloads |
 | 11 | [security-layers.md](./11-authorization/resources/security-layers.md) | Map authentication, authorization, and ownership responsibilities |
-| 12 | [`12-production-deployment/resources/.dockerignore.template`](./12-production-deployment/resources/.dockerignore.template) | Ignore rules for container builds |
-| 12 | [`12-production-deployment/resources/.env.production.example`](./12-production-deployment/resources/.env.production.example) | Example production environment layout |
-| 12 | [`12-production-deployment/resources/Dockerfile.template`](./12-production-deployment/resources/Dockerfile.template) | Multi-stage container build baseline |
 | 12 | [edge-runtime.matrix.md](./12-production-deployment/resources/edge-runtime.matrix.md) | Choose the right runtime model for deployment |
 | 12 | [observability-release-checklist.md](./12-production-deployment/resources/observability-release-checklist.md) | Release checklist for observability and rollback readiness |
 | 12 | [process-supervision.template.md](./12-production-deployment/resources/process-supervision.template.md) | Supervision rules for native long-running processes |

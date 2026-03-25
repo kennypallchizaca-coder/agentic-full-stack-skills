@@ -15,6 +15,9 @@ Relationships are where many persistence bugs begin: duplicate ownership, accide
 **Descripción (ES):**
 Las relaciones son el origen de muchos bugs de persistencia: ownership duplicado, cascadas accidentales, serialización recursiva y consultas N+1. Esta skill ayuda a definir asociaciones entre entidades con ownership, restricciones y estrategias de carga explícitas.
 
+Related resources:
+- [relationship-decision.md](./resources/relationship-decision.md)
+
 ---
 
 # 2. Skill Objective

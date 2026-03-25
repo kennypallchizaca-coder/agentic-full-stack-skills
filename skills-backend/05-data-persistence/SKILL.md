@@ -15,6 +15,10 @@ Persistence code should be explicit about how data is stored, queried, and migra
 **Descripción (ES):**
 La persistencia debe dejar claro como se guardan, consultan y migran los datos. Esta skill organiza repositorios junto con schemas, entidades o documentos de persistencia para que los servicios dependan de una capa de acceso a datos limpia, sin acoplar la logica de negocio al SQL ni a detalles internos del framework.
 
+Related resources:
+- [migration-strategy.md](./resources/migration-strategy.md)
+- [shared-persistence-fields.template.md](./resources/shared-persistence-fields.template.md)
+
 ---
 
 # 2. Skill Objective
